@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register Form Validator</title>
+    <link rel="stylesheet" href="test/style.css" />
+    </head>
+    <body>
+        <div class="container">
+          <h1>Register</h1>
+          <form action="MainController" method ="POST">
+            
+            <div class="form-control">
+              <input type="text" id="username" class="input" name="txtUsername"/>
+              <label for="" class="label">Username</label>
+              <span></span>
+              <small></small>
+            </div>
+
+            <div class="form-control">
+              <input type="email" id="email" class="input" name="txtMail"/>
+              <label for="" class="label">Email</label>
+              <span></span>
+              <small></small>
+            </div>
+
+            <div class="form-control">
+              <input type="password" id="password" class="input" name="txtPassword"/>
+              <label for="" class="label">Password</label>
+              <span></span>
+              <small></small>
+            </div>
+
+            <div class="form-control">
+              <input type="password" id="password2" class="input" name="txtConfirmPassword"/>
+              <label for="" class="label">Confirm Password</label>
+              <span></span>
+              <small></small>
+            </div>
+              <div class="form-control">
+              <input type="text" id="password2" class="input" name="txtPhone"/>
+              <label for="" class="label">Phone Number</label>
+              <span></span>
+              <small></small>
+            </div>
+              <div class="form-control">
+              <input type="text" id="password2" class="input" name="txtAddress"/>
+              <label for="" class="label">Address</label>
+              <span></span>
+              <small></small>
+            </div>
+            <input type="submit" class="submitBtn" name="btAction" value="Sign Up">
+             
+            <p>Want to return to the homepage? <a href="index.html">Press Here</a></p>
+          </form>
+        </div>
+    
+        <script src="app.js"></script>
+      </body>
+</html>
