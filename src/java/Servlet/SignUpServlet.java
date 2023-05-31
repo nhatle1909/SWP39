@@ -53,6 +53,7 @@ public class SignUpServlet extends HttpServlet {
         session.setAttribute("txtMail",mail);
         session.setAttribute("txtPhone", phoneNumber);
         session.setAttribute("txtAddress", address);
+        session.setAttribute("Status","Verify");
         // Send verification code to user's email
         String subject = "Verification Mail";
         String content = "The Verify Code for register is " + Integer.toString(code);
@@ -60,8 +61,6 @@ public class SignUpServlet extends HttpServlet {
                 content);
 
         // Forward user to verification page
-        request.setAttribute("txtUsername", username);
-        request.setAttribute("txtMail", mail);
 
         RequestDispatcher rd = request.getRequestDispatcher("verify.jsp");
         rd.forward(request, response);

@@ -12,6 +12,7 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -46,13 +47,17 @@ public class ForgetPasswordServlet extends HttpServlet {
             HttpSession session = request.getSession();
 
             int code = rng.nextInt(999999) + 10000;
-            session.setAttribute("txtVerifyCode", code);
             String mail = request.getParameter("txtMail");
+            session.setAttribute("txtMail", mail);
+            session.setAttribute("txtVerifyCode", Integer.toString(code));
+            session.setAttribute("Status","ForgetPassword");
             String subject = "Verification Mail";
-            String content = "The Verify Code for Reset password is " + Integer.toString(code);
+            String content = "The Verify Code  is " + Integer.toString(code);
+            
             EmailUtility.sendEmail(host, port, user, pass, mail, subject,
                     content);
-
+               RequestDispatcher rd = request.getRequestDispatcher("verify.jsp");
+        rd.forward(request, response);
         }
     }
 

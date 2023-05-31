@@ -117,4 +117,25 @@ public class SQLCommand {
         }
         return Role;
     }
+     public boolean updatePassword(String mail, String password) throws SQLException{
+        Connection con = null;
+        PreparedStatement stm = null;
+        try{
+            con = DBUtility.makeConnection();
+            if(con != null){
+                String sql = "Update dbo.Account_User set password = ? where mail = ?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, password);
+                stm.setString(2, mail);
+                int row = stm.executeUpdate();
+                if (row > 0){
+                    return true;
+                }
+            }
+        }finally{
+            if (stm != null) stm.close();
+            if (con != null) con.close();
+        }
+        return false;
+    }
 }

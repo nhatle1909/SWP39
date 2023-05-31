@@ -51,6 +51,8 @@ public class MainController extends HttpServlet {
                 url = "VerifyServlet";
             } else if (action.equals("Logout")){
                 url = "LogoutServlet";
+            } else if (action.equals("Reset")){
+                url = "ForgetPasswordServlet";
             }
 
             RequestDispatcher rd = request.getRequestDispatcher(url);
