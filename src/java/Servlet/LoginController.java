@@ -5,12 +5,13 @@
  */
 package Servlet;
 
-import SQLCommand.SQLCommand;
+import SQLCommand.DAO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -45,23 +46,23 @@ public class LoginController extends HttpServlet {
             String mail = request.getParameter("txtMail");
             String password = request.getParameter("txtPassword");
 
-            SQLCommand sql = new SQLCommand();
+            DAO sql = new DAO();
             boolean result = sql.checkLogin(mail, password);
             //System.out.println(result);
             if (result) {
                 session.setAttribute("txtMail", mail);
-                session.setAttribute("txtPassword", password);
                 session.setAttribute("txtRole", sql.getRole(mail));
                 session.setMaxInactiveInterval(60 * 5);
                 if (sql.getRole(mail).equals("CUSTOMER")) {
-                    url = itemPage;
-                }else if (sql.getRole(mail).equals("ADMIN")){
+                    url = "customer_dashboard.html";
+                } else if (sql.getRole(mail).equals("ADMIN")) {
                     url = "admin.jsp";
-                }else if (sql.getRole(mail).equals("STAFF")){
+                } else if (sql.getRole(mail).equals("STAFF")) {
                     url = "staff.jsp";
-                }           
-            }
-            response.sendRedirect(url);
+                }
+                
+            } response.sendRedirect(url);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

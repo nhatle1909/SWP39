@@ -10,7 +10,7 @@
 <html>
         <%
          String role = (String) session.getAttribute("txtRole");
-    if (session != null && session.getAttribute("txtMail") != null && role.equals("ADMIN")) {
+    if (session != null && role.equals("ADMIN")) {
        
         
         // TODO: Display protected resources for the authenticated user

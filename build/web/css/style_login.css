@@ -349,14 +349,13 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
 }
 .box-form .right .remember-me--forget-password input {
   margin: 0;
   margin-right: 7px;
   width: auto;
 }
-.box-form .right button {
+.box-form .right #LoginButton {
   float: right;
   color: #fff;
   font-size: 16px;
@@ -367,6 +366,9 @@ body {
   outline: 0;
   box-shadow: 0px 4px 20px 0px #285ac6a6;
   background-image: linear-gradient(135deg, #152ae7 10%, #282bc6 100%);
+}
+.box-form .right .remember-me--forget-password .text-checkbox {
+    margin-top: 8px;
 }
 
 label {

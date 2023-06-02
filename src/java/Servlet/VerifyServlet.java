@@ -1,6 +1,6 @@
 package Servlet;
 
-import SQLCommand.SQLCommand;
+import SQLCommand.DAO;
 import java.io.*;
 import java.sql.SQLException;
 import java.util.Random;
@@ -11,14 +11,18 @@ import javax.servlet.http.*;
 
 public class VerifyServlet extends HttpServlet {
 
-    private static final long serialVersionUID = 1L;
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        SQLCommand sql = new SQLCommand();
+        DAO sql = new DAO();
         Random rand = new Random();
-
-        int user_id = rand.nextInt(900000) + 100000;
+        int user_id = 0;
+        try {
+            do {
+                user_id = rand.nextInt(900000) + 100000;
+            } while (sql.uniqueID(user_id) == false);
+        } catch (SQLException ex) {
+            Logger.getLogger(VerifyServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         String code = request.getParameter("code");
         String expectedCode = (String) session.getAttribute("txtVerifyCode");
@@ -35,8 +39,8 @@ public class VerifyServlet extends HttpServlet {
                     String phoneNumber = (String) session.getAttribute("txtPhone");
                     String address = (String) session.getAttribute("txtAddress");
 
-                    boolean result = sql.insertAccount(user_id, username, password, address, phoneNumber, email); // TODO: Add code to insert user details into database
-                    sql.insertProfile(user_id, username, phoneNumber, email, "CUSTOMER");
+                    boolean result = sql.insertAccount(user_id, username, password, email); // TODO: Add code to insert user details into database
+                    sql.insertProfile(user_id, username, email, address, phoneNumber, "CUSTOMER");
                     if (result) {
                         response.sendRedirect("birds.html");
                         session.invalidate();

@@ -5,7 +5,7 @@
  */
 package Servlet;
 
-import SQLCommand.SQLCommand;
+import SQLCommand.DAO;
 import Utility.EmailUtility;
 import java.io.IOException;
 import static java.lang.System.out;
@@ -35,6 +35,9 @@ public class SignUpServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, MessagingException {
         response.setContentType("text/html;charset=UTF-8");
+        Random rand = new Random();
+        DAO sql = new DAO();
+        
         String username = request.getParameter("txtUsername");
         String mail = request.getParameter("txtMail");
         String password = request.getParameter("txtPassword");
@@ -42,9 +45,9 @@ public class SignUpServlet extends HttpServlet {
         String phoneNumber = request.getParameter("txtPhone");
         String address = request.getParameter("txtAddress");
 
-        Random rand = new Random();
+        
         int code = rand.nextInt(900000) + 100000; // 6-digit code
-        if (password.equals(confirmPassword)){
+        if (password.equals(confirmPassword) && sql.uniqueMail(mail) == true){
         // Set session attribute for verification code
         HttpSession session = request.getSession();
         session.setAttribute("txtVerifyCode", Integer.toString(code));

@@ -21,12 +21,11 @@
     <link rel="stylesheet" href="css/style_login.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
-
 <body class="main-layout inner_page">
     <%  String role = (String) session.getAttribute("txtRole");
         if (role != null) {
             if (role.equals("CUSTOMER")) {
-                response.sendRedirect("items_page.html");
+                response.sendRedirect("customer_dashboard.jsp");
             } else if (role.equals("ADMIN")) {
                 response.sendRedirect("admin.jsp");
             } else if (role.equals("STAFF")) {
@@ -107,20 +106,22 @@
                 </div>
                 <br>
 
-                <input type="submit" name="btAction" value="Login">
-
+                <input id="LoginButton" type="submit" name="btAction" value="Login">
                 <p>Want to return to the homepage? <a href="index.html">Press Here</a></p>
             </div>
 
         </div>
-    </form>
-    <!--end loginform-->
-    <!-- Javascript files-->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/jquery-3.0.0.min.js"></script>
-    <script src="js/custom.js"></script>
-    <%}%>
+    </div>
+</form>
+<!--end loginform-->
+<!-- Javascript files-->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/jquery-3.0.0.min.js"></script>
+<script src="js/custom.js"></script>
+<script>
+</script>
+<%}%>
 </body>
 
 </html>
