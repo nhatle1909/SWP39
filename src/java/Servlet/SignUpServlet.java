@@ -38,43 +38,40 @@ public class SignUpServlet extends HttpServlet {
         Random rand = new Random();
         DAO sql = new DAO();
         HttpSession session = request.getSession();
-        
+
         String username = request.getParameter("txtUsername");
         String mail = request.getParameter("txtMail");
         String password = request.getParameter("txtPassword");
         String confirmPassword = request.getParameter("txtConfirmPassword");
         String phoneNumber = request.getParameter("txtPhone");
         String address = request.getParameter("txtAddress");
-        
-        if (sql.uniqueMail(mail)){
-            session.setAttribute("ExistMail","true");
-            response.sendRedirect("signup1.jsp");
-        }
-        
+
         int code = rand.nextInt(900000) + 100000; // 6-digit code
-        if (password.equals(confirmPassword) && sql.uniqueMail(mail) == true){
-        // Set session attribute for verification code
-        session.setAttribute("txtVerifyCode", Integer.toString(code));
-        session.setAttribute("txtUsername", username);
-        session.setAttribute("txtPassword", password);
-        session.setAttribute("txtMail",mail);
-        session.setAttribute("txtPhone", phoneNumber);
-        session.setAttribute("txtAddress", address);
-        session.setAttribute("Status","Verify");
-        // Send verification code to user's email
-        String subject = "Verification Mail";
-        String content = "The Verify Code for register is " + Integer.toString(code);
-        EmailUtility.sendEmail(host, port, user, pass, mail, subject,
-                content);
+        if (password.equals(confirmPassword) && sql.uniqueMail(mail) == true) {
+            // Set session attribute for verification code
+            session.setAttribute("txtVerifyCode", Integer.toString(code));
+            session.setAttribute("txtUsername", username);
+            session.setAttribute("txtPassword", password);
+            session.setAttribute("txtMail", mail);
+            session.setAttribute("txtPhone", phoneNumber);
+            session.setAttribute("txtAddress", address);
+            session.setAttribute("Status", "Verify");
+            // Send verification code to user's email
+            String subject = "Verification Mail";
+            String content = "The Verify Code for register is " + Integer.toString(code);
+            EmailUtility.sendEmail(host, port, user, pass, mail, subject,
+                    content);
 
-        // Forward user to verification page
-
-        RequestDispatcher rd = request.getRequestDispatcher("verify.jsp");
-        rd.forward(request, response);
-        }
-        else {
-            RequestDispatcher rd = request.getRequestDispatcher("signup1.html");
-        rd.forward(request, response);
+            // Forward user to verification page
+            response.sendRedirect("verify.jsp");
+        } else {
+            if (sql.uniqueMail(mail) == false) {
+                session.setAttribute("ExistMail", "true");
+            }
+            if (!password.equals(confirmPassword)) {
+                session.setAttribute("WrongConfirmPassword", "true");
+            }
+            response.sendRedirect("signup1.jsp");
         }
     }
 

@@ -62,14 +62,20 @@
              
             <p>Want to return to the homepage? <a href="index.html">Press Here</a></p>
           </form>
-           <script>
+           
+        </div>
+    <script>
     <% String checkMail = (String) session.getAttribute("ExistMail");
         if (checkMail != null && checkMail.equals("true") ){  %>
     alert("Mail Existed ");
-     <%}%>
+     <%} session.removeAttribute("ExistMail");%>
    </script>
-        </div>
-    
+    <script>
+    <% String wrongConfirmPassword = (String) session.getAttribute("WrongConfirmPassword");
+        if (wrongConfirmPassword != null && wrongConfirmPassword.equals("true") ){  %>
+    alert("The password does not match to Confirm Password ");
+     <%} session.removeAttribute("WrongConfirmPassword");%>
+   </script>
         <script src="app.js"></script>
       </body>
 </html>
