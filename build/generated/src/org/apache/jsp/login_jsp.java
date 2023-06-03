@@ -46,6 +46,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("\n");
+      out.write("\n");
       out.write("<!DOCTYPE html>\n");
       out.write("\n");
       out.write("<head>\n");
@@ -66,7 +67,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
   String role = (String) session.getAttribute("txtRole");
         if (role != null) {
             if (role.equals("CUSTOMER")) {
-                response.sendRedirect("customer_dashboard.html");
+                response.sendRedirect("customer_dashboard.jsp");
             } else if (role.equals("ADMIN")) {
                 response.sendRedirect("admin.jsp");
             } else if (role.equals("STAFF")) {
@@ -127,7 +128,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("            <div class=\"right\">\n");
       out.write("                <h5>Login</h5>\n");
-      out.write("                <p>Don't have an account? <a href=\"signup1.html\">Create Your Account</a> it takes less than a minute</p>\n");
+      out.write("                <p>Don't have an account? <a href=\"signup1.jsp\">Create Your Account</a> it takes less than a minute</p>\n");
       out.write("                <div class=\"inputs\">\n");
       out.write("                    <input type=\"text\" name=\"txtMail\" placeholder=\"Mail\">\n");
       out.write("                    <br>\n");
@@ -150,11 +151,19 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("                <input id=\"LoginButton\" type=\"submit\" name=\"btAction\" value=\"Login\">\n");
       out.write("                <p>Want to return to the homepage? <a href=\"index.html\">Press Here</a></p>\n");
-      out.write("            </div>\n");
-      out.write("\n");
+      out.write("            </div>        \n");
       out.write("        </div>\n");
-      out.write("    </div>\n");
       out.write("</form>\n");
+      out.write("    <script>\n");
+      out.write("    ");
+ String isValidLogin = (String) session.getAttribute("ValidLogin");
+        if (isValidLogin != null && isValidLogin.equals("false") ){  
+      out.write("\n");
+      out.write("    alert(\"Invalid username or password\");\n");
+      out.write("  ");
+ } 
+      out.write("\n");
+      out.write("   </script>\n");
       out.write("<!--end loginform-->\n");
       out.write("<!-- Javascript files-->\n");
       out.write("<script src=\"js/jquery.min.js\"></script>\n");

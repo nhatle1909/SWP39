@@ -9,7 +9,7 @@
 <html>
 <head>
 	<title>Order History</title>
-        <link rel="stylesheet" type="text/css" href="test/test_1.css">
+        <link rel="stylesheet" type="text/css" href="css/order_history.css">
 </head>
 <body>
 	<header>

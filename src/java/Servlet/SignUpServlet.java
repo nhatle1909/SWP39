@@ -37,6 +37,7 @@ public class SignUpServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         Random rand = new Random();
         DAO sql = new DAO();
+        HttpSession session = request.getSession();
         
         String username = request.getParameter("txtUsername");
         String mail = request.getParameter("txtMail");
@@ -44,12 +45,15 @@ public class SignUpServlet extends HttpServlet {
         String confirmPassword = request.getParameter("txtConfirmPassword");
         String phoneNumber = request.getParameter("txtPhone");
         String address = request.getParameter("txtAddress");
-
+        
+        if (sql.uniqueMail(mail)){
+            session.setAttribute("ExistMail","true");
+            response.sendRedirect("signup1.jsp");
+        }
         
         int code = rand.nextInt(900000) + 100000; // 6-digit code
         if (password.equals(confirmPassword) && sql.uniqueMail(mail) == true){
         // Set session attribute for verification code
-        HttpSession session = request.getSession();
         session.setAttribute("txtVerifyCode", Integer.toString(code));
         session.setAttribute("txtUsername", username);
         session.setAttribute("txtPassword", password);

@@ -35,36 +35,43 @@ public class LoginController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     private final String itemPage = "items_page.html";
-
+    private String url = "";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, NamingException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         try {
             /* TODO output your page here. You may use following sample code. */
             HttpSession session = request.getSession();
-            String url = "index.html";
             String mail = request.getParameter("txtMail");
             String password = request.getParameter("txtPassword");
-
+            session.setAttribute("ValidLogin", "true");
             DAO sql = new DAO();
             boolean result = sql.checkLogin(mail, password);
             //System.out.println(result);
             if (result) {
+                if( session.getAttribute("ValidLogin") != null){
+                    session.removeAttribute("ValidLogin");
+                }
                 session.setAttribute("txtMail", mail);
                 session.setAttribute("txtRole", sql.getRole(mail));
                 session.setMaxInactiveInterval(60 * 5);
                 if (sql.getRole(mail).equals("CUSTOMER")) {
-                    url = "customer_dashboard.html";
+                    url = "customer_dashboard.jsp";
                 } else if (sql.getRole(mail).equals("ADMIN")) {
                     url = "admin.jsp";
                 } else if (sql.getRole(mail).equals("STAFF")) {
                     url = "staff.jsp";
                 }
                 
-            } response.sendRedirect(url);
+            } else {
+                session.setAttribute("ValidLogin", "false");
+                url = "login.jsp";
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            response.sendRedirect(url);
         }
     }
 

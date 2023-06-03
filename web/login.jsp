@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="javax.servlet.http.HttpSession" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <head>
@@ -85,7 +86,7 @@
 
             <div class="right">
                 <h5>Login</h5>
-                <p>Don't have an account? <a href="signup1.html">Create Your Account</a> it takes less than a minute</p>
+                <p>Don't have an account? <a href="signup1.jsp">Create Your Account</a> it takes less than a minute</p>
                 <div class="inputs">
                     <input type="text" name="txtMail" placeholder="Mail">
                     <br>
@@ -108,11 +109,15 @@
 
                 <input id="LoginButton" type="submit" name="btAction" value="Login">
                 <p>Want to return to the homepage? <a href="index.html">Press Here</a></p>
-            </div>
-
+            </div>        
         </div>
-    </div>
 </form>
+    <script>
+    <% String isValidLogin = (String) session.getAttribute("ValidLogin");
+        if (isValidLogin != null && isValidLogin.equals("false") ){  %>
+    alert("Invalid username or password");
+  <% } %>
+   </script>
 <!--end loginform-->
 <!-- Javascript files-->
 <script src="js/jquery.min.js"></script>

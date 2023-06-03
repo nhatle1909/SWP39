@@ -12,7 +12,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>User Dashboard</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-pZsRrY5+1zTtGYUy9V7Vv2tWT5ImN9hH8W4uXnDT6KX/kdux3AvXCJBFvl9pJ0H9QqZsUooCfR6NsIj+vklg2w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="test/test.css">
+        <link rel="stylesheet" href="css/customer_dashboard.css">
 </head>
 <body>
 	<header>
@@ -26,7 +26,7 @@
 				<li><a href="order_history.jsp">Order History</a></li>
 				<li><a href="user_info.jsp">Profile</a></li>
                                 <li><a href="favorite_product.jsp">Favorite Product</a></li>
-				<li><a href="update_password.html">Update Password</a></li>
+				<li><a href="UpdatePassword">Update Password</a></li>
                                 <li><input id ="Logout" type="submit" name="btAction" value="Logout"></li>
                             </form>
 			</ul>
