@@ -32,6 +32,8 @@ public class SignUpServlet extends HttpServlet {
     private String user = "bmossystem@gmail.com";
     private String pass = "yhtegccgzzmptrzq";
 
+    
+    private String url = "";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, MessagingException {
         response.setContentType("text/html;charset=UTF-8");
@@ -63,7 +65,7 @@ public class SignUpServlet extends HttpServlet {
                     content);
 
             // Forward user to verification page
-            response.sendRedirect("verify.jsp");
+            url = "verify.jsp";
         } else {
             if (sql.uniqueMail(mail) == false) {
                 session.setAttribute("ExistMail", "true");
@@ -71,8 +73,9 @@ public class SignUpServlet extends HttpServlet {
             if (!password.equals(confirmPassword)) {
                 session.setAttribute("WrongConfirmPassword", "true");
             }
-            response.sendRedirect("signup1.jsp");
+            url = "signup1.jsp";
         }
+        response.sendRedirect(url);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

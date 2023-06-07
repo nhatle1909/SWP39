@@ -56,7 +56,7 @@ public class ForgetPasswordServlet extends HttpServlet {
             
             EmailUtility.sendEmail(host, port, user, pass, mail, subject,
                     content);
-               RequestDispatcher rd = request.getRequestDispatcher("verify.jsp");
+               RequestDispatcher rd = request.getRequestDispatcher("ResetPassword.jsp");
         rd.forward(request, response);
         }
     }

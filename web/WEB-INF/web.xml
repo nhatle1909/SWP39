@@ -32,6 +32,14 @@
         <servlet-name>UpdatePassword</servlet-name>
         <servlet-class>Servlet.UpdatePassword</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateInformationServlet</servlet-name>
+        <servlet-class>Servlet.UpdateInformationServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoveFavoriteProductServlet</servlet-name>
+        <servlet-class>Servlet.RemoveFavoriteProductServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -63,6 +71,14 @@
     <servlet-mapping>
         <servlet-name>UpdatePassword</servlet-name>
         <url-pattern>/UpdatePassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateInformationServlet</servlet-name>
+        <url-pattern>/UpdateInformationServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveFavoriteProductServlet</servlet-name>
+        <url-pattern>/RemoveFavoriteProductServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

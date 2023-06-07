@@ -53,6 +53,12 @@ public class MainController extends HttpServlet {
                 url = "LogoutServlet";
             } else if (action.equals("Reset")){
                 url = "ForgetPasswordServlet";
+            } else if (action.equals("Update Password")){
+                url = "UpdatePassword";
+            } else if (action.equals("Save")){
+                url = "UpdateInformationServlet";
+            } else if (action.equals("Remove")){
+                url = "RemoveFavoriteProductServlet";
             }
 
             RequestDispatcher rd = request.getRequestDispatcher(url);

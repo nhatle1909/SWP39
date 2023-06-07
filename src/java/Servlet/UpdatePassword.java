@@ -44,6 +44,7 @@ public class UpdatePassword extends HttpServlet {
         if ( newPassword.equals(confirmPassword) ){
             sql.updatePassword(mail, newPassword);
         }
+        response.sendRedirect("user_info.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

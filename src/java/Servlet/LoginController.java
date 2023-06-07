@@ -56,7 +56,7 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("txtRole", sql.getRole(mail));
                 session.setMaxInactiveInterval(60 * 5);
                 if (sql.getRole(mail).equals("CUSTOMER")) {
-                    url = "customer_dashboard.jsp";
+                    url = "user_info.jsp";
                 } else if (sql.getRole(mail).equals("ADMIN")) {
                     url = "admin.jsp";
                 } else if (sql.getRole(mail).equals("STAFF")) {

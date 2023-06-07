@@ -26,7 +26,7 @@
     <%  String role = (String) session.getAttribute("txtRole");
         if (role != null) {
             if (role.equals("CUSTOMER")) {
-                response.sendRedirect("customer_dashboard.jsp");
+                response.sendRedirect("user_info.jsp");
             } else if (role.equals("ADMIN")) {
                 response.sendRedirect("admin.jsp");
             } else if (role.equals("STAFF")) {
@@ -103,7 +103,7 @@
                         <span class="text-checkbox">Remember me</span>
                     </label>
 
-                    <a href="verify.jsp">Forget password?</a>
+                    <a href="ResetPassword.jsp">Forget password?</a>
                 </div>
                 <br>
 
