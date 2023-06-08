@@ -10,6 +10,7 @@ package Utility;
  * @author ADMIN
  */
 public class FavoriteDTO {
+
     private int product_id;
     private String product_name;
     private int price;
@@ -46,5 +47,5 @@ public class FavoriteDTO {
     public void setPrice(int price) {
         this.price = price;
     }
-    
+
 }

@@ -22,17 +22,6 @@
     <body>
         <%
             String user_mail = (String) session.getAttribute("txtMail");
-            String role = (String) session.getAttribute("txtRole");
-            String url = "";
-            if (role != null) {
-                if (role.equals("CUSTOMER")) {
-                    url = "customer_dashboard.jsp";
-                } else if (role.equals("ADMIN")) {
-                    url = "admin.jsp";
-                } else if (role.equals("STAFF")) {
-                    url = "staff.jsp";
-                }
-            }
             if (user_mail != null) {
                 DAO sql = new DAO();
                 sql.searchUser(user_mail);
@@ -46,7 +35,7 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                         <li class="breadcrumb-item">
-                            <a href="<%=url%>">User</a>
+                            <a href="ProductPage.jsp">Shop</a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page">
                             User Info
@@ -83,7 +72,13 @@
                                                 <p class="text-secondary mb-1"><%= userDTO.getRole()%></p>
                                                 <p class="text-muted font-size-sm">UserID : <%= userDTO.getUser_id()%>
                                                 </p>
+                                                <br/>
                                                 <a class="btn btn-primary" href="UpdatePassword.jsp">Update Password</a>
+                                                <form action="MainController" method="post">
+                                                    <br/>
+                                                    <input class="btn btn-success btn-sm mr-2"
+                                                           type="submit" name="btAction" value="Logout" />
+                                                </form>
                                                 <br><br />        
                                             </div>
                                         </div>
@@ -295,19 +290,19 @@
                                                         });
         </script>
         <script type="text/javascript">
-  // Retrieve the last selected tab from local storage, or default to the first tab
-  const selectedTab = localStorage.getItem('selectedTab') || '#user-info';
+            // Retrieve the last selected tab from local storage, or default to the first tab
+            const selectedTab = localStorage.getItem('selectedTab') || '#user-info';
 
-  // Set the last selected tab as active
-  $(function() {
-    $('a[href="' + selectedTab + '"]').tab('show');
-  });
+            // Set the last selected tab as active
+            $(function () {
+                $('a[href="' + selectedTab + '"]').tab('show');
+            });
 
-  // Store the currently selected tab in local storage when a new tab is selected
-  $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-    localStorage.setItem('selectedTab', e.target.hash);
-  });
-</script>
+            // Store the currently selected tab in local storage when a new tab is selected
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                localStorage.setItem('selectedTab', e.target.hash);
+            });
+        </script>
         <%} else {
                 response.sendRedirect("login.jsp");
             }%>

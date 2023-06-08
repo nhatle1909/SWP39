@@ -45,9 +45,7 @@ public class DAO {
     public List<ProductListDTO> getListProduct() {
         return listProduct;
     }
-    
-    
-    
+
     public static boolean checkLogin(String mail, String password) throws SQLException, NamingException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -417,6 +415,7 @@ public class DAO {
         }
         return false;
     }
+
     public void searchProduct(String product_name) throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -426,17 +425,17 @@ public class DAO {
             if (con != null) {
                 String sql = "select * from dbo.Product_List where product_name like ?";
                 stm = con.prepareStatement(sql);
-                stm.setString(1, "%"+product_name+"%");
+                stm.setString(1, "%" + product_name + "%");
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     int product_id = rs.getInt("product_id");
                     product_name = rs.getString("product_name");
                     int price = rs.getInt("price");
-                    int quantity = Integer.parseInt(rs.getString("quantity"));
+                    int quantity = rs.getInt("quantity");
                     String vote = rs.getString("vote");
                     String image_url = rs.getString("Images");
 
-                    ProductListDTO productListDTO= new ProductListDTO(product_id, product_name, price, quantity, vote, image_url);
+                    ProductListDTO productListDTO = new ProductListDTO(product_id, product_name, price, quantity, vote, image_url);
                     if (this.listProduct == null) {
                         this.listProduct = new ArrayList<ProductListDTO>();
                     }
@@ -455,4 +454,175 @@ public class DAO {
             }
         }
     }
+
+    public void sortProductByPrice(String product_name) throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "select * from dbo.Product_List where product_name like ? order by price";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, "%" + product_name + "%");
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int product_id = rs.getInt("product_id");
+                    product_name = rs.getString("product_name");
+                    int price = rs.getInt("price");
+                    int quantity = rs.getInt("quantity");
+                    String vote = rs.getString("vote");
+                    String image_url = rs.getString("Images");
+
+                    ProductListDTO productListDTO = new ProductListDTO(product_id, product_name, price, quantity, vote, image_url);
+                    if (this.listProduct == null) {
+                        this.listProduct = new ArrayList<ProductListDTO>();
+                    }
+                    this.listProduct.add(productListDTO);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
+    public void sortProductByQuantity(String product_name) throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "select * from dbo.Product_List where product_name like ? order by quantity";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, "%" + product_name + "%");
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int product_id = rs.getInt("product_id");
+                    product_name = rs.getString("product_name");
+                    int price = rs.getInt("price");
+                    int quantity = rs.getInt("quantity");
+                    String vote = rs.getString("vote");
+                    String image_url = rs.getString("Images");
+
+                    ProductListDTO productListDTO = new ProductListDTO(product_id, product_name, price, quantity, vote, image_url);
+                    if (this.listProduct == null) {
+                        this.listProduct = new ArrayList<ProductListDTO>();
+                    }
+                    this.listProduct.add(productListDTO);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
+    public void sortProductByName(String product_name) throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "select * from dbo.Product_List where product_name like ? order by product_name";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, "%" + product_name + "%");
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int product_id = rs.getInt("product_id");
+                    product_name = rs.getString("product_name");
+                    int price = rs.getInt("price");
+                    int quantity = rs.getInt("quantity");
+                    String vote = rs.getString("vote");
+                    String image_url = rs.getString("Images");
+
+                    ProductListDTO productListDTO = new ProductListDTO(product_id, product_name, price, quantity, vote, image_url);
+                    if (this.listProduct == null) {
+                        this.listProduct = new ArrayList<ProductListDTO>();
+                    }
+                    this.listProduct.add(productListDTO);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+        public int getID(String mail) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        int id = 0;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "select user_id from dbo.ProfileUser where mail like ?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, mail);
+                ResultSet row = stm.executeQuery();
+                if (row.next()) {
+                    id = row.getInt("user_id");
+                    return id;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return id;
+    }
+        
+        public boolean addToFavorite( int code,int user_id,int product_id) throws SQLException{
+            Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "Insert into dbo.Favorite (id,user_id,product_id) Values (?,?,?)";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, code);
+                stm.setInt(2, user_id);
+                stm.setInt(3, product_id);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+        }
+
 }

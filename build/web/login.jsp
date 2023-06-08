@@ -111,22 +111,22 @@
                 <p>Want to return to the homepage? <a href="index.html">Press Here</a></p>
             </div>        
         </div>
-</form>
+    </form>
     <script>
-    <% String isValidLogin = (String) session.getAttribute("ValidLogin");
-        if (isValidLogin != null && isValidLogin.equals("false") ){  %>
-    alert("Invalid username or password");
-  <% } %>
-   </script>
-<!--end loginform-->
-<!-- Javascript files-->
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.bundle.min.js"></script>
-<script src="js/jquery-3.0.0.min.js"></script>
-<script src="js/custom.js"></script>
-<script>
-</script>
-<%}%>
+        <% String isValidLogin = (String) session.getAttribute("ValidLogin");
+        if (isValidLogin != null && isValidLogin.equals("false")) {  %>
+        alert("Invalid username or password");
+        <% } %>
+    </script>
+    <!--end loginform-->
+    <!-- Javascript files-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-3.0.0.min.js"></script>
+    <script src="js/custom.js"></script>
+    <script>
+    </script>
+    <%}%>
 </body>
 
 </html>

@@ -5,8 +5,8 @@
         <servlet-class>Servlet.MainController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>LoginController</servlet-name>
-        <servlet-class>Servlet.LoginController</servlet-class>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>Servlet.Login</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SendingMailServlet</servlet-name>
@@ -17,12 +17,12 @@
         <servlet-class>Servlet.SignUpServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>VerifyServlet</servlet-name>
-        <servlet-class>Servlet.VerifyServlet</servlet-class>
+        <servlet-name>VerifyCode</servlet-name>
+        <servlet-class>Servlet.VerifyCode</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ForgetPasswordServlet</servlet-name>
-        <servlet-class>Servlet.ForgetPasswordServlet</servlet-class>
+        <servlet-name>ForgetPassword</servlet-name>
+        <servlet-class>Servlet.ForgetPassword</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
@@ -33,20 +33,28 @@
         <servlet-class>Servlet.UpdatePassword</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>UpdateInformationServlet</servlet-name>
-        <servlet-class>Servlet.UpdateInformationServlet</servlet-class>
+        <servlet-name>UpdateInformation</servlet-name>
+        <servlet-class>Servlet.UpdateInformation</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>RemoveFavoriteProductServlet</servlet-name>
-        <servlet-class>Servlet.RemoveFavoriteProductServlet</servlet-class>
+        <servlet-name>RemoveFavoriteProduct</servlet-name>
+        <servlet-class>Servlet.RemoveFavoriteProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SortProductList</servlet-name>
+        <servlet-class>Servlet.SortProductList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddToFavorite</servlet-name>
+        <servlet-class>Servlet.AddToFavorite</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>LoginController</servlet-name>
-        <url-pattern>/LoginController</url-pattern>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/Login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SendingMailServlet</servlet-name>
@@ -57,12 +65,12 @@
         <url-pattern>/SignUpServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>VerifyServlet</servlet-name>
-        <url-pattern>/VerifyServlet</url-pattern>
+        <servlet-name>VerifyCode</servlet-name>
+        <url-pattern>/VerifyCode</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ForgetPasswordServlet</servlet-name>
-        <url-pattern>/ForgetPasswordServlet</url-pattern>
+        <servlet-name>ForgetPassword</servlet-name>
+        <url-pattern>/ForgetPassword</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
@@ -73,12 +81,20 @@
         <url-pattern>/UpdatePassword</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>UpdateInformationServlet</servlet-name>
-        <url-pattern>/UpdateInformationServlet</url-pattern>
+        <servlet-name>UpdateInformation</servlet-name>
+        <url-pattern>/UpdateInformation</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>RemoveFavoriteProductServlet</servlet-name>
-        <url-pattern>/RemoveFavoriteProductServlet</url-pattern>
+        <servlet-name>RemoveFavoriteProduct</servlet-name>
+        <url-pattern>/RemoveFavoriteProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SortProductList</servlet-name>
+        <url-pattern>/SortProductList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddToFavorite</servlet-name>
+        <url-pattern>/AddToFavorite</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

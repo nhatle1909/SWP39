@@ -10,6 +10,7 @@ package Utility;
  * @author ADMIN
  */
 public class ProductListDTO {
+
     private int product_id;
     private String product_name;
     private int price;
@@ -76,5 +77,5 @@ public class ProductListDTO {
     public void setImage_url(String image_url) {
         this.image_url = image_url;
     }
-    
+
 }

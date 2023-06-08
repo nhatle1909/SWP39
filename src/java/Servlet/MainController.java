@@ -28,7 +28,6 @@ public class MainController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private final String loginServlet = "LoginController";
     private final String signUpServlet = "SignUpServlet";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -42,23 +41,27 @@ public class MainController extends HttpServlet {
             if (action == null) {
                 url = "";
             } else if (action.equals("Login")) {
-                url = "LoginController";
+                url = "Login";
             } else if (action.equals("Send Mail")) {
-                url = "EmailSendingServlet";
+                url = "EmailSending";
             } else if (action.equals("Sign Up")) {
                 url = signUpServlet;
             } else if (action.equals("Verify")) {
-                url = "VerifyServlet";
-            } else if (action.equals("Logout")){
+                url = "VerifyCode";
+            } else if (action.equals("Logout")) {
                 url = "LogoutServlet";
-            } else if (action.equals("Reset")){
-                url = "ForgetPasswordServlet";
-            } else if (action.equals("Update Password")){
+            } else if (action.equals("Reset")) {
+                url = "ForgetPassword";
+            } else if (action.equals("Update Password")) {
                 url = "UpdatePassword";
-            } else if (action.equals("Save")){
-                url = "UpdateInformationServlet";
-            } else if (action.equals("Remove")){
-                url = "RemoveFavoriteProductServlet";
+            } else if (action.equals("Save")) {
+                url = "UpdateInformation";
+            } else if (action.equals("Remove")) {
+                url = "RemoveFavoriteProduct";
+            } else if (action.equals("Sort")) {
+                url = "SortProductList";
+            } else if (action.equals("Add to Favorite")) {
+                url = "AddToFavorite";
             }
 
             RequestDispatcher rd = request.getRequestDispatcher(url);
