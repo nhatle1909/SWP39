@@ -60,7 +60,7 @@ public class MainController extends HttpServlet {
                 url = "RemoveFavoriteProduct";
             } else if (action.equals("Sort")) {
                 url = "SortProductList";
-            } else if (action.equals("Add to Favorite")) {
+            } else if (action.equals("Favorite")) {
                 url = "AddToFavorite";
             }
 

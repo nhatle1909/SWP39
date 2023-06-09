@@ -5,6 +5,7 @@
  */
 package SQLCommand;
 
+import Utility.BirdDTO;
 import Utility.DBUtility;
 import Utility.FavoriteDTO;
 import Utility.OrderDTO;
@@ -24,7 +25,7 @@ import javax.naming.NamingException;
  * @author ADMIN
  */
 public class DAO {
-
+    private List<BirdDTO> listBird;
     private List<FavoriteDTO> listFavorite;
     private List<UserDTO> listAccount;
     private List<ProductListDTO> listProduct;
@@ -45,6 +46,12 @@ public class DAO {
     public List<ProductListDTO> getListProduct() {
         return listProduct;
     }
+
+    public List<BirdDTO> getListBird() {
+        return listBird;
+    }
+    
+    
 
     public static boolean checkLogin(String mail, String password) throws SQLException, NamingException, ClassNotFoundException {
         Connection con = null;
@@ -624,5 +631,42 @@ public class DAO {
         }
         return false;
         }
+        public void searchBird(String bird_name) throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "select * from dbo.BIRD where bird_name like ?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, "%" + bird_name + "%");
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int bird_id = rs.getInt("bird_id");
+                    bird_name = rs.getString("bird_name");
+                    String product_name = rs.getString("product_name");
+                    int product_id = rs.getInt("product_id");
+                    String species = rs.getString("species");
+                    String image_url = rs.getString("Images");
 
+                    BirdDTO birdList = new BirdDTO(bird_id, bird_name, product_id, product_name, species, image_url);
+                    if (this.listBird == null) {
+                        this.listBird = new ArrayList<BirdDTO>();
+                    }
+                    this.listBird.add(birdList);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
 }

@@ -73,7 +73,7 @@
                                 <%} else {%>
                             </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="user_info.jsp" style="padding: 10px 20px;">Profile</a>
                                 <%}%>
-                            </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="About.html" style="padding: 10px 20px;">Bird</a>
+                            </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="bird.jsp" style="padding: 10px 20px;">Bird</a>
                             </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="Contact.html" style="padding: 10px 20px;">Contact</a>
                             </li></ul>
                     </div>
@@ -121,9 +121,7 @@
                                     Quantity : <%= productList.getQuantity()%></p>
                                     <%}%>
                                     <% if (sql.getRole(mail).equals("CUSTOMER")) {%> 
-                                     <form action="MainController" method="Post">
-                                    <input type="hidden" name="txtProductId" value="<%= productList.getProduct_id()%>"/>
-                                    <input id="FUCKYOUSHIT" class="u-border-2 u-border-black u-btn u-button-style u-hover-black u-none u-text-black u-text-hover-white" data-animation-name="customAnimationIn" data-animation-duration="1000" type="submit" name="btAction" value="Add to Favorite"/>
+                                    <a href="AddToFavorite?txtProductId=<%= productList.getProduct_id()%>" class="u-border-2 u-border-black u-btn u-button-style u-hover-black u-none u-text-black u-text-hover-white" data-animation-name="customAnimationIn" data-animation-duration="1000">Add To Favorite</a>
                                    <form/>
                                     <%}%>
                                     <a href="Mazuri.html" class="u-border-2 u-border-black u-btn u-button-style u-hover-black u-none u-text-black u-text-hover-white" data-animation-name="customAnimationIn" data-animation-duration="1000">GO TO PRODUCT</a>
