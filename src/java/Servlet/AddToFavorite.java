@@ -41,7 +41,6 @@ public class AddToFavorite extends HttpServlet {
         Random rng = new Random();
 
         int code = rng.nextInt(999999) + 100000;
-        int count = 1;
         String mail = (String) session.getAttribute("txtMail");
         int user_id = sql.getID(mail);
         int product_id = Integer.parseInt(request.getParameter("txtProductId"));

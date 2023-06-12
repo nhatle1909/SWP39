@@ -15,19 +15,29 @@ public class ProductListDTO {
     private String product_name;
     private int price;
     private int quantity;
-    private String vote;
+    private String description;
     private String image_url;
+    private String birds;
 
     public ProductListDTO() {
     }
 
-    public ProductListDTO(int product_id, String product_name, int price, int quantity, String vote, String image_url) {
+    public ProductListDTO(int product_id, String product_name, int price, int quantity, String description, String image_url, String birds) {
         this.product_id = product_id;
         this.product_name = product_name;
         this.price = price;
         this.quantity = quantity;
-        this.vote = vote;
+        this.description = description;
         this.image_url = image_url;
+        this.birds = birds;
+    }
+
+    public String getBirds() {
+        return birds;
+    }
+
+    public void setBirds(String birds) {
+        this.birds = birds;
     }
 
     public int getProduct_id() {
@@ -62,13 +72,15 @@ public class ProductListDTO {
         this.quantity = quantity;
     }
 
-    public String getVote() {
-        return vote;
+    public String getDescription() {
+        return description;
     }
 
-    public void setVote(String vote) {
-        this.vote = vote;
+    public void setDescription(String description) {
+        this.description = description;
     }
+
+
 
     public String getImage_url() {
         return image_url;

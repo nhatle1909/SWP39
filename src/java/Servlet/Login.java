@@ -6,8 +6,10 @@
 package Servlet;
 
 import SQLCommand.DAO;
+import Utility.UserDTO;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
@@ -36,6 +38,7 @@ public class Login extends HttpServlet {
      */
     private final String itemPage = "items_page.html";
     private String url = "";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, NamingException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
@@ -49,7 +52,7 @@ public class Login extends HttpServlet {
             boolean result = sql.checkLogin(mail, password);
             //System.out.println(result);
             if (result) {
-                if( session.getAttribute("ValidLogin") != null){
+                if (session.getAttribute("ValidLogin") != null) {
                     session.removeAttribute("ValidLogin");
                 }
                 session.setAttribute("txtMail", mail);
@@ -62,7 +65,11 @@ public class Login extends HttpServlet {
                 } else if (sql.getRole(mail).equals("STAFF")) {
                     url = "staff.jsp";
                 }
-                
+
+                sql.searchUser(mail);
+                List<UserDTO> user_info = sql.getListAccount();
+                UserDTO userDTO = user_info.get(0);
+                session.setAttribute("User_info", userDTO);
             } else {
                 session.setAttribute("ValidLogin", "false");
                 url = "login.jsp";
@@ -70,7 +77,7 @@ public class Login extends HttpServlet {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             response.sendRedirect(url);
         }
     }

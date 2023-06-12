@@ -48,6 +48,18 @@
         <servlet-name>AddToFavorite</servlet-name>
         <servlet-class>Servlet.AddToFavorite</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Search</servlet-name>
+        <servlet-class>Servlet.Search</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductDetail</servlet-name>
+        <servlet-class>Servlet.ProductDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductFeedback</servlet-name>
+        <servlet-class>Servlet.ProductFeedback</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -95,6 +107,18 @@
     <servlet-mapping>
         <servlet-name>AddToFavorite</servlet-name>
         <url-pattern>/AddToFavorite</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Search</servlet-name>
+        <url-pattern>/Search</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductDetail</servlet-name>
+        <url-pattern>/ProductDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductFeedback</servlet-name>
+        <url-pattern>/ProductFeedback</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

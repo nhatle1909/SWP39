@@ -8,6 +8,7 @@ package SQLCommand;
 import Utility.BirdDTO;
 import Utility.DBUtility;
 import Utility.FavoriteDTO;
+import Utility.FeedbackDTO;
 import Utility.OrderDTO;
 import Utility.ProductListDTO;
 import Utility.UserDTO;
@@ -25,11 +26,13 @@ import javax.naming.NamingException;
  * @author ADMIN
  */
 public class DAO {
+
     private List<BirdDTO> listBird;
     private List<FavoriteDTO> listFavorite;
     private List<UserDTO> listAccount;
     private List<ProductListDTO> listProduct;
     private List<OrderDTO> listOrder;
+    private List<FeedbackDTO> listFeedback;
 
     public List<UserDTO> getListAccount() {
         return listAccount;
@@ -50,8 +53,10 @@ public class DAO {
     public List<BirdDTO> getListBird() {
         return listBird;
     }
-    
-    
+
+    public List<FeedbackDTO> getListFeedback() {
+        return listFeedback;
+    }
 
     public static boolean checkLogin(String mail, String password) throws SQLException, NamingException, ClassNotFoundException {
         Connection con = null;
@@ -439,10 +444,10 @@ public class DAO {
                     product_name = rs.getString("product_name");
                     int price = rs.getInt("price");
                     int quantity = rs.getInt("quantity");
-                    String vote = rs.getString("vote");
+                    String desc = rs.getString("description");
                     String image_url = rs.getString("Images");
-
-                    ProductListDTO productListDTO = new ProductListDTO(product_id, product_name, price, quantity, vote, image_url);
+                    String birds = rs.getString("birds");
+                    ProductListDTO productListDTO = new ProductListDTO(product_id, product_name, price, quantity, desc, image_url, birds);
                     if (this.listProduct == null) {
                         this.listProduct = new ArrayList<ProductListDTO>();
                     }
@@ -478,10 +483,10 @@ public class DAO {
                     product_name = rs.getString("product_name");
                     int price = rs.getInt("price");
                     int quantity = rs.getInt("quantity");
-                    String vote = rs.getString("vote");
+                    String desc = rs.getString("description");
                     String image_url = rs.getString("Images");
-
-                    ProductListDTO productListDTO = new ProductListDTO(product_id, product_name, price, quantity, vote, image_url);
+                    String birds = rs.getString("birds");
+                    ProductListDTO productListDTO = new ProductListDTO(product_id, product_name, price, quantity, desc, image_url, birds);
                     if (this.listProduct == null) {
                         this.listProduct = new ArrayList<ProductListDTO>();
                     }
@@ -517,10 +522,10 @@ public class DAO {
                     product_name = rs.getString("product_name");
                     int price = rs.getInt("price");
                     int quantity = rs.getInt("quantity");
-                    String vote = rs.getString("vote");
+                    String desc = rs.getString("description");
                     String image_url = rs.getString("Images");
-
-                    ProductListDTO productListDTO = new ProductListDTO(product_id, product_name, price, quantity, vote, image_url);
+                    String birds = rs.getString("birds");
+                    ProductListDTO productListDTO = new ProductListDTO(product_id, product_name, price, quantity, desc, image_url, birds);
                     if (this.listProduct == null) {
                         this.listProduct = new ArrayList<ProductListDTO>();
                     }
@@ -556,10 +561,10 @@ public class DAO {
                     product_name = rs.getString("product_name");
                     int price = rs.getInt("price");
                     int quantity = rs.getInt("quantity");
-                    String vote = rs.getString("vote");
+                    String desc = rs.getString("description");
                     String image_url = rs.getString("Images");
-
-                    ProductListDTO productListDTO = new ProductListDTO(product_id, product_name, price, quantity, vote, image_url);
+                    String birds = rs.getString("birds");
+                    ProductListDTO productListDTO = new ProductListDTO(product_id, product_name, price, quantity, desc, image_url, birds);
                     if (this.listProduct == null) {
                         this.listProduct = new ArrayList<ProductListDTO>();
                     }
@@ -578,7 +583,8 @@ public class DAO {
             }
         }
     }
-        public int getID(String mail) throws SQLException {
+
+    public int getID(String mail) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         int id = 0;
@@ -604,9 +610,9 @@ public class DAO {
         }
         return id;
     }
-        
-        public boolean addToFavorite( int code,int user_id,int product_id) throws SQLException{
-            Connection con = null;
+
+    public boolean addToFavorite(int code, int user_id, int product_id) throws SQLException {
+        Connection con = null;
         PreparedStatement stm = null;
         try {
             con = DBUtility.makeConnection();
@@ -630,8 +636,9 @@ public class DAO {
             }
         }
         return false;
-        }
-        public void searchBird(String bird_name) throws SQLException, NamingException {
+    }
+
+    public void searchBird(String bird_name) throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -655,6 +662,83 @@ public class DAO {
                         this.listBird = new ArrayList<BirdDTO>();
                     }
                     this.listBird.add(birdList);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
+    public void showFeedback(String product_id) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "SELECT account_user.username, feedback.date_feedback, feedback.comment\n"
+                        + "FROM feedback\n"
+                        + "INNER JOIN account_user ON feedback.user_id = account_user.user_id WHERE feedback.product_id = ?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, product_id);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String username = rs.getString("username");
+                    Date date_feedback = rs.getDate("date_feedback");
+                    String comment = rs.getString("comment");
+
+                    FeedbackDTO feedbackDTO = new FeedbackDTO(username, date_feedback, comment);
+                    if (this.listFeedback == null) {
+                        this.listFeedback = new ArrayList<FeedbackDTO>();
+                    }
+                    this.listFeedback.add(feedbackDTO);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
+    public void getProductDetail(String product_id) throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "select * from dbo.Product_List where product_id = ?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, product_id);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int id = rs.getInt("product_id");
+                    String product_name = rs.getString("product_name");
+                    int price = rs.getInt("price");
+                    int quantity = rs.getInt("quantity");
+                    String desc = rs.getString("description");
+                    String image_url = rs.getString("Images");
+                    String birds = rs.getString("birds");
+                    ProductListDTO productListDTO = new ProductListDTO(id, product_name, price, quantity, desc, image_url, birds);
+                    if (this.listProduct == null) {
+                        this.listProduct = new ArrayList<ProductListDTO>();
+                    }
+                    this.listProduct.add(productListDTO);
                 }
             }
         } finally {
