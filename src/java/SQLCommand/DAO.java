@@ -656,8 +656,8 @@ public class DAO {
                     int product_id = rs.getInt("product_id");
                     String species = rs.getString("species");
                     String image_url = rs.getString("Images");
-
-                    BirdDTO birdList = new BirdDTO(bird_id, bird_name, product_id, product_name, species, image_url);
+                    String desc_order = rs.getString("description_order");
+                    BirdDTO birdList = new BirdDTO(bird_id, bird_name, product_id, product_name,desc_order, species, image_url);
                     if (this.listBird == null) {
                         this.listBird = new ArrayList<BirdDTO>();
                     }
@@ -739,6 +739,44 @@ public class DAO {
                         this.listProduct = new ArrayList<ProductListDTO>();
                     }
                     this.listProduct.add(productListDTO);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+    public void getBirdDetail(int bird_id) throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "select * from dbo.BIRD where bird_id = ?";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, bird_id);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    bird_id = rs.getInt("bird_id");
+                    String bird_name = rs.getString("bird_name");
+                    String product_name = rs.getString("product_name");
+                    int product_id = rs.getInt("product_id");
+                    String species = rs.getString("species");
+                    String image_url = rs.getString("Images");
+                    String desc_order = rs.getString("description_order");
+                    BirdDTO birdList = new BirdDTO(bird_id, bird_name, product_id, product_name,desc_order, species, image_url);
+                    if (this.listBird == null) {
+                        this.listBird = new ArrayList<BirdDTO>();
+                    }
+                    this.listBird.add(birdList);
                 }
             }
         } finally {

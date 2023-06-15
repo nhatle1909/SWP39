@@ -64,6 +64,8 @@ public class MainController extends HttpServlet {
                 url = "AddToFavorite";
             }else if (action.equals("Search")) {
                 url = "Search";
+            }else if (action.equals("Search Bird Name")) {
+                url = "SearchBird";
             }
 
             RequestDispatcher rd = request.getRequestDispatcher(url);

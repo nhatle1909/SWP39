@@ -23,15 +23,18 @@
         <!--Link to Box Icons-->
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     </head>
-
+    '
     <body>
         <!-- Java Scriplet ->
         <% DAO sql = new DAO();
-                    String bird_name = "";
-                    String mail = (String) session.getAttribute("txtMail");
-                     sql.searchBird(bird_name);
-                      List<BirdDTO>  birdLists = sql.getListBird();
-                %>
+            String bird_name = "";
+            String mail = (String) session.getAttribute("txtMail");
+            List<BirdDTO> birdLists = (List) session.getAttribute("SortBird");
+            if (birdLists == null){
+            sql.searchBird(bird_name);
+            birdLists = sql.getListBird();
+            }
+        %>
         <!-- Java Scriplet -->
 
 
@@ -45,7 +48,7 @@
                 <ul>
                     <li><a href="index.html" class="header-title">Home</a></li>
                     <li><a href="ProductPage.jsp" class="header-title">Product</a></li>
-                    <li><a href="Birds.jsp" class="header-title">Bird</a></li>
+                    <li><a href="bird.jsp" class="header-title">Bird</a></li>
                     <li><a href="productList.html" class="header-title">Contact</a></li>
                         <% if (mail == null) {%>
                     <li><a href="login.jsp" class="header-title">Login</a></li>
@@ -81,8 +84,8 @@
                 <form action="MainController" method="post">
                     <div class="search_wrap search_wrap_1">
                         <div class="search_box">
-                            <input type="text" value="" name="txtProductName" class="input" placeholder="search...">
-                            <input type="submit" name="btAction" value="Search" class="searchButton"/>
+                            <input type="text" value="" name="txtBirdName" class="input" placeholder="search...">
+                            <input type="submit" name="btAction" value="Search Bird Name" class="searchButton"/>
                         </div>
                     </div>
                     <div class="filter-condition">
@@ -99,8 +102,8 @@
 
             <div class="shop-content">
                 <div class="row justify-content-center">
-                      <%if (birdLists !=null && !birdLists.isEmpty()) {
-                            for (BirdDTO birdList : birdLists) {%>
+                    <%if (birdLists != null && !birdLists.isEmpty()) {
+                              for (BirdDTO birdList : birdLists) {%>
 
                     <div class="col-md-4 col-sm-6 mb-4">
                         <!-- Box 1 -->
@@ -110,9 +113,9 @@
                             <br/>
                             <p class ="price">Food : <%= birdList.getProduct_name()%></p>
                             <p class = "product-text">
-                              Species : <%=birdList.getSpecies()%>
+                                Species : <%=birdList.getSpecies()%>
                             </p>
-                            <a href="ProductDetail.jsp">
+                            <a href="BirdDetail?txtBirdId=<%=birdList.getBird_id()%>">
                                 <h2 class="learn-more">Learn More</h2>
                             </a>
                             <i class='bx bxs-cart-alt add-cart'></i>
@@ -124,75 +127,80 @@
             </div>
         </section>
 
-    <!-- Offer -->
-    <div class="offer">
-        <div class="small-container">
-            <div class="row">
-                <div class="col-6">
-                    <img src="images/body_bird_food1/bird_food5.png" class="offer-img">
-                </div>
-                <div class="col-6 offer-content">
-                    <p>Exclusively Available on BIFO Shop</p>
-                    <h1>ZUPREEM PURE FUN</h1>
-                    <small>
-                        Our ZuPreem Pure Fun is 39.9% more nutrious than other product which can only found on BIFO Shop
-                        <p>Want to see more information about the product?</p>
-                        <a href="" class="btn-offer">See More &#8594;</a>
-                    </small>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Brands -->
-    <div class="brands">
-        <div class="small-container">
-            <div class="row">
-                <img src="images/paypal.png" class="brands">
-                <img src="images/visa.png" class="brands">
-                <img src="images/mastercard.png" class="brands">
-            </div>
-        </div>
-    </div>
-    <!-- Footer -->
-    <div class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3 footer-content">
-                    <h3>Download Our App</h3>
-                    <p>Download App For Android and ios mobile phone.</p>
-                    <div class="app-logo">
-                        <img src="images/app-store.png" alt="">
-                        <img src="images/play-store.png" alt="">
+        <!-- Offer -->
+        <div class="offer">
+            <div class="small-container">
+                <div class="row">
+                    <div class="col-6">
+                        <img src="images/body_bird_food1/bird_food5.png" class="offer-img">
+                    </div>
+                    <div class="col-6 offer-content">
+                        <p>Exclusively Available on BIFO Shop</p>
+                        <h1>ZUPREEM PURE FUN</h1>
+                        <small>
+                            Our ZuPreem Pure Fun is 39.9% more nutrious than other product which can only found on BIFO Shop
+                            <p>Want to see more information about the product?</p>
+                            <a href="" class="btn-offer">See More &#8594;</a>
+                        </small>
                     </div>
                 </div>
-                <div class="col-md-3 footer-content">
-                    <img src="images/logo-removebg-preview.png">
-                    <p>Our Purpose Is To Sustainably Make the Pleasure and Benefits of Bird Food to Many.</p>
-                </div>
-                <div class="col-md-3 footer-content">
-                    <h3>Useful Links</h3>
-                    <ul>
-                        <li>Coupon</li>
-                        <li>Blog Post</li>
-                        <li>Return Policy</li>
-                        <li>Join Affiliate</li>
-                    </ul>
-                </div>
-                <div class="col-md-3 footer-content">
-                    <h3>Follow Us</h3>
-                    <ul>
-                        <li>Facebook</li>
-                        <li>Twitter</li>
-                        <li>Instagram</li>
-                        <li>Youtube</li>
-                    </ul>
+            </div>
+        </div>
+        <!-- Brands -->
+        <div class="brands">
+            <div class="small-container">
+                <div class="row">
+                    <img src="images/paypal.png" class="brands">
+                    <img src="images/visa.png" class="brands">
+                    <img src="images/mastercard.png" class="brands">
                 </div>
             </div>
-            <hr>
-            <p class="copyright">Copyright 2023 - BIFO Shop</p>
         </div>
-    </div>
-    <!-- Link to JS -->
-    <script src="js/main.js"></script>
-</body>
+        <!-- Footer -->
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 footer-content">
+                        <h3>Download Our App</h3>
+                        <p>Download App For Android and ios mobile phone.</p>
+                        <div class="app-logo">
+                            <img src="images/app-store.png" alt="">
+                            <img src="images/play-store.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-md-3 footer-content">
+                        <img src="images/logo-removebg-preview.png">
+                        <p>Our Purpose Is To Sustainably Make the Pleasure and Benefits of Bird Food to Many.</p>
+                    </div>
+                    <div class="col-md-3 footer-content">
+                        <h3>Useful Links</h3>
+                        <ul>
+                            <li>Coupon</li>
+                            <li>Blog Post</li>
+                            <li>Return Policy</li>
+                            <li>Join Affiliate</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 footer-content">
+                        <h3>Follow Us</h3>
+                        <ul>
+                            <li>Facebook</li>
+                            <li>Twitter</li>
+                            <li>Instagram</li>
+                            <li>Youtube</li>
+                        </ul>
+                    </div>
+                </div>
+                <hr>
+                <p class="copyright">Copyright 2023 - BIFO Shop</p>
+            </div>
+        </div>
+         <%if (birdLists != null){
+        birdLists.clear();
+        session.removeAttribute("SortBird");
+    }
+    %>
+        <!-- Link to JS -->
+        <script src="js/main.js"></script>
+    </body>
 </html>

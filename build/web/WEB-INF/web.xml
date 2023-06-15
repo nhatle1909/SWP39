@@ -60,6 +60,14 @@
         <servlet-name>ProductFeedback</servlet-name>
         <servlet-class>Servlet.ProductFeedback</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchBird</servlet-name>
+        <servlet-class>Servlet.SearchBird</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BirdDetail</servlet-name>
+        <servlet-class>Servlet.BirdDetail</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -119,6 +127,14 @@
     <servlet-mapping>
         <servlet-name>ProductFeedback</servlet-name>
         <url-pattern>/ProductFeedback</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchBird</servlet-name>
+        <url-pattern>/SearchBird</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BirdDetail</servlet-name>
+        <url-pattern>/BirdDetail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

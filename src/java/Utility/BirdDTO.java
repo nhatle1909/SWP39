@@ -14,19 +14,29 @@ public class BirdDTO {
     private String bird_name;
     private int product_id;
     private String product_name;
+    private String desc_order;
     private String species;
     private String bird_images;
 
     public BirdDTO() {
     }
 
-    public BirdDTO(int bird_id, String bird_name, int product_id, String product_name, String species, String bird_images) {
+    public BirdDTO(int bird_id, String bird_name, int product_id, String product_name,String desc_order, String species, String bird_images) {
         this.bird_id = bird_id;
         this.bird_name = bird_name;
         this.product_id = product_id;
         this.product_name = product_name;
+        this.desc_order = desc_order;
         this.species = species;
         this.bird_images = bird_images;
+    }
+
+    public String getDesc_order() {
+        return desc_order;
+    }
+
+    public void setDesc_order(String desc_order) {
+        this.desc_order = desc_order;
     }
 
     public int getBird_id() {

@@ -62,7 +62,7 @@
 
         <!-- Single Product Details  -->
         <section class="shop container single-product">
-            <div class="small-container">
+            <div id="Details" class="small-container">
                 <div class="row">
                     <div class="col-6">
                         <img src="<%= product.getImage_url()%>">
@@ -84,9 +84,13 @@
             </div>
             <div class="comment-section">
                 <h3>Customer Feedback</h3>
+                <% if (feedbacks == null) { %>
+                <h4 class="comment-count">No Comments</h4>
+                <%} else 
+                    if (!feedbacks.isEmpty()) {%>
                 <h4 class="comment-count"><%=feedbacks.size()%> Comments</h4>
-                  <%if (feedbacks != null && !feedbacks.isEmpty()) {
-                            for (FeedbackDTO feedback : feedbacks) {%>
+                <%
+                      for (FeedbackDTO feedback : feedbacks) {%>
                 <div class="comments">
                     <div class="comment">
                         <h4><%=feedback.getUsername()%></h4>
@@ -167,6 +171,11 @@
                 <p class="copyright">Copyright 2023 - BIFO Shop</p>
             </div>
         </div>
+            <%if (productLists != null){
+        productLists.clear();
+        session.removeAttribute("SortedProductList");
+    }
+    %>
         <script src="js/main.js"></script>
     </body>
 

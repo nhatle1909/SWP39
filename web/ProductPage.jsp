@@ -48,7 +48,7 @@
                 <ul>
                     <li><a href="index.html" class="header-title">Home</a></li>
                     <li><a href="ProductPage.jsp" class="header-title">Product</a></li>
-                    <li><a href="Bird6++++++++.jsp" class="header-title">Bird</a></li>
+                    <li><a href="bird.jsp" class="header-title">Bird</a></li>
                     <li><a href="productList.html" class="header-title">Contact</a></li>
                         <% if (mail == null) {%>
                     <li><a href="login.jsp" class="header-title">Login</a></li>
@@ -239,6 +239,11 @@
             <p class="copyright">Copyright 2023 - BIFO Shop</p>
         </div>
     </div>
+    <%if (productLists != null){
+        productLists.clear();
+        session.removeAttribute("SortedProductList");
+    }
+    %>
     <!-- Link to JS -->
     <script src="js/main.js"></script>
 </body>
