@@ -1,18 +1,17 @@
 <%-- 
-    Document   : admin
-    Created on : May 30, 2023, 11:16:35 AM
+    Document   : dele-update
+    Created on : Jun 15, 2023, 9:15:43 PM
     Author     : ADMIN
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="javax.servlet.http.HttpSession" %>
- <!doctype html>
+<!doctype html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BIFO</title>
+  <title>Modernize Free</title>
   <!-- <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" /> -->
   <link rel="stylesheet" href="css/styles.min.css" />
 </head>
@@ -40,7 +39,7 @@
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">Home</span>
             </li>
-            <li class="sidebar-item">
+              <li class="sidebar-item">
               <a class="sidebar-link" href="AdminDashboard.jsp" aria-expanded="false">
                 <span>
                   <i class="ti ti-layout-dashboard"></i>
@@ -60,7 +59,15 @@
                 <span class="hide-menu">Account List</span>
               </a>
             </li>
-             
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="Add-DeleAccount.jsp" aria-expanded="false">
+                <span>
+                  <i class="ti ti-file-description"></i>
+                </span>
+                <span class="hide-menu">Add & Delete Staff</span>
+              </a>
+            </li>
+            
         </nav>
         <!-- End Sidebar navigation -->
       </div>
@@ -117,94 +124,61 @@
       </header>
       <!--  Header End -->
       <div class="container-fluid">
-        <!--  Row 1 -->
-        <div class="row">
-          <div class="col-lg-8 d-flex align-items-strech">
-            <div class="card w-100">
-              <div class="card-body">
-                <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
-                  <div class="mb-3 mb-sm-0">
-                    <h5 class="card-title fw-semibold">Sales Overview</h5>
-                  </div>
-                  <div>
-                    <select class="form-select">
-                      <option value="1">March 2023</option>
-                      <option value="2">April 2023</option>
-                      <option value="3">May 2023</option>
-                      <option value="4">June 2023</option>
-                    </select>
-                  </div>
-                </div>
-                <div id="chart"></div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="row">
-              <div class="col-lg-12">
-                <!-- Yearly Breakup -->
-                <div class="card overflow-hidden">
-                  <div class="card-body p-4">
-                    <h5 class="card-title mb-9 fw-semibold">Yearly Breakup</h5>
-                    <div class="row align-items-center">
-                      <div class="col-8">
-                        <h4 class="fw-semibold mb-3">$36,358</h4>
-                        <div class="d-flex align-items-center mb-3">
-                          <span
-                            class="me-1 rounded-circle bg-light-success round-20 d-flex align-items-center justify-content-center">
-                            <i class="ti ti-arrow-up-left text-success"></i>
-                          </span>
-                          <p class="text-dark me-1 fs-3 mb-0">+9%</p>
-                          <p class="fs-3 mb-0">last year</p>
-                        </div>
-                        <div class="d-flex align-items-center">
-                          <div class="me-4">
-                            <span class="round-8 bg-primary rounded-circle me-2 d-inline-block"></span>
-                            <span class="fs-2">2023</span>
-                          </div>
-                          <div>
-                            <span class="round-8 bg-light-primary rounded-circle me-2 d-inline-block"></span>
-                            <span class="fs-2">2023</span>
-                          </div>
-                        </div>
+        <div class="container-fluid">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title fw-semibold mb-4">Update</h5>
+              <div class="card">
+                <div class="card-body">
+                  <form>
+
+                    <div class="mb-3">
+                        <label for="exampleInputID" class="form-label">User_ID</label>
+                        <input type="id" class="form-control" id="inputID">
                       </div>
-                      <div class="col-4">
-                        <div class="d-flex justify-content-center">
-                          <div id="breakup"></div>
-                        </div>
+  
+                      <div class="mb-3">
+                        <label for="exampleInputName" class="form-label">Username</label>
+                        <input type="name" class="form-control" id="exampleInputName">
                       </div>
-                    </div>
-                  </div>
+  
+                      <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <input type="number" class="form-control" id="exampleInputPassword1">
+                      </div>
+                      
+                      <div class="mb-3">
+                        <label for="exampleInputQuantity" class="form-label">Email</label>
+                        <input type="number" class="form-control" id="exampleInputEmail1">
+                      </div>
+  
+                      <div class="mb-3">
+                        <label for="exampleInputDes" class="form-label">Address</label>
+                        <input type="text" class="form-control" id="exampleInputDes">
+                      </div>
+  
+                      <div class="mb-3">
+                        <label for="exampleInputBird" class="form-label">PhoneNumber</label>
+                        <input type="text" class="form-control" id="exampleInputBird">
+                      </div>
+
+                    <input type="submit" name="btAction" values ="Update Product" class="btn btn-primary">Save</button>
+
+                  </form>
                 </div>
               </div>
-              <div class="col-lg-12">
-                <!-- Monthly Earnings -->
-                <div class="card">
-                  <div class="card-body">
-                    <div class="row alig n-items-start">
-                      <div class="col-8">
-                        <h5 class="card-title mb-9 fw-semibold"> Monthly Earnings </h5>
-                        <h4 class="fw-semibold mb-3">$6,820</h4>
-                        <div class="d-flex align-items-center pb-1">
-                          <span
-                            class="me-2 rounded-circle bg-light-danger round-20 d-flex align-items-center justify-content-center">
-                            <i class="ti ti-arrow-down-right text-danger"></i>
-                          </span>
-                          <p class="text-dark me-1 fs-3 mb-0">+9%</p>
-                          <p class="fs-3 mb-0">last year</p>
-                        </div>
-                      </div>
-                      <div class="col-4">
-                        <div class="d-flex justify-content-end">
-                          <div
-                            class="text-white bg-secondary rounded-circle p-6 d-flex align-items-center justify-content-center">
-                            <i class="ti ti-currency-dollar fs-6"></i>
+              <h5 class="card-title fw-semibold mb-4">Delete</h5>
+              <div class="card mb-0">
+                <div class="card-body">
+                  <form action="MainController" method="Post">
+                    <fieldset enable>
+                        <div class="mb-3">
+                            <label for="exampleInputID" class="form-label">User_ID</label>
+                            <input type="text" name="txtProductId" class="form-control" id="inputID">
                           </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div id="earning"></div>
+                      <input type="sumbit" value="Delete Product" name="btAction" class="btn btn-primary">Delete</button>
+                    </fieldset>
+                  </form>
                 </div>
               </div>
             </div>
@@ -213,14 +187,11 @@
       </div>
     </div>
   </div>
-  <script src="js/jquery.min.js"></script>
-  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/libs/jquery/dist/jquery.min.js"></script>
+  <script src="js/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/sidebarmenu.js"></script>
-  <script src="js/admin.min.js"></script>
-  <script src="js/libs/apexcharts/dist/apexcharts.min.js"></script>
+  <script src="js/app.min.js"></script>
   <script src="js/libs/simplebar/dist/simplebar.js"></script>
-  <script src="js/dashboard.js"></script>
-  
 </body>
 
 </html>

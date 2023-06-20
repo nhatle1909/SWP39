@@ -60,6 +60,14 @@
               <span class="hide-menu">Account Controller</span>
             </a>
           </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="Add-DeleAccount.jsp" aria-expanded="false">
+                <span>
+                  <i class="ti ti-file-description"></i>
+                </span>
+                <span class="hide-menu">Add & Delete Staff</span>
+              </a>
+            </li>
       </nav>
       <!-- End Sidebar navigation -->
     </div>
