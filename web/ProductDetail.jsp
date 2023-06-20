@@ -62,45 +62,48 @@
 
         <!-- Single Product Details  -->
         <section class="shop container single-product">
-            <div id="Details" class="small-container">
+            <div class="small-container">
                 <div class="row">
                     <div class="col-6">
-                        <img src="<%= product.getImage_url()%>">
+                        <div class="product-box">
+                            <img src="<%=product.getImage_url()%>" alt="img" class="product-img single-img">
+                            <h2 class="product-title"><%=product.getProduct_name()%></h2>
+                            <span class="price"><%=product.getPrice()%></span>
+                            <%if (product.getQuantity() > 0) {%>
+                            <h2>Quantity : <%= product.getQuantity()%></h2>
+                            <%} else {%>
+                            <h2>Out of stock</h2>
+                            <%}%>
+                            <i class='bx bxs-cart-alt add-cart'></i>
+                        </div>
                     </div>
                     <div class="col-6">
-                        <p>Product / <%=product.getProduct_name()%></p>
-                        <h3>Use for : <%=product.getBirds()%></h3>
-                        <h4><%=product.getPrice()%>.000 VND</h4>
-                        <input type="number" value="1">
-                        <a href="" class="btn-productpage">Add to Cart</a>
+                        <h2>Product /<%=product.getProduct_name()%></h2>
+                        <h3>Small Bird Diet</h3>
+                        <h3>Use for : <%= product.getBirds()%></h3>
 
                         <h3>Product Details</h3>
-                        <p>
-
-                        <li><%=product.getDescription()%></li>
-                        </p>
+                        <p><%=product.getDescription()%></p>
                     </div>
                 </div>
-            </div>
-            <div class="comment-section">
-                <h3>Customer Feedback</h3>
-                <% if (feedbacks == null) { %>
-                <h4 class="comment-count">No Comments</h4>
-                <%} else 
-                    if (!feedbacks.isEmpty()) {%>
-                <h4 class="comment-count"><%=feedbacks.size()%> Comments</h4>
-                <%
-                      for (FeedbackDTO feedback : feedbacks) {%>
-                <div class="comments">
-                    <div class="comment">
-                        <h4><%=feedback.getUsername()%></h4>
-                        <p><%=feedback.getComment()%></p>
-                        <span class="comment-date"><%=feedback.getDate_feedback()%></span>
+                <div class="comment-section">
+                    <h3>Customer Feedback</h3>
+                    <% if (feedbacks == null) { %>
+                    <h4 class="comment-count">No Comments</h4>
+                    <%} else if (!feedbacks.isEmpty()) {%>
+                    <h4 class="comment-count"><%=feedbacks.size()%> Comments</h4>
+                    <%
+                    for (FeedbackDTO feedback : feedbacks) {%>
+                    <div class="comments">
+                        <div class="comment">
+                            <h4><%=feedback.getUsername()%></h4>
+                            <p><%=feedback.getComment()%></p>
+                            <span class="comment-date"><%=feedback.getDate_feedback()%></span>
+                        </div>
                     </div>
+                    <%}%>
+                    <%}%>
                 </div>
-                <%}%>
-                <%}%>
-            </div>
         </section>
         <!-- Offer -->
         <div class="offer">
@@ -171,11 +174,11 @@
                 <p class="copyright">Copyright 2023 - BIFO Shop</p>
             </div>
         </div>
-            <%if (productLists != null){
-        productLists.clear();
-        session.removeAttribute("SortedProductList");
-    }
-    %>
+        <%if (productLists != null) {
+                productLists.clear();
+                session.removeAttribute("SortedProductList");
+            }
+        %>
         <script src="js/main.js"></script>
     </body>
 

@@ -7,9 +7,7 @@ package Servlet;
 
 import SQLCommand.DAO;
 import Utility.BirdDTO;
-import Utility.ProductListDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;

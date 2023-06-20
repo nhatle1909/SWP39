@@ -310,12 +310,11 @@ public class DAO {
                 while (rs.next()) {
                     int order_id = rs.getInt("order_id");
                     user_id = rs.getInt("user_id");
-                    String name = rs.getString("name");
                     Date date = rs.getDate("order_date");
                     int totalPrice = rs.getInt("total_price");
                     String status = rs.getString("status");
 
-                    OrderDTO orderDTO = new OrderDTO(order_id, user_id, name, date, totalPrice, status);
+                    OrderDTO orderDTO = new OrderDTO(order_id, user_id, date, totalPrice, status);
                     if (this.listOrder == null) {
                         this.listOrder = new ArrayList<OrderDTO>();
                     }
@@ -657,7 +656,7 @@ public class DAO {
                     String species = rs.getString("species");
                     String image_url = rs.getString("Images");
                     String desc_order = rs.getString("description_order");
-                    BirdDTO birdList = new BirdDTO(bird_id, bird_name, product_id, product_name,desc_order, species, image_url);
+                    BirdDTO birdList = new BirdDTO(bird_id, bird_name, product_id, product_name, desc_order, species, image_url);
                     if (this.listBird == null) {
                         this.listBird = new ArrayList<BirdDTO>();
                     }
@@ -753,6 +752,7 @@ public class DAO {
             }
         }
     }
+
     public void getBirdDetail(int bird_id) throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -772,7 +772,7 @@ public class DAO {
                     String species = rs.getString("species");
                     String image_url = rs.getString("Images");
                     String desc_order = rs.getString("description_order");
-                    BirdDTO birdList = new BirdDTO(bird_id, bird_name, product_id, product_name,desc_order, species, image_url);
+                    BirdDTO birdList = new BirdDTO(bird_id, bird_name, product_id, product_name, desc_order, species, image_url);
                     if (this.listBird == null) {
                         this.listBird = new ArrayList<BirdDTO>();
                     }
@@ -790,5 +790,158 @@ public class DAO {
                 con.close();
             }
         }
+    }
+
+    public boolean insertOrderToDB(int order_id, int user_id, String order_date, int total_price, String status) throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "insert dbo.OrderList (order_id,user_id,order_date,total_price,status) values (?,?,?,?,?)";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, order_id);
+                stm.setInt(2, user_id);
+                stm.setString(3, order_date);
+                stm.setInt(4, total_price);
+                stm.setString(5, status);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+
+    public boolean insertOrderDetail(int order_item_id, int order_id, String product_list, int total_price, String phone_number, String address, String username) throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "insert dbo.OrderDetail (order_item_id,order_id,product_list,price,phone_number,address,username) values (?,?,?,?,?,?,?)";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, order_item_id);
+                stm.setInt(2, order_id);
+                stm.setString(3, product_list);
+                stm.setInt(4, total_price);
+                stm.setString(5, phone_number);
+                stm.setString(6, address);
+                stm.setString(7, username);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+
+    public boolean cancelOrder(int Order_id) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "DELETE FROM dbo.OrderDetail\n"
+                        + "WHERE order_id = ?;\n"
+                        + "\n"
+                        + "DELETE FROM dbo.OrderList\n"
+                        + "WHERE order_id = ?;";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, Order_id);
+                stm.setInt(2, Order_id);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+     public boolean addProduct(int product_id, String product_name, int price, int quantity, String desc, String birds,String image_url) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "Insert into dbo.Product_List (product_id,product_name,price,quantity,images,description,birds) Values (?,?,?,?,?,?,?)";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, product_id);
+                stm.setString(2, product_name);
+                stm.setInt(3, price);
+                stm.setInt(4, quantity);
+                stm.setString(5, image_url);
+                stm.setString(6, desc);
+                stm.setString(7, birds);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+
+    public boolean deleteProduct(int product_id) throws SQLException {
+         Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "Delete from dbo.Product_List where product_id = ?";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, product_id);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
     }
 }

@@ -14,7 +14,7 @@ import java.sql.Date;
 public class OrderDTO {
     private int order_id;
     private int user_id;
-    private String name;
+ 
     private Date order_date;
     private int total_price;
     private String status;
@@ -23,10 +23,10 @@ public class OrderDTO {
     public OrderDTO() {
     }
 
-    public OrderDTO(int order_id, int user_id, String name, Date order_date, int total_price, String status) {
+    public OrderDTO(int order_id, int user_id, Date order_date, int total_price, String status) {
         this.order_id = order_id;
         this.user_id = user_id;
-        this.name = name;
+
         this.order_date = order_date;
         this.total_price = total_price;
         this.status = status;
@@ -54,14 +54,6 @@ public class OrderDTO {
 
     public void setUser_id(int user_id) {
         this.user_id = user_id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getTotal_price() {

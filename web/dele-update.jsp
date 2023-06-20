@@ -40,49 +40,41 @@
               <span class="hide-menu">Home</span>
             </li>
             <li class="sidebar-item">
-                <a class="sidebar-link" href="AdminDashboard.jsp" aria-expanded="false">
+                <a class="sidebar-link" href="StaffDashboard.jsp" aria-expanded="false">
                   <span>
                     <i class="ti ti-layout-dashboard"></i>
                   </span>
                   <span class="hide-menu">Dashboard</span>
                 </a>
               </li>
-              <li class="nav-small-cap">
-                <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                <span class="hide-menu">UI COMPONENTS</span>
-              </li>
-              <li class="sidebar-item">
-                <a class="sidebar-link" href="AccountController.jsp" aria-expanded="false">
-                  <span>
-                    <i class="ti ti-user"></i>
-                  </span>
-                  <span class="hide-menu">Account Controller</span>
-                </a>
-              </li>
-              <li class="sidebar-item">
-                <a class="sidebar-link" href="add-product.jsp" aria-expanded="false">
-                  <span>
-                    <i class="ti ti-file-description"></i>
-                  </span>
-                  <span class="hide-menu">Add Products</span>
-                </a>
-              </li>
-              <li class="sidebar-item">
-                <a class="sidebar-link" href="dele-update.jsp" aria-expanded="false">
-                  <span>
-                    <i class="ti ti-file-description"></i>
-                  </span>
-                  <span class="hide-menu">Update & Delete</span>
-                </a>
-              </li>
-              <li class="sidebar-item">
-                <a class="sidebar-link" href="product.jsp" aria-expanded="false">
-                  <span>
-                    <i class="ti ti-box"></i>
-                  </span>
-                  <span class="hide-menu">Product</span>
-                </a>
-              </li>
+             <li class="nav-small-cap">
+              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+              <span class="hide-menu">UI COMPONENTS</span>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="add-product.jsp" aria-expanded="false">
+                <span>
+                  <i class="ti ti-file-description"></i>
+                </span>
+                <span class="hide-menu">Add Products</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="dele-update.jsp" aria-expanded="false">
+                <span>
+                  <i class="ti ti-file-description"></i>
+                </span>
+                <span class="hide-menu">Update & Delete</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="product.jsp" aria-expanded="false">
+                <span>
+                  <i class="ti ti-box"></i>
+                </span>
+                <span class="hide-menu">Product</span>
+              </a>
+            </li>
         </nav>
         <!-- End Sidebar navigation -->
       </div>
@@ -177,7 +169,7 @@
                         <input type="text" class="form-control" id="exampleInputBird">
                       </div>
 
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <input type="submit" name="btAction" values ="Update Product" class="btn btn-primary">Save</button>
 
                   </form>
                 </div>
@@ -185,13 +177,13 @@
               <h5 class="card-title fw-semibold mb-4">Delete</h5>
               <div class="card mb-0">
                 <div class="card-body">
-                  <form>
+                  <form action="MainController" method="Post">
                     <fieldset enable>
                         <div class="mb-3">
                             <label for="exampleInputID" class="form-label">Product ID</label>
-                            <input type="id" class="form-control" id="inputID">
+                            <input type="text" name="txtProductId" class="form-control" id="inputID">
                           </div>
-                      <button type="sumbit" class="btn btn-primary">Delete</button>
+                      <input type="sumbit" value="Delete Product" name="btAction" class="btn btn-primary">Delete</button>
                     </fieldset>
                   </form>
                 </div>

@@ -55,7 +55,7 @@
                         <%} else {%>
                     <li><a href="user_info.jsp" class="header-title">Profile</a></li>
                         <%}%>
-                    <li><i class='bx bxs-cart-alt' id="cart-icon"></i></li>
+                    <li><i class='bx bxs-cart-alt' id="cart-icon" data-quantity="0"></i></li>
                 </ul>
                 <!-- Cart -->
                 <div class="cart">
@@ -103,7 +103,6 @@
             <div class="shop-content">
                 <div class="row justify-content-center">
                     <%if (productLists != null && !productLists.isEmpty()) {
-                            int count = -1;
                             for (ProductListDTO productList : productLists) {%>
 
                     <div class="col-md-4 col-sm-6 mb-4">

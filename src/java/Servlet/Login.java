@@ -13,9 +13,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -61,9 +59,9 @@ public class Login extends HttpServlet {
                 if (sql.getRole(mail).equals("CUSTOMER")) {
                     url = "ProductPage.jsp";
                 } else if (sql.getRole(mail).equals("ADMIN")) {
-                    url = "admin.jsp";
+                    url = "AdminDashboard.jsp";
                 } else if (sql.getRole(mail).equals("STAFF")) {
-                    url = "staff.jsp";
+                    url = "StaffDashboard.jsp";
                 }
 
                 sql.searchUser(mail);

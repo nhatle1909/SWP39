@@ -90,13 +90,18 @@
                         <a class="nav-link active" id="user-info-tab" data-toggle="tab" href="#user-info"
                            role="tab" aria-controls="user-info" aria-selected="true">User Information</a>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" id="favorite-products-tab" data-toggle="tab" href="#favorite-products"
+                           role="tab" aria-controls="favorite-products" aria-selected="false">Favorite Product List</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" id="order-history-tab" data-toggle="tab" href="#order-history" role="tab"
                            aria-controls="order-history" aria-selected="false">Order History</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="favorite-products-tab" data-toggle="tab" href="#favorite-products"
-                           role="tab" aria-controls="favorite-products" aria-selected="false">Favorite Product List</a>
+                        <a class="nav-link active" id="order-detail-tabl" data-toggle="tab" href="#order-detail"
+                           role="tab" aria-controls="order-detail" aria-selected="true">Order detail</a>
                     </li>
                 </ul>
             </section>  
@@ -210,6 +215,7 @@
                                     <h5 class="card-title">Order History</h5>
                                     <div class="table-responsive">
                                         <table class="table table-hover">
+
                                             <thead>
                                                 <tr>
                                                     <th>Order ID</th>
@@ -217,6 +223,7 @@
                                                     <th>Total Amount</th>
                                                     <th>Status</th>
                                                     <th>Check</th>
+                                                    <th>Cancel</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -225,14 +232,23 @@
                                                     if (orders != null && !orders.isEmpty()) {
                                                         for (OrderDTO order : orders) {%>
                                                 <tr>
+
                                                     <td><%= order.getOrder_id()%></td>
                                                     <td><%= order.getOrder_date()%></td>
                                                     <td>$<%= order.getTotal_price()%></td>
                                                     <td><%= order.getStatus()%></td>
-                                                    <td><a class="btn btn-primary" href="UpdatePassword.jsp">Check</a></td>
+                                                    <td><input type="submit" name="btAction" value="Check" class = "btn btn-primary"></td>
+                                                        <% if (order.getStatus().equals("WAITING")) {%>
+                                                    <td>
+                                                        <form action="MainController" method="post">
+                                                            <input type="hidden" name="txtOrderID" value="<%=order.getOrder_id()%>">
+                                                            <input type="submit" name="btAction" value="Cancel" class = "btn btn-primary">
+                                                            <%}%>
+                                                        </form>
+                                                    </td>
                                                 </tr>
                                                 <% }
-                                                    } else { %>
+                                            } else { %>
                                                 <tr>
                                                     <td colspan="4" class="text-center">No orders found.</td>
                                                 </tr>
@@ -286,7 +302,7 @@
                                                     </td>
                                                 </tr>
                                                 <% }
-                                                    } else { %>
+                                                } else { %>
                                                 <tr>
                                                     <td colspan="4" class="text-center">No orders found.</td>
                                                 </tr>

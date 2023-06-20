@@ -60,30 +60,6 @@
               <span class="hide-menu">Account Controller</span>
             </a>
           </li>
-          <li class="sidebar-item">
-            <a class="sidebar-link" href="add-product.jsp" aria-expanded="false">
-              <span>
-                <i class="ti ti-file-description"></i>
-              </span>
-              <span class="hide-menu">Add Products</span>
-            </a>
-          </li>
-          <li class="sidebar-item">
-            <a class="sidebar-link" href="dele-update.jsp" aria-expanded="false">
-              <span>
-                <i class="ti ti-file-description"></i>
-              </span>
-              <span class="hide-menu">Update & Delete</span>
-            </a>
-          </li>
-          <li class="sidebar-item">
-            <a class="sidebar-link" href="product.jsp" aria-expanded="false">
-              <span>
-                <i class="ti ti-box"></i>
-              </span>
-              <span class="hide-menu">Product</span>
-            </a>
-          </li>
       </nav>
       <!-- End Sidebar navigation -->
     </div>

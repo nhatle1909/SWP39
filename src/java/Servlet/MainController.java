@@ -62,10 +62,20 @@ public class MainController extends HttpServlet {
                 url = "SortProductList";
             } else if (action.equals("Favorite")) {
                 url = "AddToFavorite";
-            }else if (action.equals("Search")) {
+            } else if (action.equals("Search")) {
                 url = "Search";
-            }else if (action.equals("Search Bird Name")) {
+            } else if (action.equals("Search Bird Name")) {
                 url = "SearchBird";
+            } else if (action.equals("proceed to checkout")) {
+                url = "Checkout";
+            } else if (action.equals("Cancel")) {
+                url = "CancelOrder";
+            } else if (action.equals("Add Product")) {
+                url = "AddProduct";
+            } else if (action.equals("Delete Product")) {
+                url = "DeleteProduct";
+            } else if (action.equals("Update Product")) {
+                url = "UpdateProduct";
             }
 
             RequestDispatcher rd = request.getRequestDispatcher(url);

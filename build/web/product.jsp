@@ -4,6 +4,9 @@
     Author     : ADMIN
 --%>
 
+<%@page import="Utility.ProductListDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="SQLCommand.DAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
@@ -18,6 +21,14 @@
 </head>
 
 <body>
+    <%DAO sql = new DAO();
+            String product_name = "";
+            List<ProductListDTO> productLists = (List) session.getAttribute("SortedProductList");
+            if (productLists == null) {
+                sql.searchProduct(product_name);
+                productLists = sql.getListProduct();
+                session.setAttribute("SortedProductList", productLists);
+            }%>
   <!--  Body Wrapper -->
   <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
     data-sidebar-position="fixed" data-header-position="fixed">
@@ -51,14 +62,6 @@
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">UI COMPONENTS</span>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="AccountController.jsp" aria-expanded="false">
-                <span>
-                  <i class="ti ti-user"></i>
-                </span>
-                <span class="hide-menu">Account Controller</span>
-              </a>
             </li>
             <li class="sidebar-item">
               <a class="sidebar-link" href="add-product.jsp" aria-expanded="false">
@@ -149,247 +152,41 @@
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
                 </button>
               </div>
-              <div class="product-cell category">Name<button class="sort-button">
+                 <div class="product-cell sales">Product ID<button class="sort-button">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
                 </button></div>
-              <div class="product-cell status-cell">Description<button class="sort-button">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-                </button></div>
-              <div class="product-cell sales">ID<button class="sort-button">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-                </button></div>
+             
+             
               <div class="product-cell stock">Quantity<button class="sort-button">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
                 </button></div>
               <div class="product-cell price">Price<button class="sort-button">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
                 </button></div>
+                 <div class="product-cell status-cell">Use For Bird<button class="sort-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
+                </button></div>
             </div>
 
 
+  <%if (productLists != null && !productLists.isEmpty()) {
+                            for (ProductListDTO productList : productLists) {%>
 
             <div class="products-row">
               <button class="cell-more-button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
               </button>
                 <div class="product-cell image">
-                  <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="product">
-                  <span>Ocean</span>
+                  <img src="<%=productList.getImage_url()%>" alt="product">
+                  <span><%=productList.getProduct_name()%></span>
                 </div>
-              <div class="product-cell category"><span class="cell-label">Category:</span>Furniture</div>
-              <div class="product-cell status-cell">
-                <span class="cell-label">Status:</span>
-                <span class="status active">Active</span>
-              </div>
-              <div class="product-cell sales"><span class="cell-label">Sales:</span>11</div>
-              <div class="product-cell stock"><span class="cell-label">Stock:</span>36</div>
-              <div class="product-cell price"><span class="cell-label">Price:</span>$560</div>
-            </div>
-            
-            <div class="products-row">
-              <button class="cell-more-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-              </button>
-                <div class="product-cell image">
-                  <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8a2l0Y2hlbnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="product">
-                  <span>Lou</span>
-                </div>
-              <div class="product-cell category"><span class="cell-label">Category:</span>Kitchen</div>
-              <div class="product-cell status-cell">
-                <span class="cell-label">Status:</span>
-                <span class="status disabled">Disabled</span>
-              </div>
-              <div class="product-cell sales"><span class="cell-label">Sales:</span>6</div>
-              <div class="product-cell stock"><span class="cell-label">Stock:</span>46</div>
-              <div class="product-cell price"><span class="cell-label">Price:</span>$710</div>
-            </div>
-            <div class="products-row">
-              <button class="cell-more-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-              </button>
-                <div class="product-cell image">
-                  <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60" alt="product">
-                  <span>Yellow</span>
-                </div>
-              <div class="product-cell category"><span class="cell-label">Category:</span>Decoration</div>
-              <div class="product-cell status-cell">
-                <span class="cell-label">Status:</span>
-                <span class="status active">Active</span>
-              </div>
-              <div class="product-cell sales"><span class="cell-label">Sales:</span>61</div>
-              <div class="product-cell stock"><span class="cell-label">Stock:</span>56</div>
-              <div class="product-cell price"><span class="cell-label">Price:</span>$360</div>
-            </div>
-            <div class="products-row">
-              <button class="cell-more-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-              </button>
-                <div class="product-cell image">
-                  <img src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8YmVkcm9vbXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="product">
-                  <span>Dreamy</span>
-                </div>
-              <div class="product-cell category"><span class="cell-label">Category:</span>Bedroom</div>
-              <div class="product-cell status-cell">
-                <span class="cell-label">Status:</span>
-                <span class="status disabled">Disabled</span>
-              </div>
-              <div class="product-cell sales"><span class="cell-label">Sales:</span>41</div>
-              <div class="product-cell stock"><span class="cell-label">Stock:</span>66</div>
-              <div class="product-cell price"><span class="cell-label">Price:</span>$260</div>
-            </div>
-            <div class="products-row">
-              <button class="cell-more-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-              </button>
-                <div class="product-cell image">
-                  <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8aW50ZXJpb3J8ZW58MHwwfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="product">
-                  <span>Boheme</span>
-                </div>
-              <div class="product-cell category"><span class="cell-label">Category:</span>Furniture</div>
-              <div class="product-cell status-cell">
-                <span class="cell-label">Status:</span>
-                <span class="status active">Active</span>
-              </div>
-              <div class="product-cell sales"><span class="cell-label">Sales:</span>32</div>
-              <div class="product-cell stock"><span class="cell-label">Stock:</span>40</div>
-              <div class="product-cell price"><span class="cell-label">Price:</span>$350</div>
-            </div>
-            <div class="products-row">
-              <button class="cell-more-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-              </button>
-                <div class="product-cell image">
-                  <img src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fGludGVyaW9yfGVufDB8MHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="product">
-                  <span>Sky</span>
-                </div>
-              <div class="product-cell category"><span class="cell-label">Category:</span>Bathroom</div>
-              <div class="product-cell status-cell">
-                <span class="cell-label">Status:</span>
-                <span class="status disabled">Disabled</span>
-              </div>
-              <div class="product-cell sales"><span class="cell-label">Sales:</span>22</div>
-              <div class="product-cell stock"><span class="cell-label">Stock:</span>44</div>
-              <div class="product-cell price"><span class="cell-label">Price:</span>$160</div>
-            </div>
-            <div class="products-row">
-              <button class="cell-more-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-              </button>
-                <div class="product-cell image">
-                  <img src="https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzB8fGludGVyaW9yfGVufDB8MHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="product">
-                  <span>Midnight</span>
-                </div>
-              <div class="product-cell category"><span class="cell-label">Category:</span>Furniture</div>
-              <div class="product-cell status-cell">
-                <span class="cell-label">Status:</span>
-                <span class="status active">Active</span>
-              </div>
-              <div class="product-cell sales"><span class="cell-label">Sales:</span>23</div>
-              <div class="product-cell stock"><span class="cell-label">Stock:</span>45</div>
-              <div class="product-cell price"><span class="cell-label">Price:</span>$340</div>
-            </div>
-            <div class="products-row">
-              <button class="cell-more-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-              </button>
-                <div class="product-cell image">
-                  <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8aW50ZXJpb3J8ZW58MHwwfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="product">
-                  <span>Boheme</span>
-                </div>
-              <div class="product-cell category"><span class="cell-label">Category:</span>Furniture</div>
-              <div class="product-cell status-cell">
-                <span class="cell-label">Status:</span>
-                <span class="status active">Active</span>
-              </div>
-              <div class="product-cell sales"><span class="cell-label">Sales:</span>32</div>
-              <div class="product-cell stock"><span class="cell-label">Stock:</span>40</div>
-              <div class="product-cell price"><span class="cell-label">Price:</span>$350</div>
-            </div>
-            <div class="products-row">
-              <button class="cell-more-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-              </button>
-                <div class="product-cell image">
-                  <img src="https://images.unsplash.com/photo-1511389026070-a14ae610a1be?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzR8fGludGVyaW9yfGVufDB8MHwwfHw%3D&auto=format&fit=crop&w=900&q=60" alt="product">
-                  <span>Palm</span>
-                </div>
-              <div class="product-cell category"><span class="cell-label">Category:</span>Decoration</div>
-              <div class="product-cell status-cell">
-                <span class="cell-label">Status:</span>
-                <span class="status active">Active</span>
-              </div>
-              <div class="product-cell sales"><span class="cell-label">Sales:</span>24</div>
-              <div class="product-cell stock"><span class="cell-label">Stock:</span>46</div>
-              <div class="product-cell price"><span class="cell-label">Price:</span>$60</div>
-            </div>
-            <div class="products-row">
-              <button class="cell-more-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-              </button>
-                <div class="product-cell image">
-                  <img src="https://images.unsplash.com/photo-1600494603989-9650cf6ddd3d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTV8fGludGVyaW9yfGVufDB8MHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="product">
-                  <span>Forest</span>
-                </div>
-              <div class="product-cell category"><span class="cell-label">Category:</span>Living Room</div>
-              <div class="product-cell status-cell">
-                <span class="cell-label">Status:</span>
-                <span class="status active">Active</span>
-              </div>
-              <div class="product-cell sales"><span class="cell-label">Sales:</span>41</div>
-              <div class="product-cell stock"><span class="cell-label">Stock:</span>16</div>
-              <div class="product-cell price"><span class="cell-label">Price:</span>$270</div>
-            </div>
-            <div class="products-row">
-              <button class="cell-more-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-              </button>
-                <div class="product-cell image">
-                  <img src="https://images.unsplash.com/photo-1560448204-603b3fc33ddc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Njd8fGludGVyaW9yfGVufDB8MHwwfHw%3D&auto=format&fit=crop&w=900&q=60" alt="product">
-                  <span>Sand</span>
-                </div>
-              <div class="product-cell category"><span class="cell-label">Category:</span>Living Room</div>
-              <div class="product-cell status-cell">
-                <span class="cell-label">Status:</span>
-                <span class="status disabled">Disabled</span>
-              </div>
-              <div class="product-cell sales"><span class="cell-label">Sales:</span>52</div>
-              <div class="product-cell stock"><span class="cell-label">Stock:</span>16</div>
-              <div class="product-cell price"><span class="cell-label">Price:</span>$230</div>
-            </div>
-            <div class="products-row">
-              <button class="cell-more-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-              </button>
-                <div class="product-cell image">
-                  <img src="https://images.unsplash.com/photo-1533779283484-8ad4940aa3a8?ixid=MnwxMjA3fDB8MHxzZWFyY2h8ODd8fGludGVyaW9yfGVufDB8MHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="product">
-                  <span>Autumn</span>
-                </div>
-              <div class="product-cell category"><span class="cell-label">Category:</span>Decoration</div>
-              <div class="product-cell status-cell">
-                <span class="cell-label">Status:</span>
-                <span class="status active">Active</span>
-              </div>
-              <div class="product-cell sales"><span class="cell-label">Sales:</span>21</div>
-              <div class="product-cell stock"><span class="cell-label">Stock:</span>46</div>
-              <div class="product-cell price"><span class="cell-label">Price:</span>$252</div>
-            </div>
-            <div class="products-row">
-              <button class="cell-more-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-              </button>
-                <div class="product-cell image">
-                  <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8aW50ZXJpb3J8ZW58MHwwfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="product">
-                  <span>Boheme</span>
-                </div>
-              <div class="product-cell category"><span class="cell-label">Category:</span>Furniture</div>
-              <div class="product-cell status-cell">
-                <span class="cell-label">Status:</span>
-                <span class="status active">Active</span>
-              </div>
-              <div class="product-cell sales"><span class="cell-label">Sales:</span>32</div>
-              <div class="product-cell stock"><span class="cell-label">Stock:</span>40</div>
-              <div class="product-cell price"><span class="cell-label">Price:</span>$350</div>
-            </div>
+                  <div class="product-cell category"><span class="cell-label">Category:</span><%=productList.getProduct_id()%></div>
+              <div class="product-cell sales"><span class="cell-label">Sales:</span><%=productList.getQuantity()%></div>
+              <div class="product-cell stock"><span class="cell-label">Stock:</span><%=productList.getPrice()%>.000 VND</div>
+              <div class="product-cell price"><span class="cell-label">Price:</span><%=productList.getBirds()%></div>
+            </div>      
+                <%}%>
+                <%}%>
           </div>
         </div>
 
@@ -400,7 +197,7 @@
   <script src="js/sidebarmenu.js"></script>
   <script src="js/app.min.js"></script>
   <script src="js/libs/apexcharts/dist/apexcharts.min.js"></script>
-  <script src="js//libs/simplebar/dist/simplebar.js"></script>
+  <script src="js/libs/simplebar/dist/simplebar.js"></script>
   <script src="js/dashboard.js"></script>
   <script src="js/admin.js"></script>
 </body>
