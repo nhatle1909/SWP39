@@ -3,22 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/DevTools/repository/SWP39/web/css/check.css</file>
-            <file>file:/D:/DevTools/repository/SWP39/src/java/Servlet/DeleteProduct.java</file>
-            <file>file:/D:/DevTools/repository/SWP39/src/java/Servlet/RemoveFavoriteProduct.java</file>
-            <file>file:/D:/DevTools/repository/SWP39/web/dele-update.jsp</file>
-            <file>file:/D:/DevTools/repository/SWP39/web/checkout.jsp</file>
-            <file>file:/D:/DevTools/repository/SWP39/src/java/Servlet/CancelOrder.java</file>
+            <file>file:/D:/DevTools/repository/SWP39/src/java/Servlet/AddStaffAccount.java</file>
+            <file>file:/D:/DevTools/repository/SWP39/src/java/Servlet/VerifyCode.java</file>
+            <file>file:/D:/DevTools/repository/SWP39/src/java/Utility/UserDTO.java</file>
+            <file>file:/D:/DevTools/repository/SWP39/src/java/Utility/OrderDetailDTO.java</file>
+            <file>file:/D:/DevTools/repository/SWP39/web/Add-DeleAccount.jsp</file>
+            <file>file:/D:/DevTools/repository/SWP39/web/AccountList.jsp</file>
             <file>file:/D:/DevTools/repository/SWP39/web/user_info.jsp</file>
-            <file>file:/D:/DevTools/repository/SWP39/src/java/Servlet/Checkout.java</file>
             <file>file:/D:/DevTools/repository/SWP39/src/java/Servlet/AddProduct.java</file>
+            <file>file:/D:/DevTools/repository/SWP39/src/java/Servlet/LogoutServlet.java</file>
             <file>file:/D:/DevTools/repository/SWP39/web/product.jsp</file>
+            <file>file:/D:/DevTools/repository/SWP39/src/java/Servlet/DeleteStaff.java</file>
+            <file>file:/D:/DevTools/repository/SWP39/web/orderList.jsp</file>
             <file>file:/D:/DevTools/repository/SWP39/src/java/Servlet/MainController.java</file>
             <file>file:/D:/DevTools/repository/SWP39/web/StaffDashboard.jsp</file>
-            <file>file:/D:/DevTools/repository/SWP39/web/add-product.jsp</file>
-            <file>file:/D:/DevTools/repository/SWP39/web/ProductPage.jsp</file>
             <file>file:/D:/DevTools/repository/SWP39/src/java/SQLCommand/DAO.java</file>
             <file>file:/D:/DevTools/repository/SWP39/web/AdminDashboard.jsp</file>
+            <file>file:/D:/DevTools/repository/SWP39/src/java/Servlet/Login.java</file>
         </group>
     </open-files>
 </project-private>

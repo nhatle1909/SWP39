@@ -20,8 +20,6 @@
 
     </head>
     <body>
-
-
         <%         UserDTO userDTO = (UserDTO) session.getAttribute("User_info");
         %>
 
@@ -133,8 +131,10 @@
 
                 </div>
 
-                <input type="submit" name="btAction" value="proceed to checkout" class="submit-btn">
-
+                        <input type="submit" name="btAction" value="proceed to checkout" class="submit-btn"> 
+                        <br/>
+                        <br/>
+                <a href="ProductPage.jsp" class="submit-btn">Return</a>
             </form>
 
         </div>    
@@ -168,8 +168,6 @@
             }
             var subtotal = localStorage.getItem("cartTotal");
             document.getElementById('subtotal').value = subtotal + ".000 VND";
-            localStorage.clear();
-            subtotal = "0";
 
         </script>
         <script>

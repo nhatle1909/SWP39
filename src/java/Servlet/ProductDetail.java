@@ -46,13 +46,13 @@ public class ProductDetail extends HttpServlet {
             sql.showFeedback(product_id);
             sql.getProductDetail(product_id);
             
-            session.removeAttribute("SortedProductList");
+            session.removeAttribute("ProductDetail");
             
             List<FeedbackDTO> feedbackDTO = sql.getListFeedback();
             List<ProductListDTO> productListDTO = sql.getListProduct();
             
             session.setAttribute("Feedback", feedbackDTO);
-            session.setAttribute("SortedProductList", productListDTO);
+            session.setAttribute("ProductDetail", productListDTO);
         } catch (SQLException ex) {
             Logger.getLogger(ProductDetail.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {

@@ -10,6 +10,7 @@ import Utility.DBUtility;
 import Utility.FavoriteDTO;
 import Utility.FeedbackDTO;
 import Utility.OrderDTO;
+import Utility.OrderDetailDTO;
 import Utility.ProductListDTO;
 import Utility.UserDTO;
 import java.sql.Connection;
@@ -33,6 +34,11 @@ public class DAO {
     private List<ProductListDTO> listProduct;
     private List<OrderDTO> listOrder;
     private List<FeedbackDTO> listFeedback;
+    private List<OrderDetailDTO> listOrderDetail;
+
+    public List<OrderDetailDTO> getListOrderDetail() {
+        return listOrderDetail;
+    }
 
     public List<UserDTO> getListAccount() {
         return listAccount;
@@ -889,7 +895,8 @@ public class DAO {
         }
         return false;
     }
-     public boolean addProduct(int product_id, String product_name, int price, int quantity, String desc, String birds,String image_url) throws SQLException {
+
+    public boolean addProduct(int product_id, String product_name, int price, int quantity, String desc, String birds, String image_url) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         try {
@@ -921,7 +928,7 @@ public class DAO {
     }
 
     public boolean deleteProduct(int product_id) throws SQLException {
-         Connection con = null;
+        Connection con = null;
         PreparedStatement stm = null;
         try {
             con = DBUtility.makeConnection();
@@ -929,6 +936,176 @@ public class DAO {
                 String sql = "Delete from dbo.Product_List where product_id = ?";
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, product_id);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+
+    public boolean updateProduct(int product_id, String product_name, int price, int quantity, String desc, String bird) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "Update dbo.Product_List set product_name = ? , price = ?, quantity = ? , description = ? , birds = ? where product_id = ? ";
+                stm = con.prepareStatement(sql);
+
+                stm.setString(1, product_name);
+                stm.setInt(2, price);
+                stm.setInt(3, quantity);
+                stm.setString(4, desc);
+                stm.setString(5, bird);
+                stm.setInt(6, product_id);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+
+    public void showOrderList() throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "Select * from dbo.OrderDetail";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int order_id = rs.getInt("order_id");
+                    String username = rs.getString("username");
+                    int price = rs.getInt("price");
+                    String address = rs.getString("address");
+                    String phone_number = rs.getString("phone_number");
+                    String product_list = rs.getString("product_list");
+
+                    OrderDetailDTO dto = new OrderDetailDTO(order_id, username, phone_number, address, price, product_list);
+                    if (this.listOrderDetail == null) {
+                        this.listOrderDetail = new ArrayList<OrderDetailDTO>();
+                    }
+                    this.listOrderDetail.add(dto);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
+    public void showAllUser() throws SQLException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "Select * from dbo.ProfileUser";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int user_id = rs.getInt("user_id");
+                    String username = rs.getString("username");
+                    String mail = rs.getString("mail");
+                    String address = rs.getString("address");
+                    String phone_number = rs.getString("phone_number");
+                    String role = rs.getString("role");
+
+                    UserDTO dto = new UserDTO(user_id, username, mail, address, phone_number, role);
+                    if (this.listAccount == null) {
+                        this.listAccount = new ArrayList<UserDTO>();
+                    }
+                    this.listAccount.add(dto);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
+    public boolean DeleteStaff(int user_id) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "Delete from dbo.ProfileUser where user_id = ? \n"
+                        + "                            Delete from dbo.Account_User where user_id = ?";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, user_id);
+                stm.setInt(2, user_id);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+
+    }
+
+    public boolean addStaff(int user_id, String username, String password, String mail, String address, String phoneNumber,String role) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "Insert into dbo.Account_User (user_id,username,password,mail) values (?,?,?,?) \n"
+                        + "Insert into dbo.ProfileUser (user_id,username,mail,address,phone_number,role) values (?,?,?,?,?,?)";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, user_id);
+                stm.setString(2, username);
+                stm.setString(3, password);
+                stm.setString(4, mail);
+                stm.setInt(5, user_id);
+                stm.setString(6, username);
+                stm.setString(7, mail);
+                stm.setString(8, address);
+                stm.setString(9, phoneNumber);
+                stm.setString(10, role);
                 int row = stm.executeUpdate();
                 if (row > 0) {
                     return true;

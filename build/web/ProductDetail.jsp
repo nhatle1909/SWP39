@@ -23,7 +23,7 @@
     </head>
 
     <body>
-        <% List<ProductListDTO> productLists = (List) session.getAttribute("SortedProductList");
+        <% List<ProductListDTO> productLists = (List) session.getAttribute("ProductDetail");
             List<FeedbackDTO> feedbacks = (List) session.getAttribute("Feedback");
             ProductListDTO product = productLists.get(0);
         %>
@@ -31,11 +31,11 @@
         <header>
             <!-- Nav -->
             <div class="nav container">
-                <img src="img/logo-removebg-preview.png" href="#" class="logo"></img>
+                <img src="images/logo-removebg-preview.png" href="#" class="logo"></img>
                 <!-- Cart-Icon -->
                 <ul>
                     <li><a href="productList.html" class="header-title">Home</a></li>
-                    <li><a href="productList.html" class="header-title">Product</a></li>
+                    <li><a href="ProductPage.jsp" class="header-title">Product</a></li>
                     <li><a href="productList.html" class="header-title">Contact</a></li>
                     <li><a href="productList.html" class="header-title">Profile</a></li>
                     <li><i class='bx bxs-cart-alt' id="cart-icon"></i></li>
@@ -174,11 +174,7 @@
                 <p class="copyright">Copyright 2023 - BIFO Shop</p>
             </div>
         </div>
-        <%if (productLists != null) {
-                productLists.clear();
-                session.removeAttribute("SortedProductList");
-            }
-        %>
+   
         <script src="js/main.js"></script>
     </body>
 

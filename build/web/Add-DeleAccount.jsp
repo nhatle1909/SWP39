@@ -127,56 +127,51 @@
         <div class="container-fluid">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title fw-semibold mb-4">Update</h5>
+              <h5 class="card-title fw-semibold mb-4">Add Staff</h5>
               <div class="card">
                 <div class="card-body">
-                  <form>
-
-                    <div class="mb-3">
-                        <label for="exampleInputID" class="form-label">User_ID</label>
-                        <input type="id" class="form-control" id="inputID">
-                      </div>
+                  <form action="MainController" method="Post">
   
                       <div class="mb-3">
                         <label for="exampleInputName" class="form-label">Username</label>
-                        <input type="name" class="form-control" id="exampleInputName">
+                        <input type="text" name = "txtUsername"class="form-control" id="exampleInputName">
                       </div>
   
                       <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="number" class="form-control" id="exampleInputPassword1">
+                        <input type="text" name="txtPassword" class="form-control" id="exampleInputPassword1">
                       </div>
                       
                       <div class="mb-3">
                         <label for="exampleInputQuantity" class="form-label">Email</label>
-                        <input type="number" class="form-control" id="exampleInputEmail1">
+                        <input type="text" name="txtEmail"class="form-control" id="exampleInputEmail1">
                       </div>
   
                       <div class="mb-3">
                         <label for="exampleInputDes" class="form-label">Address</label>
-                        <input type="text" class="form-control" id="exampleInputDes">
+                        <input type="text" name="txtAddress" class="form-control" id="exampleInputDes">
                       </div>
   
                       <div class="mb-3">
                         <label for="exampleInputBird" class="form-label">PhoneNumber</label>
-                        <input type="text" class="form-control" id="exampleInputBird">
+                        <input type="text" name="txtPhoneNumber" class="form-control" id="exampleInputBird">
                       </div>
 
-                    <input type="submit" name="btAction" values ="Update Product" class="btn btn-primary">Save</button>
+                    <input type="submit" name="btAction" value ="Add Staff Account" class="btn btn-primary">
 
                   </form>
                 </div>
               </div>
-              <h5 class="card-title fw-semibold mb-4">Delete</h5>
+              <h5 class="card-title fw-semibold mb-4">Delete Staff</h5>
               <div class="card mb-0">
                 <div class="card-body">
                   <form action="MainController" method="Post">
                     <fieldset enable>
                         <div class="mb-3">
                             <label for="exampleInputID" class="form-label">User_ID</label>
-                            <input type="text" name="txtProductId" class="form-control" id="inputID">
+                            <input type="text" name="txtUserID" class="form-control" id="inputID">
                           </div>
-                      <input type="sumbit" value="Delete Product" name="btAction" class="btn btn-primary">Delete</button>
+                      <input type="submit" value="Delete Staff" name="btAction" class="btn btn-primary">
                     </fieldset>
                   </form>
                 </div>

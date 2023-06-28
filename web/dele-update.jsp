@@ -137,39 +137,39 @@
               <h5 class="card-title fw-semibold mb-4">Update</h5>
               <div class="card">
                 <div class="card-body">
-                  <form>
+                  <form action="MainController" method="Post">
 
                     <div class="mb-3">
                         <label for="exampleInputID" class="form-label">Product ID</label>
-                        <input type="id" class="form-control" id="inputID">
+                        <input type="id" name="txtProductId" class="form-control" id="inputID">
                       </div>
   
                       <div class="mb-3">
                         <label for="exampleInputName" class="form-label">Product Name</label>
-                        <input type="name" class="form-control" id="exampleInputName">
+                        <input type="name" name="txtProductName" class="form-control" id="exampleInputName">
                       </div>
   
                       <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Price</label>
-                        <input type="number" class="form-control" id="exampleInputPassword1">
+                        <input type="number" name="txtPrice" class="form-control" id="exampleInputPassword1">
                       </div>
                       
                       <div class="mb-3">
                         <label for="exampleInputQuantity" class="form-label">Quantity</label>
-                        <input type="number" class="form-control" id="exampleInputEmail1">
+                        <input type="number" name="txtQuantity" class="form-control" id="exampleInputEmail1">
                       </div>
   
                       <div class="mb-3">
                         <label for="exampleInputDes" class="form-label">Description</label>
-                        <input type="text" class="form-control" id="exampleInputDes">
+                        <input type="text" name="txtDescription" class="form-control" id="exampleInputDes">
                       </div>
   
                       <div class="mb-3">
                         <label for="exampleInputBird" class="form-label">Bird</label>
-                        <input type="text" class="form-control" id="exampleInputBird">
+                        <input type="text" name="txtBird"class="form-control" id="exampleInputBird">
                       </div>
 
-                    <input type="submit" name="btAction" values ="Update Product" class="btn btn-primary">Save</button>
+                    <input type="submit" name="btAction" value ="Update Product" class="btn btn-primary">
 
                   </form>
                 </div>

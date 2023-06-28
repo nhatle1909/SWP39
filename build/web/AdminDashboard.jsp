@@ -60,6 +60,14 @@
                 <span class="hide-menu">Account List</span>
               </a>
             </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="Add-DeleAccount.jsp" aria-expanded="false">
+                <span>
+                  <i class="ti ti-file-description"></i>
+                </span>
+                <span class="hide-menu">Add & Delete Staff</span>
+              </a>
+            </li>
              
         </nav>
         <!-- End Sidebar navigation -->
@@ -87,8 +95,10 @@
           </ul>
           <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
             <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
-              <a href="https://adminmart.com/product/modernize-free-bootstrap-admin-dashboard/" target="_blank" class="btn btn-primary">Download Free</a>
-              <li class="nav-item dropdown">
+                <form action="MainController" method="post">
+                <input type="submit" name="btAction" value="Logout" class="btn btn-primary">
+                </form>
+                <li class="nav-item dropdown">
                 <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
                   aria-expanded="false">
                   <img src="#" alt="" width="35" height="35" class="rounded-circle">
@@ -107,7 +117,9 @@
                       <i class="ti ti-list-check fs-6"></i>
                       <p class="mb-0 fs-3">My Task</p>
                     </a>
-                    <a href="./authentication-login.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                      <form action="MainController" method="Post">
+                    <input type="submit" name="btAction" value="Logout" class="btn btn-outline-primary mx-3 mt-2 d-block">
+                  </form>
                   </div>
                 </div>
               </li>

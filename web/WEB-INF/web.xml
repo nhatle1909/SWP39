@@ -84,6 +84,18 @@
         <servlet-name>DeleteProduct</servlet-name>
         <servlet-class>Servlet.DeleteProduct</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateProduct</servlet-name>
+        <servlet-class>Servlet.UpdateProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddStaffAccount</servlet-name>
+        <servlet-class>Servlet.AddStaffAccount</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteStaff</servlet-name>
+        <servlet-class>Servlet.DeleteStaff</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -167,6 +179,18 @@
     <servlet-mapping>
         <servlet-name>DeleteProduct</servlet-name>
         <url-pattern>/DeleteProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProduct</servlet-name>
+        <url-pattern>/UpdateProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddStaffAccount</servlet-name>
+        <url-pattern>/AddStaffAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteStaff</servlet-name>
+        <url-pattern>/DeleteStaff</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
