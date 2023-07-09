@@ -37,7 +37,7 @@
                     <li><a href="productList.html" class="header-title">Home</a></li>
                     <li><a href="ProductPage.jsp" class="header-title">Product</a></li>
                     <li><a href="productList.html" class="header-title">Contact</a></li>
-                    <li><a href="productList.html" class="header-title">Profile</a></li>
+                    <li><a href="user_info.jsp" class="header-title">Profile</a></li>
                     <li><i class='bx bxs-cart-alt' id="cart-icon"></i></li>
                 </ul>
                 <!-- Cart -->
@@ -68,9 +68,9 @@
                         <div class="product-box">
                             <img src="<%=product.getImage_url()%>" alt="img" class="product-img single-img">
                             <h2 class="product-title"><%=product.getProduct_name()%></h2>
-                            <span class="price"><%=product.getPrice()%></span>
+                            <h2 class="price"><%=product.getPrice()%>.000 VND</h2>
                             <%if (product.getQuantity() > 0) {%>
-                            <h2>Quantity : <%= product.getQuantity()%></h2>
+                            <p class = "product-text" >Quantity : <%= product.getQuantity()%></p>
                             <%} else {%>
                             <h2>Out of stock</h2>
                             <%}%>
@@ -79,7 +79,6 @@
                     </div>
                     <div class="col-6">
                         <h2>Product /<%=product.getProduct_name()%></h2>
-                        <h3>Small Bird Diet</h3>
                         <h3>Use for : <%= product.getBirds()%></h3>
 
                         <h3>Product Details</h3>

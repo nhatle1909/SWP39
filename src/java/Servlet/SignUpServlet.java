@@ -5,7 +5,7 @@
  */
 package Servlet;
 
-import SQLCommand.DAO;
+import DAO.DAO;
 import Utility.EmailUtility;
 import java.io.IOException;
 import java.sql.SQLException;

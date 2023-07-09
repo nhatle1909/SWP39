@@ -131,10 +131,11 @@
 
                 </div>
 
-                        <input type="submit" name="btAction" value="proceed to checkout" class="submit-btn"> 
+                        <input id="clearButton" type="submit" name="btAction" value="proceed to checkout" class="submit-btn"> 
                         <br/>
                         <br/>
                 <a href="ProductPage.jsp" class="submit-btn">Return</a>
+                <a id="clearButton" href="ProductPage.jsp" class="submit-btn">Cancel</a>
             </form>
 
         </div>    
@@ -149,6 +150,7 @@
                 var title = document.createElement("input");
                 var img = document.createElement("img");
                 var price = document.createElement("input");
+                var quantity = document.createElement("input");
 
                 title.type = "readonly";
                 title.name = "title";
@@ -159,11 +161,15 @@
                 price.type = "readonly";
                 price.name = "price";
                 price.value = String(product.price);
-
+                
+                quantity.type = "readonly";
+                quantity.name = "quantity";
+                quantity.value = String(product.quantity);
+                
                 productDiv.appendChild(title);
                 productDiv.appendChild(img);
                 productDiv.appendChild(price);
-
+                productDiv.appendChild(quantity);
                 productsDiv.appendChild(productDiv);
             }
             var subtotal = localStorage.getItem("cartTotal");
@@ -199,6 +205,17 @@ cardPaymentRadio.addEventListener("change", () => {
     cardDetailsDiv.style.display = "none";
   }
 });
+        </script>
+        <script>
+            function clearLocalStorage() {
+  // Clear the local storage
+  localStorage.clear();
+  subtotal="";
+}
+
+// Assuming you have a button in your HTML with the id "clearButton"
+var clearButton = document.getElementById("clearButton");
+clearButton.addEventListener("click", clearLocalStorage);
         </script>
     </body>
 </html>

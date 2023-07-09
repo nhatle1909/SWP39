@@ -5,7 +5,7 @@
  */
 package Servlet;
 
-import SQLCommand.DAO;
+import DAO.DAO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -58,14 +58,16 @@ public class Checkout extends HttpServlet {
             int order_item_id = rng.nextInt(99999) + 100000;
             String total_price = request.getParameter("subtotal").substring(0, request.getParameter("subtotal").length() - 8);
             String[] products = request.getParameterValues("title");
-
+            String[] quantities = request.getParameterValues("quantity");
             String username = request.getParameter("txtUsername");
             String mail = request.getParameter("txtMail");
             String phone_number = request.getParameter("txtPhoneNumber");
             String address = request.getParameter("txtAddress");
+            
             String productList = "";
             for (int i = 0; i < products.length; i++) {
-                productList = productList + " | " + products[i];
+                productList = productList + " | " + quantities[i] + " " + products[i];
+                sql.updateQuantity(Integer.parseInt(quantities[i]),products[i]);
             }
             if (username == "" || mail == "" || phone_number == "" || address == "") {
                 session.setAttribute("LackOfInformation", "true");

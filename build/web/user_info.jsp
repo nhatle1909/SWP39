@@ -2,7 +2,7 @@
 <%@page import="Utility.OrderDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="Utility.UserDTO"%>
-<%@page import="SQLCommand.DAO"%>
+<%@page import="DAO.DAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,8 +48,6 @@
                 <li><a href="ProductPage.jsp" class="header-title">Product</a></li>
                 <li><a href="bird.jsp" class="header-title">Bird</a></li>
                 <li><a href="productList.html" class="header-title">Contact</a></li>
-
-
                 <li><a href="user_info.jsp" class="header-title">Profile</a></li>
 
                 <li><i class='bx bxs-cart-alt' id="cart-icon"></i></li>
@@ -304,7 +302,7 @@
                                                 <% }
                                                 } else { %>
                                                 <tr>
-                                                    <td colspan="4" class="text-center">No orders found.</td>
+                                                    <td colspan="4" class="text-center">No favorite product.</td>
                                                 </tr>
                                                 <%}%>
                                             </tbody>

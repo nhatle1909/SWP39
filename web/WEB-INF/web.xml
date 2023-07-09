@@ -96,6 +96,22 @@
         <servlet-name>DeleteStaff</servlet-name>
         <servlet-class>Servlet.DeleteStaff</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateStatus</servlet-name>
+        <servlet-class>Servlet.UpdateStatus</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Search1</servlet-name>
+        <servlet-class>Servlet.Search1</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchOrder</servlet-name>
+        <servlet-class>Servlet.SearchOrder</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetRevenue</servlet-name>
+        <servlet-class>Servlet.GetRevenue</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -191,6 +207,22 @@
     <servlet-mapping>
         <servlet-name>DeleteStaff</servlet-name>
         <url-pattern>/DeleteStaff</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateStatus</servlet-name>
+        <url-pattern>/UpdateStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Search1</servlet-name>
+        <url-pattern>/Search1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchOrder</servlet-name>
+        <url-pattern>/SearchOrder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetRevenue</servlet-name>
+        <url-pattern>/GetRevenue</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

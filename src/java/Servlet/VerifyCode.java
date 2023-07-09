@@ -1,6 +1,6 @@
 package Servlet;
 
-import SQLCommand.DAO;
+import DAO.DAO;
 import java.io.*;
 import java.sql.SQLException;
 import java.util.Random;

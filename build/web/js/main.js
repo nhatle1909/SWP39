@@ -54,11 +54,12 @@ function buyButtonClicked() {
         var titleElement = cartBox.getElementsByClassName("cart-product-title")[0];
         var priceElement = cartBox.getElementsByClassName("cart-price")[0];
         var imgElement = cartBox.getElementsByClassName("cart-img")[0];
-
+        var quantityElement = parseInt(cartBox.getElementsByClassName("cart-quantity")[0].value);
         var product = {
             title: titleElement.innerText,
             price: priceElement.innerText,
-            imgSrc: imgElement.src
+            imgSrc: imgElement.src,
+            quantity : quantityElement
         };
 
         products.push(product);

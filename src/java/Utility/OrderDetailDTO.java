@@ -16,14 +16,24 @@ public class OrderDetailDTO {
     private String address;
     private int totalPrice;
     private String productList;
+    private String status;
 
-    public OrderDetailDTO(int order_id, String username, String phoneNumber, String address, int totalPrice, String productList) {
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public OrderDetailDTO(int order_id, String username, String phoneNumber, String address, int totalPrice, String productList, String status) {
         this.order_id = order_id;
         this.username = username;
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.totalPrice = totalPrice;
         this.productList = productList;
+        this.status = status;
     }
 
     public int getOrder_id() {

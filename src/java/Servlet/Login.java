@@ -5,7 +5,7 @@
  */
 package Servlet;
 
-import SQLCommand.DAO;
+import DAO.DAO;
 import Utility.UserDTO;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -59,7 +59,7 @@ public class Login extends HttpServlet {
                 if (sql.getRole(mail).equals("CUSTOMER")) {
                     url = "ProductPage.jsp";
                 } else if (sql.getRole(mail).equals("ADMIN")) {
-                    url = "AdminDashboard.jsp";
+                    url = "GetRevenue?Year=2023";
                 } else if (sql.getRole(mail).equals("STAFF")) {
                     url = "StaffDashboard.jsp";
                 }

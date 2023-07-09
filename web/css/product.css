@@ -548,3 +548,39 @@ body {
 .gridView .cell-label {
   opacity: 0.6;
 }
+.Button {
+    
+  background-color: var(--app-content-secondary-color);
+  border: 1px solid var(--app-content-secondary-color);
+  color: var(--app-content-main-color);
+  font-size: 12px;
+  line-height: 24px;
+  border-radius: 4px;
+  padding: 0px 10px;
+  height: 32px;
+  width: auto;
+  max-width: 120px;
+  transition: 0.2s;
+  margin-top: 10px;
+}
+
+.Button:hover {
+  background-color: var(--app-button-hover-background-color);
+  color: var(--app-button-hover-text-color);
+  cursor: pointer;
+}
+#order-status{
+  background-color: var(--app-content-secondary-color);
+  border: 1px solid var(--app-content-secondary-color);
+  color: var(--app-content-main-color);
+  font-size: 12px;
+  line-height: 24px;
+  border-radius: 4px;
+  padding: 0px 10px;
+  height: 32px;
+  width: auto;
+  max-width: 120px;
+  transition: 0.2s;
+  margin-bottom: 5px;
+  margin-left:10px;
+}

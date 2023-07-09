@@ -80,6 +80,12 @@ public class MainController extends HttpServlet {
                 url = "AddStaffAccount";
             } else if (action.equals("Delete Staff")) {
                 url = "DeleteStaff";
+            }else if (action.equals("Search Product")) {
+                url = "Search1";
+            }else if (action.equals("Search Order")) {
+                url = "SearchOrder";
+            }else if (action.equals("Select Year")) {
+                url = "GetRevenue";
             }
 
             RequestDispatcher rd = request.getRequestDispatcher(url);

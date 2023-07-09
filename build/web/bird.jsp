@@ -7,7 +7,7 @@
 <%@page import="Utility.BirdDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="Utility.ProductListDTO"%>
-<%@page import="SQLCommand.DAO"%>
+<%@page import="DAO.DAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">

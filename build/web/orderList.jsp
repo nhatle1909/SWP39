@@ -5,9 +5,9 @@ t<%--
     Author     : ADMIN
 --%>
 
-<%@page import="Utility.ProductListDTO"%>
+<%@page import="Utility.OrderDetailDTO"%>
 <%@page import="java.util.List"%>
-<%@page import="SQLCommand.DAO"%>
+<%@page import="DAO.DAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
@@ -23,8 +23,13 @@ t<%--
 
     <body>
         <%DAO sql = new DAO();
-            sql.showOrderList();
-            List<OrderDetailDTO> orderDetailList = sql.getListOrderDetail();
+            String username = "";
+            List<OrderDetailDTO> orderDetailList = (List) session.getAttribute("SortedOrderList");
+            if (orderDetailList == null) {
+                sql.showOrderList(username);
+                orderDetailList = sql.getListOrderDetail();
+                session.setAttribute("SortedOrderList", orderDetailList);
+            }%>
         %>
         <!--  Body Wrapper -->
         <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
@@ -83,6 +88,16 @@ t<%--
                                     </span>
                                     <span class="hide-menu">Product</span>
                                 </a>
+
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="orderList.jsp" aria-expanded="false">
+                                    <span>
+                                        <i class="ti ti-box"></i>
+                                    </span>
+                                    <span class="hide-menu">Order List</span>
+                                </a>
+
                             </li>
                     </nav>
                     <!-- End Sidebar navigation -->
@@ -106,7 +121,10 @@ t<%--
                             <button class="app-content-headerButton">Add Product</button>
                         </div>
                         <div class="app-content-actions">
-                            <input class="search-bar" placeholder="Search..." type="text">
+                            <form action ="MainController" method="Post">
+                                <input class="search-bar" placeholder="Search by username" type="text" name="txtUsername">
+                                <input type="submit" name="btAction" value="Search Order" class ="Button">
+                            </form>
                             <div class="app-content-actions-wrapper">
                                 <div class="filter-button-wrapper">
                                     <button class="action-button filter jsFilter"><span>Filter</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg></button>
@@ -143,45 +161,36 @@ t<%--
                         </div>
                         <div class="products-area-wrapper tableView">
                             <div class="products-header">
-                                <div class="product-cell image">
-                                    Order ID
-                                    <button class="sort-button">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-                                    </button>
-                                </div>
-                                <div class="product-cell sales">Username<button class="sort-button">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-                                    </button></div>
-
-
-                                <div class="product-cell stock">Phone Number<button class="sort-button">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-                                    </button></div>
-                                <div class="product-cell price">Address<button class="sort-button">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-                                    </button></div>
-                                <div class="product-cell price">Total Price<button class="sort-button">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-                                    </button></div>
-                                <div class="product-cell status-cell">Product List<button class="sort-button">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="currentColor" d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"/></svg>
-                                    </button></div>
+                                <div class="product-cell image">Order ID</div>
+                                <div class="product-cell sales">Username</div>
+                                <div class="product-cell stock">Phone Number</div>
+                                <div class="product-cell price">Address</div>
+                                <div class="product-cell price">Total Price</div>
+                                <div class="product-cell status-cell">Product List</div>
+                                <div class="product-cell status-cell">Status</div>
                             </div>
 
 
                             <%if (orderDetailList != null && !orderDetailList.isEmpty()) {
-          for (OrderDetailDTO orderDetailLists : orderDetailList) {%>
+                                    for (OrderDetailDTO orderDetailLists : orderDetailList) {%>
 
                             <div class="products-row">
                                 <button class="cell-more-button">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
                                 </button>
-                                <div class="product-cell category"><span class="cell-label">Category:</span><%=orderDetailLists.getOrder_id()%></div>
-                                <div class="product-cell category"><span class="cell-label">Category:</span><%=orderDetailLists.getUsername()%></div>
-                                d<div class="product-cell category"><span class="cell-label">Category:</span><%=orderDetailLists.getPhoneNumber()%></div>
-                                <div class="product-cell sales"><span class="cell-label">Sales:</span><%=orderDetailLists.getAddress()%></div>
-                                <div class="product-cell stock"><span class="cell-label">Stock:</span><%=orderDetailLists.getTotalPrice()%>.000 VND</div>
-                                <div class="product-cell price"><span class="cell-label">Price:</span><%=orderDetailLists.getProductList()%></div>
+                                <div class="product-cell category"><span class="cell-label">Order ID:</span><%=orderDetailLists.getOrder_id()%></div>
+                                <div class="product-cell price"><span class="cell-label">Username:</span><%=orderDetailLists.getUsername()%></div>
+                                <div class="product-cell price"><span class="cell-label">Phone Number:</span><%=orderDetailLists.getPhoneNumber()%></div>
+                                <div class="product-cell price"><span class="cell-label">Address:</span><%=orderDetailLists.getAddress()%></div>
+                                <div class="product-cell stock"><span class="cell-label">Price:</span><%=orderDetailLists.getTotalPrice()%>.000 VND</div>
+                                <div class="product-cell price"><span class="cell-label">Product List:</span><%=orderDetailLists.getProductList()%></div>
+                                <div class="product-cell price">
+                                    <span class="cell-label"><%=orderDetailLists.getStatus()%></span>
+                                    <%=orderDetailLists.getStatus()%> 
+                                    <% if (orderDetailLists.getStatus().equals("WAITING")) {%>
+                                    <button id="order-status" class="Button"><a href = "UpdateStatus?txtOrderID=<%=orderDetailLists.getOrder_id()%>">Update</a></button>
+                                    <%}%>
+                                </div>
                             </div>      
                             <%}%>
                             <%}%>
@@ -198,6 +207,11 @@ t<%--
             <script src="js/libs/simplebar/dist/simplebar.js"></script>
             <script src="js/dashboard.js"></script>
             <script src="js/admin.js"></script>
+            <%if (orderDetailList != null) {
+                    orderDetailList.clear();
+                    session.removeAttribute("SortedOrderList");
+                }
+            %>
     </body>
 
 </html>

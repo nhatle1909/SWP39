@@ -26,6 +26,7 @@
     <body>
         <% List<BirdDTO> birdList = (List) session.getAttribute("SortedBird");
             BirdDTO birdDetail = birdList.get(0);
+              String mail = (String) session.getAttribute("txtMail");
         %>
         <!-- Header -->
         <header>
@@ -34,11 +35,15 @@
                 <img src="images/logo-removebg-preview.png" href="#" class="logo"></img>
                 <!-- Cart-Icon -->
                 <ul>
-                    <li><a href="productList.html" class="header-title">Home</a></li>
-                    <li><a href="productList.html" class="header-title">Product</a></li>
-                    <li><a href="productList.html" class="header-title">Contact</a></li>
-                    <li><a href="productList.html" class="header-title">Profile</a></li>
-                    <li><i class='bx bxs-cart-alt' id="cart-icon"></i></li>
+                    <li><a href="index.html" class="header-title">Home</a></li>
+                    <li><a href="ProductPage.jsp" class="header-title">Product</a></li>
+                   <li><a href="productList.html" class="header-title">Contact</a></li>
+                        <% if (mail == null) {%>
+                    <li><a href="login.jsp" class="header-title">Login</a></li>
+                        <%} else {%>
+                    <li><a href="user_info.jsp" class="header-title">Profile</a></li>
+                        <%}%>
+                    <li><i class='bx bxs-cart-alt' id="cart-icon" data-quantity="0"></i></li>
                 </ul>
                 <!-- Cart -->
                 <div class="cart">

@@ -5,7 +5,7 @@
  */
 package Servlet;
 
-import SQLCommand.DAO;
+import DAO.DAO;
 import Utility.BirdDTO;
 import java.io.IOException;
 import java.sql.SQLException;

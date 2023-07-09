@@ -6,7 +6,7 @@
 
 <%@page import="java.util.List"%>
 <%@page import="Utility.ProductListDTO"%>
-<%@page import="SQLCommand.DAO"%>
+<%@page import="DAO.DAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,7 +67,7 @@
                     <!-- Total -->
                     <div class="total">
                         <div class="total-title">Total</div>
-                        <div class="total-price">$0</div>
+                        <div class="total-price">0 VND</div>
                     </div>
                     <!-- Buy Button -->
                     <button type="button" class="btn-buy">Buy Now</button>

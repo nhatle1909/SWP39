@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package SQLCommand;
+package DAO;
 
 import Utility.BirdDTO;
-import Utility.DBUtility;
 import Utility.FavoriteDTO;
 import Utility.FeedbackDTO;
 import Utility.OrderDTO;
 import Utility.OrderDetailDTO;
 import Utility.ProductListDTO;
+import Utility.RevenueDTO;
 import Utility.UserDTO;
 import java.sql.Connection;
 import java.sql.Date;
@@ -35,6 +35,11 @@ public class DAO {
     private List<OrderDTO> listOrder;
     private List<FeedbackDTO> listFeedback;
     private List<OrderDetailDTO> listOrderDetail;
+    private List<RevenueDTO> listRevenue;
+
+    public List<RevenueDTO> getListRevenue() {
+        return listRevenue;
+    }
 
     public List<OrderDetailDTO> getListOrderDetail() {
         return listOrderDetail;
@@ -983,25 +988,27 @@ public class DAO {
         return false;
     }
 
-    public void showOrderList() throws SQLException, NamingException {
+    public void showOrderList(String username) throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
             con = DBUtility.makeConnection();
             if (con != null) {
-                String sql = "Select * from dbo.OrderDetail";
+                String sql = "select d.*,l.status from dbo.OrderDetail d, dbo.OrderList l where d.order_id = l.order_id and username like ?";
                 stm = con.prepareStatement(sql);
+                stm.setString(1, "%" + username + "%");
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     int order_id = rs.getInt("order_id");
-                    String username = rs.getString("username");
+                    username = rs.getString("username");
                     int price = rs.getInt("price");
                     String address = rs.getString("address");
                     String phone_number = rs.getString("phone_number");
                     String product_list = rs.getString("product_list");
+                    String status = rs.getString("status");
 
-                    OrderDetailDTO dto = new OrderDetailDTO(order_id, username, phone_number, address, price, product_list);
+                    OrderDetailDTO dto = new OrderDetailDTO(order_id, username, phone_number, address, price, product_list, status);
                     if (this.listOrderDetail == null) {
                         this.listOrderDetail = new ArrayList<OrderDetailDTO>();
                     }
@@ -1087,7 +1094,7 @@ public class DAO {
 
     }
 
-    public boolean addStaff(int user_id, String username, String password, String mail, String address, String phoneNumber,String role) throws SQLException {
+    public boolean addStaff(int user_id, String username, String password, String mail, String address, String phoneNumber, String role) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         try {
@@ -1121,4 +1128,101 @@ public class DAO {
         }
         return false;
     }
+
+    public boolean updateOrder(int orderID) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "update dbo.OrderList set status = 'DELIVERING' where order_id = ?";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, orderID);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+
+    public void revenuelist(int year) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "SELECT months.month AS month, COALESCE(SUM(orderList.total_price), 0) AS revenue\n"
+                        + "FROM (\n"
+                        + "    SELECT '01' AS month UNION ALL SELECT '02' UNION ALL SELECT '03' UNION ALL SELECT '04' UNION ALL SELECT '05' UNION ALL\n"
+                        + "    SELECT '06' UNION ALL SELECT '07' UNION ALL SELECT '08' UNION ALL SELECT '09' UNION ALL SELECT '10' UNION ALL\n"
+                        + "    SELECT '11' UNION ALL SELECT '12'\n"
+                        + ") months\n"
+                        + "LEFT JOIN orderList ON months.month = FORMAT(orderList.order_date, 'MM')\n"
+                        + "    AND YEAR(orderList.order_date) = ? \n"
+                        + "    AND orderList.status = 'CONFIRMED'\n"
+                        + "GROUP BY months.month";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, year);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String month = rs.getString("month");
+                    int revenue = rs.getInt("revenue");
+
+                    RevenueDTO revenueList = new RevenueDTO(month, revenue);
+                    if (this.listRevenue == null) {
+                        this.listRevenue = new ArrayList<RevenueDTO>();
+                    }
+                    this.listRevenue.add(revenueList);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
+    public void updateQuantity(int quantity, String product_name) throws SQLException {
+
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "UPDATE Product_List\n"
+                        + "SET Quantity = Quantity - ? \n"
+                        + "WHERE product_name = ?;";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, quantity);
+                stm.setString(2, product_name);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
 }

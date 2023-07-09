@@ -28,9 +28,9 @@
             if (role.equals("CUSTOMER")) {
                 response.sendRedirect("user_info.jsp");
             } else if (role.equals("ADMIN")) {
-                response.sendRedirect("admin.jsp");
+                response.sendRedirect("AdminDashboard.jsp");
             } else if (role.equals("STAFF")) {
-                response.sendRedirect("staff.jsp");
+                response.sendRedirect("StaffDashboard.jsp");
             }
         } else {%>
 <html lang="en">

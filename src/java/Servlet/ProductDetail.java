@@ -5,7 +5,7 @@
  */
 package Servlet;
 
-import SQLCommand.DAO;
+import DAO.DAO;
 import Utility.FeedbackDTO;
 import Utility.ProductListDTO;
 import java.io.IOException;
