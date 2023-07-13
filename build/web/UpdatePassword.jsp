@@ -12,31 +12,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Update Password</title>
-    <link rel="stylesheet" href="test/style.css" />
+    <link rel="stylesheet" href="css/VerifyPage.css" />
     </head>
     <body>
-        <div class="container">
-          <h1>Register</h1>
-          <form action="MainController" method ="POST">
-            <div class="form-control">
-              <input type="password" id="password" class="input" name="txtPassword"/>
-              <label for="" class="label">Password</label>
-              <span></span>
-              <small></small>
-            </div>
-
-            <div class="form-control">
-              <input type="password" id="password2" class="input" name="txtConfirmPassword"/>
-              <label for="" class="label">Confirm Password</label>
-              <span></span>
-              <small></small>
-            </div>
-            <input type="submit" class="submitBtn" name="btAction" value="Update Password">
-             
-            <p>Want to return to the homepage? <a href="index.html">Press Here</a></p>
-          </form>
+        <% String mail = (String) session.getAttribute("txtMail");
+        if (mail != null){ %>
+      <div class="container">
+            <header></header>
+            <h4>Update Password</h4>
+            <p>Please enter your new password</p>
+            <form action="MainController" method="POST">
+                <div class="input-field">
+                    <input id ="Reset" type="password" name="txtNewPassword" placeholder="New Password"/><br/>
+                    <input id ="Reset" type="password" name="txtConfirmNewPassword" placeholder="Confirm New Password"/>
+                </div>
+                <input id="button" type="submit" name="btAction" value="Update Password">
+            </form>
         </div>
-    
+    <%} else {
+    response.sendRedirect("login.jsp");
+}%>
         <script src="app.js"></script>
       </body>
 </html>

@@ -3,18 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/DevTools/repository/SWP391/web/staff.jsp</file>
-            <file>file:/D:/DevTools/repository/SWP391/web/signup1.html</file>
-            <file>file:/D:/DevTools/repository/SWP391/web/user_info.jsp</file>
-            <file>file:/D:/DevTools/repository/SWP391/web/account_info.html</file>
-            <file>file:/D:/DevTools/repository/SWP391/web/order_history.jsp</file>
-            <file>file:/D:/DevTools/repository/SWP391/web/test/test_1.css</file>
-            <file>file:/D:/DevTools/repository/SWP391/web/verify.jsp</file>
-            <file>file:/D:/DevTools/repository/SWP391/web/admin.jsp</file>
-            <file>file:/D:/DevTools/repository/SWP391/web/login.jsp</file>
-            <file>file:/D:/DevTools/repository/SWP391/web/test.html</file>
-            <file>file:/D:/DevTools/repository/SWP391/web/test/test.css</file>
-            <file>file:/D:/DevTools/repository/SWP391/src/java/Utility/DTO.java</file>
+            <file>file:/D:/DevTools/repository/SWP39/src/java/Utility/OrderDTO.java</file>
+            <file>file:/D:/DevTools/repository/SWP39/web/refundList.jsp</file>
+            <file>file:/D:/DevTools/repository/SWP39/src/java/Utility/OrderDetailDTO.java</file>
+            <file>file:/D:/DevTools/repository/SWP39/src/java/DAO/DAO.java</file>
+            <file>file:/D:/DevTools/repository/SWP39/web/Add-DeleAccount.jsp</file>
+            <file>file:/D:/DevTools/repository/SWP39/web/AccountList.jsp</file>
+            <file>file:/D:/DevTools/repository/SWP39/web/bird.jsp</file>
+            <file>file:/D:/DevTools/repository/SWP39/web/css/accountcontroller.css</file>
+            <file>file:/D:/DevTools/repository/SWP39/web/product.jsp</file>
+            <file>file:/D:/DevTools/repository/SWP39/web/orderList.jsp</file>
+            <file>file:/D:/DevTools/repository/SWP39/web/add-product.jsp</file>
+            <file>file:/D:/DevTools/repository/SWP39/web/css/product.css</file>
+            <file>file:/D:/DevTools/repository/SWP39/web/AdminDashboard.jsp</file>
         </group>
     </open-files>
 </project-private>

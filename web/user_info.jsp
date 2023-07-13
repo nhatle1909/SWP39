@@ -1,15 +1,12 @@
-<%-- 
-    Document   : user_info
-    Created on : May 31, 2023, 8:06:51 PM
-    Author     : ADMIN
---%>
-
+<%@page import="Utility.FavoriteDTO"%>
+<%@page import="Utility.OrderDTO"%>
 <%@page import="java.util.List"%>
-<%@page import="Utility.DTO"%>
-<%@page import="SQLCommand.DAO"%>
+<%@page import="Utility.UserDTO"%>
+<%@page import="DAO.DAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
         <meta charset="utf-8" />
 
@@ -20,310 +17,340 @@
             rel="stylesheet"
             />
         <link rel="stylesheet" href="css/user.css" />
-    </head>
-    <body>
-        <%  String user_mail = (String) session.getAttribute("txtMail");
-            String role = (String) session.getAttribute("txtRole");
-            String url = ""; 
-            if (role != null){
-            if (role.equals("CUSTOMER")) {
-                url = "customer_dashboard.html";
-            } else if (role.equals("ADMIN")) {
-              url ="admin.jsp";
-            } else if (role.equals("STAFF")) {
-                url ="staff.jsp";
-            }
-            }
-            if (user_mail != null) {
-                DAO sql = new DAO();
-                sql.searchUser(user_mail);
-                List<DTO> result = sql.getListAccount();
-                DTO dto = result.get(0);
-        %>
-        <!--dang link-->
-        <div class="container">
-            <div class="main-body">
-                <nav aria-label="breadcrumb" class="main-breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item">
-                            <a href="<%=url%>">User</a>
-                        </li>
-                        <li class="breadcrumb-item active" aria-current="page">
-                            User Info
-                        </li>
-                    </ol>
-                </nav>
+        <link rel="stylesheet" href="css/popup.css" /><link rel="stylesheet" href="css/nicepage.css" media="screen">
+        <link rel="stylesheet" href="css/ProductPage.css" media="screen">
+        <script class="u-script" type="text/javascript" src="js/jquery.js" defer=""></script>
+        <script class="u-script" type="text/javascript" src="js/nicepage.js" defer=""></script>
+        <meta name="generator" content="Nicepage 5.10.10, nicepage.com">
+        <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
 
-                <div class="row gutters-sm">
-                    <div class="col-md-4 mb-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex flex-column align-items-center text-center">            
-                                    <div class="mt-3">
-                                        <h4>Username : <%= dto.getUsername()%></h4>
-                                        <p class="text-secondary mb-1"><%= dto.getRole()%></p>
-                                        <p class="text-muted font-size-sm">UserID : <%= dto.getUser_id()%></p>
-                                        <button class="btn btn-primary">Follow</button>
-                                        <button class="btn btn-outline-primary">Message</button>
+
+        <script type="application/ld+json">{
+            "@context": "http://schema.org",
+            "@type": "Organization",
+            "name": "Site1",
+            "logo": "images/logo-removebg-preview.png"
+            }</script>
+        <meta name="theme-color" content="#478ac9">
+        <meta property="og:title" content="productList">
+        <meta property="og:description" content="">
+        <meta property="og:type" content="website">
+        <meta data-intl-tel-input-cdn-path="intlTelInput/"></head>
+</head>
+
+<body> <header>
+        <!-- Nav -->
+
+        <div class="nav container">
+            <img src="images/logo-removebg-preview.png" href="#" class="logo"></img>
+            <!-- Cart-Icon -->
+            <ul>
+                <li><a href="index.html" class="header-title">Home</a></li>
+                <li><a href="ProductPage.jsp" class="header-title">Product</a></li>
+                <li><a href="bird.jsp" class="header-title">Bird</a></li>
+                <li><a href="productList.html" class="header-title">Contact</a></li>
+                <li><a href="user_info.jsp" class="header-title">Profile</a></li>
+
+                <li><i class='bx bxs-cart-alt' id="cart-icon"></i></li>
+            </ul>
+            <!-- Cart -->
+            <div class="cart">
+                <h2 class="cart-title">Your cart</h2>
+                <!-- Content -->
+                <div class="cart-content">
+
+                </div>
+                <!-- Total -->
+                <div class="total">
+                    <div class="total-title">Total</div>
+                    <div class="total-price">$0</div>
+                </div>
+                <!-- Buy Button -->
+                <button type="button" class="btn-buy">Buy Now</button>
+                <!-- Cart Close -->
+                <i class='bx bx-x' id="close-cart"></i>
+            </div>
+        </div>
+    </header>
+    <%
+        DAO sql = new DAO();
+        UserDTO userDTO = (UserDTO) session.getAttribute("User_info");
+        if (userDTO != null) {
+    %>
+    <!--dang link-->
+    <div class="container">
+        <div class="main-body">
+
+
+            <!-- Add the tab navigation -->
+            <section>     
+                <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="user-info-tab" data-toggle="tab" href="#user-info"
+                           role="tab" aria-controls="user-info" aria-selected="true">User Information</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" id="favorite-products-tab" data-toggle="tab" href="#favorite-products"
+                           role="tab" aria-controls="favorite-products" aria-selected="false">Favorite Product List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="order-history-tab" data-toggle="tab" href="#order-history" role="tab"
+                           aria-controls="order-history" aria-selected="false">Order History</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="refund-tab" data-toggle="tab" href="#refund" role="tab"
+                           aria-controls="Refund-tab" aria-selected="false">Refund</a>
+                    </li>
+
+                </ul>
+            </section>  
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="user-info" role="tabpanel"
+                     aria-labelledby="user-info-tab">
+
+                    <div class="row gutters-sm">
+                        <div class="col-md-4 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex flex-column align-items-center text-center">
+                                        <div class="mt-3">
+                                            <p class="text-secondary mb-1"><%= userDTO.getRole()%></p>
+                                            <p class="text-muted font-size-sm">UserID : <%= userDTO.getUser_id()%>
+                                            </p>
+                                            <br/>
+                                            <a class="btn btn-primary" href="UpdatePassword.jsp">Update Password</a>
+                                            <form action="MainController" method="post">
+                                                <br/>
+                                                <input class="btn btn-success btn-sm mr-2"
+                                                       type="submit" name="btAction" value="Logout" />
+                                            </form>
+                                            <br><br/>
+                                            
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card mt-3">
-                            <ul class="list-group list-group-flush">
-                                <li
-                                    class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
-                                    >
-                                    <h6 class="mb-0">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="24"
-                                            height="24"
-                                            viewbox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            class="feather feather-globe mr-2 icon-inline"
-                                            >
-                                        <circle cx="12" cy="12" r="10"></circle>
-                                        <line x1="2" y1="12" x2="22" y2="12"></line>
-                                        <path
-                                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
-                                            ></path>
-                                        </svg>
-                                        >Website
-                                    </h6>
-                                    <span class="text-secondary">......</span>
-                                </li>
-                                <li
-                                    class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
-                                    >
-                                    <h6 class="mb-0">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="24"
-                                            height="24"
-                                            viewbox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            class="feather feather-github mr-2 icon-inline"
-                                            >
-                                        <path
-                                            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
-                                            ></path>
-                                        </svg>
-                                        >Github
-                                    </h6>
-                                    <span class="text-secondary">........</span>
-                                </li>
-                                <li
-                                    class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
-                                    >
-                                    <h6 class="mb-0">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="24"
-                                            height="24"
-                                            viewbox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            class="feather feather-twitter mr-2 icon-inline text-info"
-                                            >
-                                        <path
-                                            d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"
-                                            ></path>
-                                        </svg>
-                                        >Twitter
-                                    </h6>
-                                    <span class="text-secondary">.......</span>
-                                </li>
-                                <li
-                                    class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
-                                    >
-                                    <h6 class="mb-0">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="24"
-                                            height="24"
-                                            viewbox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            class="feather feather-instagram mr-2 icon-inline text-danger"
-                                            >
-                                        <rect
-                                            x="2"
-                                            y="2"
-                                            width="20"
-                                            height="20"
-                                            rx="5"
-                                            ry="5"
-                                            ></rect>
-                                        <path
-                                            d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
-                                            ></path>
-                                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                                        </svg>
-                                        >Instagram
-                                    </h6>
-                                    <span class="text-secondary">........</span>
-                                </li>
 
-                                <li
-                                    class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
-                                    >
-                                    <h6 class="mb-0">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="24"
-                                            height="24"
-                                            viewbox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            class="feather feather-facebook mr-2 icon-inline text-primary"
-                                            >
-                                        <path
-                                            d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
-                                            ></path>
-                                        </svg>
-                                        >Facebook
-                                    </h6>
-                                    <span class="text-secondary">........</span>
-                                </li>
-                            </ul>
+                        </div>
+
+                        <div class="col-md-8">
+
+                            <div class="card mb-3">
+                                <form action="MainController" method="POST">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Username</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary"><%= userDTO.getUsername()%></div>
+                                        </div>
+                                        <hr />
+
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Email</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <a href="/cdn-cgi/l/email-protection"
+                                                   class="cf_email"
+                                                   data-cfemail="fa9c938aba908f91978f92d49b96"><%= userDTO.getMail()%></a>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Phone Number</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <%= userDTO.getPhone_number()%>
+
+                                                <input type="text" name="txtPhoneNumber"
+                                                       class="form-control form-control-sm mb-2"
+                                                       value="<%= userDTO.getPhone_number()%>" required
+                                                       style="display:none;">
+
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Address</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <%= userDTO.getAddress()%>
+
+                                                <input type="text" name="txtAddress"
+                                                       class="form-control form-control-sm mb-2"
+                                                       value="<%= userDTO.getAddress()%>" required
+                                                       style="display:none;">
+
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <button type="button" class="btn btn-info" onclick="editInfo()">Edit</button>
+                                                <button type="button" class="btn btn-secondary btn-sm" onclick="cancelEdit()"
+                                                        style="display:none;">Cancel</button>
+                                                <br /><br />
+                                                <input id="save" class="btn btn-success btn-sm mr-2"
+                                                       style="display:none;" type="submit" name="btAction" value="Save" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+
                         </div>
                     </div>
+                </div>
 
-                    <div class="col-md-8">
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Full Name</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary"></div>
-                                </div>
-                                <hr />
+                <!-- Add the order history tab content -->
+                <div class="tab-pane fade" id="order-history" role="tabpanel" aria-labelledby="order-history-tab">
+                    <div class="row gutters-sm">
+                        <div class="col-sm-12 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">Order History</h5>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
 
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Email</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        <a
-                                            href="/cdn-cgi/l/email-protection"
-                                            class="__cf_email__"
-                                            data-cfemail="fa9c938aba908f91978f92d49b96"
-                                            ><%= dto.getMail()%></a
-                                        >
-                                    </div>
-                                </div>
-                                <hr />
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Phone Number</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary"><%= dto.getPhone_number()%></div>
-                                </div>
-                                <hr />
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Address</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary"><%= dto.getAddress()%></div>
-                                </div>
-                                <hr />
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <a
-                                            class="btn btn-info"
-                                            target="__blank"
-                                            href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills"
-                                            >Edit</a
-                                        >
+                                            <thead>
+                                                <tr>
+                                                    <th>Order ID</th>
+                                                    <th>Date</th>
+                                                    <th>Total Amount</th>
+                                                    <th>Status</th>
+                                                    <th>Feedback</th>
+                                                    <th>Cancel</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <%  sql.orderHistory(userDTO.getUser_id());
+                                                    List<OrderDTO> orders = sql.getListOrder();
+                                                    if (orders != null && !orders.isEmpty()) {
+                                                        for (OrderDTO order : orders) {%>
+                                                <tr>
+
+                                                    <td><%= order.getOrder_id()%></td>
+                                                    <td><%= order.getOrder_date()%></td>
+                                                    <td><%= order.getTotal_price()%>.000 VND</td>
+                                                    <td><%= order.getStatus()%></td>
+                                                    <td>
+                                                        <% if (order.getStatus().equals("CONFIRMED")) {%>
+
+                                                        <form action="MainController" method="post">
+                                                            <input type="hidden" name="txtOrderID" value="<%=order.getOrder_id()%>">
+                                                            <input type="submit" name="btAction" value="Feedback" class = "btn btn-primary">   
+                                                        </form>
+
+                                                        <%}%>
+                                                    </td>
+                                                    <td>
+                                                        <% if (order.getStatus().equals("WAITING")) {%>
+
+                                                        <form action="MainController" method="post">
+                                                            <input type="hidden" name="txtOrderID" value="<%=order.getOrder_id()%>">
+                                                            <input type="submit" name="btAction" value="Cancel" class = "btn btn-primary">
+
+                                                        </form>
+
+                                                        <%}%>
+                                                    </td>                                              
+                                                </tr>
+                                                <% }
+                                                } else { %>
+                                                <tr>
+                                                    <td colspan="4" class="text-center">No orders found.</td>
+                                                </tr>
+                                                <%}%>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
 
-                        <div class="row gutters-sm">
-                            <div class="col-sm-12 mb-3">
-                                <div class="card h-100">
-                                    <div class="card-body">
-                                        <h6 class="d-flex align-items-center mb-3">
-                                            <i class="material-icons text-info mr-2">Assignment</i
-                                            >Project Status
-                                        </h6>
-                                        <small>Web Design</small>
-                                        <div class="progress mb-3" style="height: 5px">
-                                            <div
-                                                class="progress-bar bg-primary"
-                                                role="progressbar"
-                                                style="width: 0%"
-                                                aria-valuenow="50"
-                                                aria-valuemin="0"
-                                                aria-valuemax="100"
-                                                ></div>
-                                        </div>
-                                        <small>Website Markup</small>
-                                        <div class="progress mb-3" style="height: 5px">
-                                            <div
-                                                class="progress-bar bg-primary"
-                                                role="progressbar"
-                                                style="width: 0%"
-                                                aria-valuenow="72"
-                                                aria-valuemin="0"
-                                                aria-valuemax="100"
-                                                ></div>
-                                        </div>
-                                        <small>One Page</small>
-                                        <div class="progress mb-3" style="height: 5px">
-                                            <div
-                                                class="progress-bar bg-primary"
-                                                role="progressbar"
-                                                style="width: 0%"
-                                                aria-valuenow="89"
-                                                aria-valuemin="0"
-                                                aria-valuemax="100"
-                                                ></div>
-                                        </div>
-                                        <small>Mobile Template</small>
-                                        <div class="progress mb-3" style="height: 5px">
-                                            <div
-                                                class="progress-bar bg-primary"
-                                                role="progressbar"
-                                                style="width: 0%"
-                                                aria-valuenow="55"
-                                                aria-valuemin="0"
-                                                aria-valuemax="100"
-                                                ></div>
-                                        </div>
-                                        <small>Backend API</small>
-                                        <div class="progress mb-3" style="height: 5px">
-                                            <div
-                                                class="progress-bar bg-primary"
-                                                role="progressbar"
-                                                style="width: 0%"
-                                                aria-valuenow="66"
-                                                aria-valuemin="0"
-                                                aria-valuemax="100"
-                                                ></div>
-                                        </div>
+                <!-- Add the favorite products tab content -->
+                <div class="tab-pane fade" id="favorite-products" role="tabpanel"
+                     aria-labelledby="favorite-products-tab">
+                    <div class="row gutters-sm">
+                        <div class="col-sm-12 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">Favorite Products</h5>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>No.</th>
+                                                    <th>Product ID</th>
+                                                    <th>Product Name</th>
+                                                    <th>Price</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% int count = 0;
+                                                    sql.searchFavoriteProduct(userDTO.getUser_id());
+                                                    List<FavoriteDTO> favorites = sql.getListFavorite();
+                                                    if (favorites != null && !favorites.isEmpty()) {
+                                                        for (FavoriteDTO favorite : favorites) {%>
+                                                <tr>
+                                                    <td><%= ++count%></td>
+                                                    <td><%= favorite.getProduct_id()%></td>
+                                                    <td><%= favorite.getProduct_name()%></td>
+                                                    <td><%= favorite.getPrice()%></td>
+
+                                                    <td>
+                                                        <form action="MainController" method="post">
+                                                            <input type="hidden" name="txtUserID" value="<%= userDTO.getUser_id()%>">
+                                                            <input type="hidden" name="txtProductID" value="<%= favorite.getProduct_id()%>"/>
+                                                            <input class="btn btn-success btn-sm mr-2" type="submit" name="btAction" value="Remove" />
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                                <% }
+                                                } else { %>
+                                                <tr>
+                                                    <td colspan="4" class="text-center">No favorite product.</td>
+                                                </tr>
+                                                <%}%>
+                                            </tbody>
+                                        </table>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="refund" role="tabpanel"
+                     aria-labelledby="Refund-tab">
+                    <div class="row gutters-sm">
+                        <div class="col-sm-12 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">Refund Order</h5>
+                                    <div class="content">
+                                        <h3>Reply will be sent to your Email</h3>
+                                        <p>Notice : Only confirmed orders will be considered for refund</p>
+                                        <br/>
+                                        <form action="MainController" method="post">
+                                            <label>Email : <%=userDTO.getMail()%></label>
+                                            <input type="hidden" name="txtMail" value="<%=userDTO.getMail()%>">
+                                            <br/>
+                                            <label>Order ID</label>
+                                            <input type="text" name="txtOrderID" placeholder="Please enter your Order ID" required>
+                                            <label>Refund Reason</label>
+                                            <textarea name="Reason"placeholder="Please let us know your refund reason..." required></textarea>
+                                            <input class="SendRequest"type="submit" value="Send Request" name="btAction">
+                                        </form>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -331,15 +358,46 @@
                 </div>
             </div>
         </div>
-        <script
-            data-cfasync="false"
-            src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
-        ></script>
-        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
-        <script type="text/javascript"></script>
-        <%} else {
-          response.sendRedirect("login.jsp");
-      }%>
-    </body>
+    </div>
+    <script data-cfasync="false"
+    src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript">
+                                                    // Function to show the form for editing phone number and hide the Edit button
+                                                    function editInfo() {
+                                                        document.getElementsByName("txtPhoneNumber")[0].style.display = "block";
+                                                        document.getElementsByName("txtAddress")[0].style.display = "block";
+                                                        document.getElementsByTagName("button")[0].style.display = "none";
+                                                        document.getElementsByTagName("button")[1].style.display = "inline-block";
+                                                        document.querySelector('input[type="submit"][name="btAction"][value="Save"]').style.display = "inline-block";
+                                                    }
+
+                                                    // Function to cancel editing of phone number and show the Edit button
+                                                    function cancelEdit() {
+                                                        document.getElementsByName("txtPhoneNumber")[0].value = "<%= userDTO.getPhone_number()%>";
+                                                        document.getElementsByName("txtAddress")[0].value = "<%= userDTO.getAddress()%>";
+                                                        document.getElementsByName("txtPhoneNumber")[0].style.display = "none";
+                                                        document.getElementsByName("txtAddress")[0].style.display = "none";
+                                                        document.getElementsByTagName("button")[0].style.display = "block";
+                                                        document.getElementsByTagName("button")[1].style.display = "none";
+                                                        document.querySelector('input[type="submit"][name="btAction"][value="Save"]').style.display = "none";
+                                                    }
+
+                                                    // Function to display the Save button on form submit
+                                                    $("form").submit(function () {
+                                                        $("#save").css("display", "inline-block");
+                                                    });
+    </script>
+    <%} else {
+            response.sendRedirect("login.jsp");
+        }%>
+        <script>
+            <% String checkOrderStatus = (String) session.getAttribute("CheckOrderStatus");
+        if (checkOrderStatus != null && checkOrderStatus.equals("FALSE") ){  %>
+    alert("The Status of Order is not CONFIRMED or your Order ID is wrong");
+     <%} session.removeAttribute("CheckOrderStatus");%>
+        </script>
+</body>
+
 </html>

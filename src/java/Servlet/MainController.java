@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -28,7 +29,6 @@ public class MainController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private final String loginServlet = "LoginController";
     private final String signUpServlet = "SignUpServlet";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -36,24 +36,71 @@ public class MainController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String action = request.getParameter("btAction");
+        HttpSession session = request.getSession();
         String url = "";
         try {
             /* TODO output your page here. You may use following sample code. */
             if (action == null) {
                 url = "";
             } else if (action.equals("Login")) {
-                url = "LoginController";
+                url = "Login";
             } else if (action.equals("Send Mail")) {
-                url = "EmailSendingServlet";
+                url = "EmailSending";
             } else if (action.equals("Sign Up")) {
                 url = signUpServlet;
             } else if (action.equals("Verify")) {
-                url = "VerifyServlet";
-            } else if (action.equals("Logout")){
+                url = "VerifyCode";
+            } else if (action.equals("Logout")) {
                 url = "LogoutServlet";
-            } else if (action.equals("Reset")){
-                url = "ForgetPasswordServlet";
+            } else if (action.equals("Reset")) {
+                url = "ForgetPassword";
+            } else if (action.equals("Update Password")) {
+                url = "UpdatePassword";
+            } else if (action.equals("Save")) {
+                url = "UpdateInformation";
+            } else if (action.equals("Remove")) {
+                url = "RemoveFavoriteProduct";
+            } else if (action.equals("Sort")) {
+                url = "SortProductList";
+            } else if (action.equals("Favorite")) {
+                url = "AddToFavorite";
+            } else if (action.equals("Search")) {
+                url = "Search";
+            } else if (action.equals("Search Bird Name")) {
+                url = "SearchBird";
+            } else if (action.equals("proceed to checkout")) {
+                url = "Checkout";
+            } else if (action.equals("Cancel")) {
+                url = "CancelOrder";
+            } else if (action.equals("Add Product")) {
+                url = "AddProduct";
+            } else if (action.equals("Delete Product")) {
+                url = "DeleteProduct";
+            } else if (action.equals("Update Product")) {
+                url = "UpdateProduct";
+            } else if (action.equals("Add Staff Account")) {
+                url = "AddStaffAccount";
+            } else if (action.equals("Delete Staff")) {
+                url = "DeleteStaff";
+            }else if (action.equals("Search Product")) {
+                url = "Search1";
+            }else if (action.equals("Search Order")) {
+                url = "SearchOrder";
+            }else if (action.equals("Select Year")) {
+                url = "GetRevenue";
+            }else if (action.equals("Feedback")) {
+                url = "Feedback";
+            }else if (action.equals("Send Feedback")) {
+                url = "SendFeedback";
+            }else if (action.equals("Send Request")) {
+                url = "SendRequest";
+            }else if (action.equals("Reply") || action.equals("Ignore")){
+                url = "HandleRequest";
+                session.setAttribute("Button",action);
+            }else if (action.equals("Search Account")) {
+                url = "SearchAccount";
             }
+            
 
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

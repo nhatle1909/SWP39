@@ -5,9 +5,8 @@
  */
 package Servlet;
 
-import SQLCommand.DAO;
+import DAO.DAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,6 +43,7 @@ public class UpdatePassword extends HttpServlet {
         if ( newPassword.equals(confirmPassword) ){
             sql.updatePassword(mail, newPassword);
         }
+        response.sendRedirect("user_info.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

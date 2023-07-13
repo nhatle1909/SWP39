@@ -5,8 +5,8 @@
         <servlet-class>Servlet.MainController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>LoginController</servlet-name>
-        <servlet-class>Servlet.LoginController</servlet-class>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>Servlet.Login</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SendingMailServlet</servlet-name>
@@ -17,12 +17,12 @@
         <servlet-class>Servlet.SignUpServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>VerifyServlet</servlet-name>
-        <servlet-class>Servlet.VerifyServlet</servlet-class>
+        <servlet-name>VerifyCode</servlet-name>
+        <servlet-class>Servlet.VerifyCode</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ForgetPasswordServlet</servlet-name>
-        <servlet-class>Servlet.ForgetPasswordServlet</servlet-class>
+        <servlet-name>ForgetPassword</servlet-name>
+        <servlet-class>Servlet.ForgetPassword</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
@@ -32,13 +32,117 @@
         <servlet-name>UpdatePassword</servlet-name>
         <servlet-class>Servlet.UpdatePassword</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateInformation</servlet-name>
+        <servlet-class>Servlet.UpdateInformation</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoveFavoriteProduct</servlet-name>
+        <servlet-class>Servlet.RemoveFavoriteProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SortProductList</servlet-name>
+        <servlet-class>Servlet.SortProductList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddToFavorite</servlet-name>
+        <servlet-class>Servlet.AddToFavorite</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Search</servlet-name>
+        <servlet-class>Servlet.Search</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductDetail</servlet-name>
+        <servlet-class>Servlet.ProductDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductFeedback</servlet-name>
+        <servlet-class>Servlet.ProductFeedback</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchBird</servlet-name>
+        <servlet-class>Servlet.SearchBird</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BirdDetail</servlet-name>
+        <servlet-class>Servlet.BirdDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Checkout</servlet-name>
+        <servlet-class>Servlet.Checkout</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CancelOrder</servlet-name>
+        <servlet-class>Servlet.CancelOrder</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddProduct</servlet-name>
+        <servlet-class>Servlet.AddProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteProduct</servlet-name>
+        <servlet-class>Servlet.DeleteProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateProduct</servlet-name>
+        <servlet-class>Servlet.UpdateProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddStaffAccount</servlet-name>
+        <servlet-class>Servlet.AddStaffAccount</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteStaff</servlet-name>
+        <servlet-class>Servlet.DeleteStaff</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateStatus</servlet-name>
+        <servlet-class>Servlet.UpdateStatus</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Search1</servlet-name>
+        <servlet-class>Servlet.Search1</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchOrder</servlet-name>
+        <servlet-class>Servlet.SearchOrder</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetRevenue</servlet-name>
+        <servlet-class>Servlet.GetRevenue</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Feedback</servlet-name>
+        <servlet-class>Servlet.Feedback</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SendFeedback</servlet-name>
+        <servlet-class>Servlet.SendFeedback</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SendRequest</servlet-name>
+        <servlet-class>Servlet.SendRequest</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HandleRequest</servlet-name>
+        <servlet-class>Servlet.HandleRequest</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchAccount</servlet-name>
+        <servlet-class>Servlet.SearchAccount</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ConfirmOrder</servlet-name>
+        <servlet-class>Servlet.ConfirmOrder</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>LoginController</servlet-name>
-        <url-pattern>/LoginController</url-pattern>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/Login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SendingMailServlet</servlet-name>
@@ -49,12 +153,12 @@
         <url-pattern>/SignUpServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>VerifyServlet</servlet-name>
-        <url-pattern>/VerifyServlet</url-pattern>
+        <servlet-name>VerifyCode</servlet-name>
+        <url-pattern>/VerifyCode</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ForgetPasswordServlet</servlet-name>
-        <url-pattern>/ForgetPasswordServlet</url-pattern>
+        <servlet-name>ForgetPassword</servlet-name>
+        <url-pattern>/ForgetPassword</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
@@ -63,6 +167,110 @@
     <servlet-mapping>
         <servlet-name>UpdatePassword</servlet-name>
         <url-pattern>/UpdatePassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateInformation</servlet-name>
+        <url-pattern>/UpdateInformation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveFavoriteProduct</servlet-name>
+        <url-pattern>/RemoveFavoriteProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SortProductList</servlet-name>
+        <url-pattern>/SortProductList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddToFavorite</servlet-name>
+        <url-pattern>/AddToFavorite</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Search</servlet-name>
+        <url-pattern>/Search</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductDetail</servlet-name>
+        <url-pattern>/ProductDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductFeedback</servlet-name>
+        <url-pattern>/ProductFeedback</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchBird</servlet-name>
+        <url-pattern>/SearchBird</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BirdDetail</servlet-name>
+        <url-pattern>/BirdDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Checkout</servlet-name>
+        <url-pattern>/Checkout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CancelOrder</servlet-name>
+        <url-pattern>/CancelOrder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddProduct</servlet-name>
+        <url-pattern>/AddProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteProduct</servlet-name>
+        <url-pattern>/DeleteProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProduct</servlet-name>
+        <url-pattern>/UpdateProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddStaffAccount</servlet-name>
+        <url-pattern>/AddStaffAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteStaff</servlet-name>
+        <url-pattern>/DeleteStaff</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateStatus</servlet-name>
+        <url-pattern>/UpdateStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Search1</servlet-name>
+        <url-pattern>/Search1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchOrder</servlet-name>
+        <url-pattern>/SearchOrder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetRevenue</servlet-name>
+        <url-pattern>/GetRevenue</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Feedback</servlet-name>
+        <url-pattern>/Feedback</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendFeedback</servlet-name>
+        <url-pattern>/SendFeedback</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendRequest</servlet-name>
+        <url-pattern>/SendRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HandleRequest</servlet-name>
+        <url-pattern>/HandleRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchAccount</servlet-name>
+        <url-pattern>/SearchAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConfirmOrder</servlet-name>
+        <url-pattern>/ConfirmOrder</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
