@@ -26,7 +26,7 @@
             </form>
             <p>Cancel the registration <br> <a href="index.html">Return to homepage</a></p>
         </div>
-        <% } %>
-       
+        <% } else{%>
+<%response.sendRedirect("index.html");}%>       
 </body>
 </html>

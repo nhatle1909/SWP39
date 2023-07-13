@@ -1,9 +1,39 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<c:set var="req" value="${pageContext.request}" />
-<c:set var="url">${req.requestURL}</c:set>
-<c:set var="uri" value="${req.requestURI}" />
-...
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <base href="${fn:substring(url, 0, fn:length(url) - fn:length(uri))}${req.contextPath}/" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/popup.css">
 </head>
+
+<body>
+    <div class="box">
+        <a href="#divOne" class="button">Click here</a>
+    </div>
+
+    <div class="overlay" id="divOne">
+        <div class="wrapper">
+            <h2>Please give us your feedback</h2>
+            <a href="#" class="close">&times;</a>
+            <div class="content">
+                <div class="popup">
+                    <form>
+                        <label>First Name</label>
+                        <input type="text" placeholder="please enter your first name">
+                        <label>Last Name</label>
+                        <input type="text" placeholder="please enter your last name">
+                        <label>Email</label>
+                        <input type="text" placeholder="please enter your email address">
+                        <label>Feedback</label>
+                        <textarea placeholder="PLease let us know your opinion about our products..."></textarea>
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

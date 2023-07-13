@@ -133,43 +133,7 @@
             </div>
         </section>
 
-        <!-- Featured Products-->
-        <div class="small-container">
-            <h2 class="title">Featured Products</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="product-box">
-                        <img src="img/food01.png" alt="img" class="product-img">
-                        <h2 class="product-title">MAZURI S</h2>
-                        <p class ="price">Price</p>
-                        <p class = "product-text">Quantity</p>
-                        <a href="mazuriS.html">
-                            <h2 class="learn-more">LEARN MORE</h2>
-                        </a>
-                        <i class='bx bxs-cart-alt add-cart'></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Lastest Products-->
-        <div class="small-container">
-            <h2 class="title">Lastest Products</h2>
-            <div class="row">          
-                <div class="col-sm-6 col-md-3">
-                    <div class="product-box">
-                        <img src="img/food08.png" alt="img" class="product-img">
-                        <h2 class="product-title">ZUPREEM N</h2>
-                        <p class ="price">Price</p>
-                        <p class = "product-text">Quantity</p>
-                        <a  href="zupreemN.html">
-                            <h2 class="learn-more">LEARN MORE</h2>
-                        </a>
-                        <i class='bx bxs-cart-alt add-cart'></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+       
     <!-- Offer -->
     <div class="offer">
         <div class="small-container">
@@ -238,12 +202,18 @@
             <p class="copyright">Copyright 2023 - BIFO Shop</p>
         </div>
     </div>
-    <%if (productLists != null){
-        productLists.clear();
-        session.removeAttribute("SortedProductList");
-    }
+    <%if (productLists != null) {
+            productLists.clear();
+            session.removeAttribute("SortedProductList");
+        }
     %>
     <!-- Link to JS -->
     <script src="js/main.js"></script>
+    <script>
+        <% String existed = (String) session.getAttribute("Existed");
+            if (existed != null && existed.equals("TRUE") ){  %>
+        alert("You added this product to favorite list");
+        <%} session.removeAttribute("Existed");%>
+    </script>
 </body>
 </html>

@@ -49,18 +49,7 @@ t<%--
                     <!-- Sidebar navigation-->
                     <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
                         <ul id="sidebarnav">
-                            <li class="nav-small-cap">
-                                <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                                <span class="hide-menu">Home</span>
-                            </li>
-                            <li class="sidebar-item">
-                                <a class="sidebar-link" href="AdminDashboard.jsp" aria-expanded="false">
-                                    <span>
-                                        <i class="ti ti-layout-dashboard"></i>
-                                    </span>
-                                    <span class="hide-menu">Dashboard</span>
-                                </a>
-                            </li>
+                          
                             <li class="nav-small-cap">
                                 <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                                 <span class="hide-menu">UI COMPONENTS</span>
@@ -99,6 +88,15 @@ t<%--
                                 </a>
 
                             </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="refundList.jsp" aria-expanded="false">
+                                    <span>
+                                        <i class="ti ti-box"></i>
+                                    </span>
+                                    <span class="hide-menu">Refund Request List</span>
+                                </a>
+
+                            </li>
                     </nav>
                     <!-- End Sidebar navigation -->
                 </div>
@@ -118,7 +116,9 @@ t<%--
                                 <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
                                 </svg>
                             </button>
-                            <button class="app-content-headerButton">Add Product</button>
+                            <form action ="MainController" method="post">
+                            <input type='submit' name='btAction' value='Logout' class="app-content-headerButton">
+                            </form>
                         </div>
                         <div class="app-content-actions">
                             <form action ="MainController" method="Post">
@@ -188,7 +188,9 @@ t<%--
                                     <span class="cell-label"><%=orderDetailLists.getStatus()%></span>
                                     <%=orderDetailLists.getStatus()%> 
                                     <% if (orderDetailLists.getStatus().equals("WAITING")) {%>
-                                    <button id="order-status" class="Button"><a href = "UpdateStatus?txtOrderID=<%=orderDetailLists.getOrder_id()%>">Update</a></button>
+                                    <button id="order-status" class="Button"><a href = "UpdateStatus?txtOrderID=<%=orderDetailLists.getOrder_id()%>">Update Order</a></button>
+                                    <%}else if (orderDetailLists.getStatus().equals("DELIVERING")){%>
+                                    <button id="order-status" class="Button"><a href = "ConfirmOrder?txtOrderID=<%=orderDetailLists.getOrder_id()%>">Confirm Order</a></button>
                                     <%}%>
                                 </div>
                             </div>      

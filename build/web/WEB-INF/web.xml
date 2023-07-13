@@ -112,6 +112,30 @@
         <servlet-name>GetRevenue</servlet-name>
         <servlet-class>Servlet.GetRevenue</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Feedback</servlet-name>
+        <servlet-class>Servlet.Feedback</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SendFeedback</servlet-name>
+        <servlet-class>Servlet.SendFeedback</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SendRequest</servlet-name>
+        <servlet-class>Servlet.SendRequest</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HandleRequest</servlet-name>
+        <servlet-class>Servlet.HandleRequest</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchAccount</servlet-name>
+        <servlet-class>Servlet.SearchAccount</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ConfirmOrder</servlet-name>
+        <servlet-class>Servlet.ConfirmOrder</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -223,6 +247,30 @@
     <servlet-mapping>
         <servlet-name>GetRevenue</servlet-name>
         <url-pattern>/GetRevenue</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Feedback</servlet-name>
+        <url-pattern>/Feedback</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendFeedback</servlet-name>
+        <url-pattern>/SendFeedback</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendRequest</servlet-name>
+        <url-pattern>/SendRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HandleRequest</servlet-name>
+        <url-pattern>/HandleRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchAccount</servlet-name>
+        <url-pattern>/SearchAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConfirmOrder</servlet-name>
+        <url-pattern>/ConfirmOrder</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

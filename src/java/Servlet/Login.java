@@ -61,7 +61,7 @@ public class Login extends HttpServlet {
                 } else if (sql.getRole(mail).equals("ADMIN")) {
                     url = "GetRevenue?Year=2023";
                 } else if (sql.getRole(mail).equals("STAFF")) {
-                    url = "StaffDashboard.jsp";
+                    url = "product.jsp";
                 }
 
                 sql.searchUser(mail);

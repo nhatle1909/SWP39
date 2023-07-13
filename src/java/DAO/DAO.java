@@ -8,9 +8,11 @@ package DAO;
 import Utility.BirdDTO;
 import Utility.FavoriteDTO;
 import Utility.FeedbackDTO;
+import Utility.GetProductToFeedbackDTO;
 import Utility.OrderDTO;
 import Utility.OrderDetailDTO;
 import Utility.ProductListDTO;
+import Utility.RefundDTO;
 import Utility.RevenueDTO;
 import Utility.UserDTO;
 import java.sql.Connection;
@@ -36,6 +38,16 @@ public class DAO {
     private List<FeedbackDTO> listFeedback;
     private List<OrderDetailDTO> listOrderDetail;
     private List<RevenueDTO> listRevenue;
+    private List<GetProductToFeedbackDTO> listGetProductToFeedbackDTO;
+    private List<RefundDTO> listRefund;
+
+    public List<RefundDTO> getListRefund() {
+        return listRefund;
+    }
+
+    public List<GetProductToFeedbackDTO> getListGetProductToFeedbackDTO() {
+        return listGetProductToFeedbackDTO;
+    }
 
     public List<RevenueDTO> getListRevenue() {
         return listRevenue;
@@ -877,11 +889,8 @@ public class DAO {
         try {
             con = DBUtility.makeConnection();
             if (con != null) {
-                String sql = "DELETE FROM dbo.OrderDetail\n"
-                        + "WHERE order_id = ?;\n"
-                        + "\n"
-                        + "DELETE FROM dbo.OrderList\n"
-                        + "WHERE order_id = ?;";
+                String sql
+                        = "Update dbo.OrderList set status = 'CANCELED' WHERE order_id = ?;";
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, Order_id);
                 stm.setInt(2, Order_id);
@@ -1028,20 +1037,21 @@ public class DAO {
         }
     }
 
-    public void showAllUser() throws SQLException, NamingException {
+    public void searchAllUser(String mail) throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
             con = DBUtility.makeConnection();
             if (con != null) {
-                String sql = "Select * from dbo.ProfileUser";
+                String sql = "Select * from dbo.ProfileUser where mail like ?";
                 stm = con.prepareStatement(sql);
+                stm.setString(1,"%"+mail+"%");
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     int user_id = rs.getInt("user_id");
                     String username = rs.getString("username");
-                    String mail = rs.getString("mail");
+                     mail = rs.getString("mail");
                     String address = rs.getString("address");
                     String phone_number = rs.getString("phone_number");
                     String role = rs.getString("role");
@@ -1225,4 +1235,333 @@ public class DAO {
         }
     }
 
+    public boolean uniqueFavorite(int user_id, int product_id) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "Select id from dbo.Favorite where user_id = ? and product_id = ?";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, user_id);
+                stm.setInt(2, product_id);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    return false;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return true;
+    }
+
+    public void getFeedback(int order_id) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "SELECT \n"
+                        + "    pl.product_id,\n"
+                        + "    pl.Images\n"
+                        + "FROM \n"
+                        + "    orderDetail AS od\n"
+                        + "CROSS APPLY \n"
+                        + "    STRING_SPLIT(od.product_list, '|') AS t\n"
+                        + "INNER JOIN \n"
+                        + "    Product_List AS pl ON LTRIM(RTRIM(REPLACE(t.value, CONCAT(SUBSTRING(t.value, 1, PATINDEX('%[a-zA-Z]%', t.value)-1), ''), ''))) = pl.product_name\n"
+                        + "WHERE \n"
+                        + "    od.order_id = ?;";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, order_id);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int product_int = rs.getInt("product_id");
+                    String images_url = rs.getString("Images");
+
+                    GetProductToFeedbackDTO dto = new GetProductToFeedbackDTO(product_int, images_url);
+                    if (this.listGetProductToFeedbackDTO == null) {
+                        this.listGetProductToFeedbackDTO = new ArrayList<GetProductToFeedbackDTO>();
+                    }
+                    this.listGetProductToFeedbackDTO.add(dto);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
+    public void Feedback(int id, int user_id, int product_id, String date, String feedback) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "Insert into dbo.Feedback (id,user_id,product_id,Date_feedback,comment) values (?,?,?,?,?)";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, id);
+                stm.setInt(2, user_id);
+                stm.setInt(3, product_id);
+                stm.setString(4, date);
+                stm.setString(5, feedback);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
+    public void setFeedbackOrder(int Order_id) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql
+                        = "Update dbo.OrderList set status = 'FEEDBACKED' WHERE order_id = ?;";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, Order_id);
+
+                int row = stm.executeUpdate();
+                if (row > 0) {
+
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
+    public void insertRequest(int requestID, int order_id, String mail, String date, String reason) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "Insert into dbo.Request (request_id,mail,order_id,Date_request,request_text) Values (?,?,?,?,?)";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, requestID);
+                stm.setString(2, mail);
+                stm.setInt(3, order_id);
+                stm.setString(4, date);
+                stm.setString(5, reason);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
+    public String getOrderStatus(int order_id, int user_id) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        String status = "";
+        ResultSet rs = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "Select status from dbo.OrderList where order_id = ? and user_id = ?";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, order_id);
+                stm.setInt(2, user_id);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    status = rs.getString("status");
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return status;
+    }
+
+    public boolean getRefundList(String mail) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "Select * from dbo.Request where mail like ? ";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, "%" + mail + "%");
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int refundID = rs.getInt("request_id");
+                    mail = rs.getString("mail");
+                    int order_ID = rs.getInt("order_id");
+                    Date date = rs.getDate("Date_request");
+                    String reason = rs.getString("request_text");
+                    RefundDTO dto = new RefundDTO(refundID, order_ID, mail, reason, date);
+                    if (this.listRefund == null) {
+                        this.listRefund = new ArrayList<RefundDTO>();
+                    }
+                    this.listRefund.add(dto);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return true;
+    }
+
+    public String getMailbyRequest(int requestID) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        String mail = "";
+        ResultSet rs = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "Select mail from dbo.Request where request_id = ? ";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, requestID);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    mail = rs.getString("mail");
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return mail;
+    }
+
+    public void HandleRequest(int requestID) throws SQLException {
+
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "update dbo.OrderList set status = 'REFUND' \n"
+                        + "where order_id IN (\n"
+                        + "	select order_id\n"
+                        + "	from Request\n"
+                        + "	where request_id = ?\n"
+                        + ")";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, requestID);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+    public void DeleteRequest(int requestID) throws SQLException {
+
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = " delete from dbo.request where request_id = ?";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, requestID);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+        public boolean confirmOrder(int orderID) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "update dbo.OrderList set status = 'CONFIRMED' where order_id = ?";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, orderID);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
 }

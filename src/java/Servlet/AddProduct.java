@@ -35,6 +35,7 @@ public class AddProduct extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
             /* TODO output your page here. You may use following sample code. */
+            String url = request.getParameter("txtUrl");
            int product_id = Integer.parseInt(request.getParameter("txtProductId"));
            String product_name = request.getParameter("txtProductName");
            int price = Integer.parseInt(request.getParameter("txtPrice"));
@@ -43,7 +44,7 @@ public class AddProduct extends HttpServlet {
            String bird = request.getParameter("txtBird");
            
            DAO sql = new DAO();
-           boolean result = sql.addProduct(product_id, product_name, price, quantity, desc, bird, "");
+           boolean result = sql.addProduct(product_id, product_name, price, quantity, desc, bird, url);
            if (result){
               response.sendRedirect("StaffDashboard.jsp"); 
            }

@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -35,6 +36,7 @@ public class MainController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String action = request.getParameter("btAction");
+        HttpSession session = request.getSession();
         String url = "";
         try {
             /* TODO output your page here. You may use following sample code. */
@@ -86,7 +88,19 @@ public class MainController extends HttpServlet {
                 url = "SearchOrder";
             }else if (action.equals("Select Year")) {
                 url = "GetRevenue";
+            }else if (action.equals("Feedback")) {
+                url = "Feedback";
+            }else if (action.equals("Send Feedback")) {
+                url = "SendFeedback";
+            }else if (action.equals("Send Request")) {
+                url = "SendRequest";
+            }else if (action.equals("Reply") || action.equals("Ignore")){
+                url = "HandleRequest";
+                session.setAttribute("Button",action);
+            }else if (action.equals("Search Account")) {
+                url = "SearchAccount";
             }
+            
 
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

@@ -16,7 +16,8 @@
             href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
             rel="stylesheet"
             />
-        <link rel="stylesheet" href="css/user.css" /> <link rel="stylesheet" href="css/nicepage.css" media="screen">
+        <link rel="stylesheet" href="css/user.css" />
+        <link rel="stylesheet" href="css/popup.css" /><link rel="stylesheet" href="css/nicepage.css" media="screen">
         <link rel="stylesheet" href="css/ProductPage.css" media="screen">
         <script class="u-script" type="text/javascript" src="js/jquery.js" defer=""></script>
         <script class="u-script" type="text/javascript" src="js/nicepage.js" defer=""></script>
@@ -98,9 +99,10 @@
                            aria-controls="order-history" aria-selected="false">Order History</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" id="order-detail-tabl" data-toggle="tab" href="#order-detail"
-                           role="tab" aria-controls="order-detail" aria-selected="true">Order detail</a>
+                        <a class="nav-link" id="refund-tab" data-toggle="tab" href="#refund" role="tab"
+                           aria-controls="Refund-tab" aria-selected="false">Refund</a>
                     </li>
+
                 </ul>
             </section>  
             <div class="tab-content" id="myTabContent">
@@ -123,7 +125,8 @@
                                                 <input class="btn btn-success btn-sm mr-2"
                                                        type="submit" name="btAction" value="Logout" />
                                             </form>
-                                            <br><br />        
+                                            <br><br/>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -220,7 +223,7 @@
                                                     <th>Date</th>
                                                     <th>Total Amount</th>
                                                     <th>Status</th>
-                                                    <th>Check</th>
+                                                    <th>Feedback</th>
                                                     <th>Cancel</th>
                                                 </tr>
                                             </thead>
@@ -233,20 +236,32 @@
 
                                                     <td><%= order.getOrder_id()%></td>
                                                     <td><%= order.getOrder_date()%></td>
-                                                    <td>$<%= order.getTotal_price()%></td>
+                                                    <td><%= order.getTotal_price()%>.000 VND</td>
                                                     <td><%= order.getStatus()%></td>
-                                                    <td><input type="submit" name="btAction" value="Check" class = "btn btn-primary"></td>
-                                                        <% if (order.getStatus().equals("WAITING")) {%>
                                                     <td>
+                                                        <% if (order.getStatus().equals("CONFIRMED")) {%>
+
+                                                        <form action="MainController" method="post">
+                                                            <input type="hidden" name="txtOrderID" value="<%=order.getOrder_id()%>">
+                                                            <input type="submit" name="btAction" value="Feedback" class = "btn btn-primary">   
+                                                        </form>
+
+                                                        <%}%>
+                                                    </td>
+                                                    <td>
+                                                        <% if (order.getStatus().equals("WAITING")) {%>
+
                                                         <form action="MainController" method="post">
                                                             <input type="hidden" name="txtOrderID" value="<%=order.getOrder_id()%>">
                                                             <input type="submit" name="btAction" value="Cancel" class = "btn btn-primary">
-                                                            <%}%>
+
                                                         </form>
-                                                    </td>
+
+                                                        <%}%>
+                                                    </td>                                              
                                                 </tr>
                                                 <% }
-                                            } else { %>
+                                                } else { %>
                                                 <tr>
                                                     <td colspan="4" class="text-center">No orders found.</td>
                                                 </tr>
@@ -313,6 +328,34 @@
                         </div>
                     </div>
                 </div>
+                <div class="tab-pane fade" id="refund" role="tabpanel"
+                     aria-labelledby="Refund-tab">
+                    <div class="row gutters-sm">
+                        <div class="col-sm-12 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">Refund Order</h5>
+                                    <div class="content">
+                                        <h3>Reply will be sent to your Email</h3>
+                                        <p>Notice : Only confirmed orders will be considered for refund</p>
+                                        <br/>
+                                        <form action="MainController" method="post">
+                                            <label>Email : <%=userDTO.getMail()%></label>
+                                            <input type="hidden" name="txtMail" value="<%=userDTO.getMail()%>">
+                                            <br/>
+                                            <label>Order ID</label>
+                                            <input type="text" name="txtOrderID" placeholder="Please enter your Order ID" required>
+                                            <label>Refund Reason</label>
+                                            <textarea name="Reason"placeholder="Please let us know your refund reason..." required></textarea>
+                                            <input class="SendRequest"type="submit" value="Send Request" name="btAction">
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -346,23 +389,15 @@
                                                         $("#save").css("display", "inline-block");
                                                     });
     </script>
-    <script type="text/javascript">
-        // Retrieve the last selected tab from local storage, or default to the first tab
-        const selectedTab = localStorage.getItem('selectedTab') || '#user-info';
-
-        // Set the last selected tab as active
-        $(function () {
-            $('a[href="' + selectedTab + '"]').tab('show');
-        });
-
-        // Store the currently selected tab in local storage when a new tab is selected
-        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-            localStorage.setItem('selectedTab', e.target.hash);
-        });
-    </script>
     <%} else {
             response.sendRedirect("login.jsp");
         }%>
+        <script>
+            <% String checkOrderStatus = (String) session.getAttribute("CheckOrderStatus");
+        if (checkOrderStatus != null && checkOrderStatus.equals("FALSE") ){  %>
+    alert("The Status of Order is not CONFIRMED or your Order ID is wrong");
+     <%} session.removeAttribute("CheckOrderStatus");%>
+        </script>
 </body>
 
 </html>

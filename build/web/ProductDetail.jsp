@@ -130,7 +130,6 @@
                     <img src="images/paypal.png" class="brands">
                     <img src="images/visa.png" class="brands">
                     <img src="images/mastercard.png" class="brands">
-                    <img src="images/coca-cola.png" class="brands">
                 </div>
             </div>
         </div>

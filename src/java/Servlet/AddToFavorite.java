@@ -35,6 +35,7 @@ public class AddToFavorite extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
+
         HttpSession session = request.getSession();
         DAO sql = new DAO();
         Random rng = new Random();
@@ -43,9 +44,15 @@ public class AddToFavorite extends HttpServlet {
         String mail = (String) session.getAttribute("txtMail");
         int user_id = sql.getID(mail);
         int product_id = Integer.parseInt(request.getParameter("txtProductId"));
-
-        boolean result = sql.addToFavorite(code, user_id, product_id);
-        if (result) {
+      
+        if (sql.uniqueFavorite(user_id,product_id)) {
+            boolean result = sql.addToFavorite(code, user_id, product_id);
+            if (result) {
+                response.sendRedirect("ProductPage.jsp");
+            }
+        }else
+        {
+            session.setAttribute("Existed","TRUE");
             response.sendRedirect("ProductPage.jsp");
         }
     }
