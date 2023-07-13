@@ -31,7 +31,7 @@
 
                     <div class="col">
                         <%if (userDTO != null) {%>
-                        <h3 class="title">billing address</h3>
+                        <h3 class="title">Billing address</h3>
 
                         <div class="inputBox">
                             <span>full name :</span>
@@ -50,7 +50,7 @@
                             <input type="text" name="txtPhoneNumber" value="<%=userDTO.getPhone_number()%>">
                         </div>
                         <%} else {%>
-                        <h3 class="title">billing address</h3>
+                        <h3 class="title">Billing address</h3>
 
                         <div class="inputBox">
                             <span>full name :</span>

@@ -15,7 +15,10 @@
         <!-- <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" /> -->
         <link rel="stylesheet" href="css/styles.min.css" />
     </head>
-
+<%  String role = (String) session.getAttribute("txtRole");
+        if (role != null) {
+             if (role.equals("ADMIN") || role.equals("STAFF")) {
+              %>
     <body>
         <!--  Body Wrapper -->
         <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
@@ -200,5 +203,7 @@
         <script src="js/app.min.js"></script>
         <script src="js/libs/simplebar/dist/simplebar.js"></script>
     </body>
-
+ <% }}else {
+                response.sendRedirect("login.jsp");
+                }%>
 </html>

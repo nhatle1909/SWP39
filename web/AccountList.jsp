@@ -19,6 +19,10 @@
         <link rel="stylesheet" href="css/accountcontroller.css">
     </head>
     <body>
+        <%  String role = (String) session.getAttribute("txtRole");
+        if (role != null) {
+             if (role.equals("ADMIN")) {
+              %>
         <%
             DAO sql = new DAO();
             String mail ="";
@@ -185,5 +189,8 @@
                 session.removeAttribute("SortedAccountList");
             }
         %>
+        <% }}else {
+                response.sendRedirect("login.jsp");
+                }%>
     </body>
 </html>

@@ -22,6 +22,10 @@ t<%--
     </head>
 
     <body>
+        <%  String role = (String) session.getAttribute("txtRole");
+        if (role != null) {
+             if (role.equals("ADMIN") || role.equals("STAFF")) {
+              %>
         <%DAO sql = new DAO();
             String username = "";
             List<OrderDetailDTO> orderDetailList = (List) session.getAttribute("SortedOrderList");
@@ -214,6 +218,9 @@ t<%--
                     session.removeAttribute("SortedOrderList");
                 }
             %>
+            <% }}else {
+                response.sendRedirect("login.jsp");
+                }%>
     </body>
 
 </html>

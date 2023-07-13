@@ -30,7 +30,7 @@
             } else if (role.equals("ADMIN")) {
                 response.sendRedirect("AdminDashboard.jsp");
             } else if (role.equals("STAFF")) {
-                response.sendRedirect("StaffDashboard.jsp");
+                response.sendRedirect("product.jsp");
             }
         } else {%>
 <html lang="en">
