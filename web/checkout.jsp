@@ -34,15 +34,15 @@
                         <h3 class="title">Billing address</h3>
 
                         <div class="inputBox">
-                            <span>full name :</span>
+                            <span>Full name :</span>
                             <input type="text" name="txtUsername" placeholder="john deo" value="<%=userDTO.getUsername()%>">
                         </div>
                         <div class="inputBox">
-                            <span>email :</span>
+                            <span>Email :</span>
                             <input type="email" name="txtMail" placeholder="example@example.com" value="<%=userDTO.getMail()%>"> 
                         </div>
                         <div class="inputBox">
-                            <span>address :</span>
+                            <span>Address :</span>
                             <input type="text" name="txtAddress"placeholder="room - street - locality" value="<%=userDTO.getAddress()%>">
                         </div>
                         <div class="inputBox">
@@ -53,15 +53,15 @@
                         <h3 class="title">Billing address</h3>
 
                         <div class="inputBox">
-                            <span>full name :</span>
+                            <span>Full name :</span>
                             <input type="text" name="txtUsername" placeholder="john deo">
                         </div>
                         <div class="inputBox">
-                            <span>email :</span>
+                            <span>Email :</span>
                             <input type="email" name="txtMail"placeholder="example@example.com">
                         </div>
                         <div class="inputBox">
-                            <span>address :</span>
+                            <span>Address :</span>
                             <input type="text" name="txtAddress"placeholder="room - street - locality">
                         </div>
                         <div class="inputBox">
@@ -80,7 +80,7 @@
                                 Pay when receive
                             </label>
                         </div>
-                        <div class="inputBox">
+                        <div class="inputBox" style="display:none;">
                             <label for="card-payment">
                                 <input type="radio" id="card-payment" name="payment-method" value="card-payment">
                                 Card payment
@@ -135,7 +135,7 @@
                         <br/>
                         <br/>
                 <a href="ProductPage.jsp" class="submit-btn">Return</a>
-                <a id="clearButton" href="ProductPage.jsp" class="submit-btn">Cancel</a>
+                <a id="clearHref" href="ProductPage.jsp" class="submit-btn">Cancel</a>
             </form>
 
         </div>    
@@ -216,6 +216,11 @@ cardPaymentRadio.addEventListener("change", () => {
 // Assuming you have a button in your HTML with the id "clearButton"
 var clearButton = document.getElementById("clearButton");
 clearButton.addEventListener("click", clearLocalStorage);
+
+document.querySelector('#clearHref').addEventListener('click', function() {
+    localStorage.clear();
+    subtotal="";
+});
         </script>
     </body>
 </html>

@@ -22,6 +22,10 @@
     </head>
 
     <body>
+            <%  String role = (String) session.getAttribute("txtRole");
+        if (role != null) {
+             if (role.equals("ADMIN") || role.equals("STAFF")) {
+              %>
         <%DAO sql = new DAO();
             String mail = "";
             List<RefundDTO> refunds = (List) session.getAttribute("SortedRefundList");
@@ -219,6 +223,9 @@
                     session.removeAttribute("SortedRefundList");
                 }
             %>
+            <% }}else {
+                response.sendRedirect("login.jsp");
+                }%>
     </body>
 
 </html>

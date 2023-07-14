@@ -130,7 +130,7 @@ t<%--
                                 <input type="submit" name="btAction" value="Search Order" class ="Button">
                             </form>
                             <div class="app-content-actions-wrapper">
-                                <div class="filter-button-wrapper">
+                                <div class="filter-button-wrapper" style="display :none;">
                                     <button class="action-button filter jsFilter"><span>Filter</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg></button>
                                     <div class="filter-menu">
                                         <label>Category</label>
@@ -192,9 +192,9 @@ t<%--
                                     <span class="cell-label"><%=orderDetailLists.getStatus()%></span>
                                     <%=orderDetailLists.getStatus()%> 
                                     <% if (orderDetailLists.getStatus().equals("WAITING")) {%>
-                                    <button id="order-status" class="Button"><a href = "UpdateStatus?txtOrderID=<%=orderDetailLists.getOrder_id()%>">Update Order</a></button>
+                                    <button id="order-status" class="Button"><a href = "UpdateStatus?txtOrderID=<%=orderDetailLists.getOrder_id()%>">Update</a></button>
                                     <%}else if (orderDetailLists.getStatus().equals("DELIVERING")){%>
-                                    <button id="order-status" class="Button"><a href = "ConfirmOrder?txtOrderID=<%=orderDetailLists.getOrder_id()%>">Confirm Order</a></button>
+                                    <button id="order-status" class="Button"><a href = "ConfirmOrder?txtOrderID=<%=orderDetailLists.getOrder_id()%>">Confirm</a></button>
                                     <%}%>
                                 </div>
                             </div>      

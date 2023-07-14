@@ -20,40 +20,40 @@
           <form action="MainController" method ="POST">
             
             <div class="form-control">
-              <input type="text" id="username" class="input" name="txtUsername"/>
+                <input type="text" id="username" class="input" name="txtUsername" required/>
               <label for="" class="label">Username</label>
               <span></span>
               <small></small>
             </div>
 
             <div class="form-control">
-              <input type="email" id="email" class="input" name="txtMail"/>
+              <input type="email" id="email" class="input" name="txtMail"  required/>
               <label for="" class="label">Email</label>
               <span></span>
               <small></small>
             </div>
 
             <div class="form-control">
-              <input type="password" id="password" class="input" name="txtPassword"/>
+              <input type="password" id="password" class="input" name="txtPassword" required=/>
               <label for="" class="label">Password</label>
               <span></span>
               <small></small>
             </div>
 
             <div class="form-control">
-              <input type="password" id="password2" class="input" name="txtConfirmPassword"/>
+              <input type="password" id="password2" class="input" name="txtConfirmPassword"  required/>
               <label for="" class="label">Confirm Password</label>
               <span></span>
               <small></small>
             </div>
               <div class="form-control">
-              <input type="text" id="password2" class="input" name="txtPhone"/>
+              <input type="text" id="password2" class="input" name="txtPhone"  required/>
               <label for="" class="label">Phone Number</label>
               <span></span>
               <small></small>
             </div>
               <div class="form-control">
-              <input type="text" id="password2" class="input" name="txtAddress"/>
+              <input type="text" id="password2" class="input" name="txtAddress" required/>
               <label for="" class="label">Address</label>
               <span></span>
               <small></small>

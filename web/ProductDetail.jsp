@@ -23,7 +23,8 @@
     </head>
 
     <body>
-        <% List<ProductListDTO> productLists = (List) session.getAttribute("ProductDetail");
+        <% String mail = (String) session.getAttribute("txtMail");
+            List<ProductListDTO> productLists = (List) session.getAttribute("ProductDetail");
             List<FeedbackDTO> feedbacks = (List) session.getAttribute("Feedback");
             ProductListDTO product = productLists.get(0);
         %>
@@ -34,10 +35,14 @@
                 <img src="images/logo-removebg-preview.png" href="#" class="logo"></img>
                 <!-- Cart-Icon -->
                 <ul>
-                    <li><a href="productList.html" class="header-title">Home</a></li>
+                    <li><a href="index.html" class="header-title">Home</a></li>
                     <li><a href="ProductPage.jsp" class="header-title">Product</a></li>
-                    <li><a href="productList.html" class="header-title">Contact</a></li>
+                    <li><a href="bird.jsp" class="header-title">Bird</a></li>
+                     <% if (mail == null) {%>
+                    <li><a href="login.jsp" class="header-title">Login</a></li>
+                        <%} else {%>
                     <li><a href="user_info.jsp" class="header-title">Profile</a></li>
+                        <%}%>
                     <li><i class='bx bxs-cart-alt' id="cart-icon"></i></li>
                 </ul>
                 <!-- Cart -->

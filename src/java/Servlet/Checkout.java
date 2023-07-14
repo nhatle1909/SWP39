@@ -64,8 +64,8 @@ public class Checkout extends HttpServlet {
             String phone_number = request.getParameter("txtPhoneNumber");
             String address = request.getParameter("txtAddress");
             
-            String productList = "";
-            for (int i = 0; i < products.length; i++) {
+            String productList = quantities [0] + " " + products[0];
+            for (int i = 1; i < products.length; i++) {
                 productList = productList + " | " + quantities[i] + " " + products[i];
                 sql.updateQuantity(Integer.parseInt(quantities[i]),products[i]);
             }

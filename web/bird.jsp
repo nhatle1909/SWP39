@@ -49,7 +49,6 @@
                     <li><a href="index.html" class="header-title">Home</a></li>
                     <li><a href="ProductPage.jsp" class="header-title">Product</a></li>
                     <li><a href="bird.jsp" class="header-title">Bird</a></li>
-                    <li><a href="productList.html" class="header-title">Contact</a></li>
                         <% if (mail == null) {%>
                     <li><a href="login.jsp" class="header-title">Login</a></li>
                         <%} else {%>
@@ -88,14 +87,7 @@
                             <input type="submit" name="btAction" value="Search Bird Name" class="searchButton"/>
                         </div>
                     </div>
-                    <div class="filter-condition">
-                        <select name="Sort" id="select">
-                            <option value="SortPrice">Price (Low to High)</option>                  
-                            <option value="SortQuantity">Quantity (Low to High)</option>                 
-                            <option value="SortName">Name (A to Z)</option>       
-                        </select>
-                        <input type="submit" name="btAction" Value="Sort" class="button"/>
-                    </div>
+                   
                 </form>
             </div>
 
@@ -118,7 +110,7 @@
                             <a href="BirdDetail?txtBirdId=<%=birdList.getBird_id()%>">
                                 <h2 class="learn-more">Learn More</h2>
                             </a>
-                            <i class='bx bxs-cart-alt add-cart'></i>
+                           
                         </div>
                     </div>
                     <%}%>

@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -35,17 +36,23 @@ public class DeleteStaff extends HttpServlet {
             throws ServletException, IOException, SQLException {
         String url = "";
         response.setContentType("text/html;charset=UTF-8");
-            /* TODO output your page here. You may use following sample code. */
-            int user_id = Integer.parseInt(request.getParameter("txtUserID"));
-            DAO sql = new DAO();
-          boolean result =  sql.DeleteStaff(user_id);
-          if (result){
-              response.sendRedirect("Add-DeleAccount.jsp");
-          }
-        
-            
+        /* TODO output your page here. You may use following sample code. */
+        int user_id = Integer.parseInt(request.getParameter("txtUserID"));
+        HttpSession session = request.getSession();
+
+        DAO sql = new DAO();
+
+        if (sql.checkRole(user_id).equals("CUSTOMER")) {
+            session.setAttribute("WrongRole", "TRUE");
+            response.sendRedirect("Add-DeleAccount.jsp");
+        } else {
+            boolean result = sql.DeleteStaff(user_id);
+            if (result) {
+                response.sendRedirect("Add-DeleAccount.jsp");
+            }
         }
-    
+
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

@@ -48,7 +48,6 @@
                 <li><a href="index.html" class="header-title">Home</a></li>
                 <li><a href="ProductPage.jsp" class="header-title">Product</a></li>
                 <li><a href="bird.jsp" class="header-title">Bird</a></li>
-                <li><a href="productList.html" class="header-title">Contact</a></li>
                 <li><a href="user_info.jsp" class="header-title">Profile</a></li>
 
                 <li><i class='bx bxs-cart-alt' id="cart-icon"></i></li>
@@ -304,7 +303,7 @@
                                                     <td><%= ++count%></td>
                                                     <td><%= favorite.getProduct_id()%></td>
                                                     <td><%= favorite.getProduct_name()%></td>
-                                                    <td><%= favorite.getPrice()%></td>
+                                                    <td><%= favorite.getPrice()%>.000 VND</td>
 
                                                     <td>
                                                         <form action="MainController" method="post">

@@ -15,10 +15,10 @@
         <!-- <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" /> -->
         <link rel="stylesheet" href="css/styles.min.css" />
     </head>
-<%  String role = (String) session.getAttribute("txtRole");
+    <%  String role = (String) session.getAttribute("txtRole");
         if (role != null) {
-             if (role.equals("ADMIN") || role.equals("STAFF")) {
-              %>
+            if (role.equals("ADMIN") || role.equals("STAFF")) {
+    %>
     <body>
         <!--  Body Wrapper -->
         <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
@@ -74,7 +74,15 @@
                                     </span>
                                     <span class="hide-menu">Order List</span>
                                 </a>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link" href="refundList.jsp" aria-expanded="false">
+                                    <span>
+                                        <i class="ti ti-box"></i>
+                                    </span>
+                                    <span class="hide-menu">Refund Request List</span>
+                                </a>
 
+                            </li>
                             </li>
                     </nav>
                     <!-- End Sidebar navigation -->
@@ -108,9 +116,9 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
                                        aria-expanded="false">
-                                        <img src="#" alt="" width="35" height="35" class="rounded-circle">
+                                        <img src="images/logo-removebg-preview.png" alt="" width="35" height="35" class="rounded-circle">
                                     </a>
-                                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
+                                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2" style="display:none;">
                                         <div class="message-body">
                                             <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
                                                 <i class="ti ti-user fs-6"></i>
@@ -144,32 +152,32 @@
 
                                             <div class="mb-3">
                                                 <label for="exampleInputID" class="form-label">Product ID</label>
-                                                <input type="id" name="txtProductId" class="form-control" id="inputID">
+                                                <input type="id" name="txtProductId" class="form-control" id="inputID" required>
                                             </div>
 
                                             <div class="mb-3">
                                                 <label for="exampleInputName" class="form-label">Product Name</label>
-                                                <input type="name" name="txtProductName" class="form-control" id="exampleInputName">
+                                                <input type="name" name="txtProductName" class="form-control" id="exampleInputName" required>
                                             </div>
 
                                             <div class="mb-3">
                                                 <label for="exampleInputPassword1" class="form-label">Price</label>
-                                                <input type="number" name="txtPrice" class="form-control" id="exampleInputPassword1">
+                                                <input type="number" name="txtPrice" min="0" step="1" class="form-control" id="exampleInputPassword1" required>
                                             </div>
 
                                             <div class="mb-3">
                                                 <label for="exampleInputQuantity" class="form-label">Quantity</label>
-                                                <input type="number" name="txtQuantity" class="form-control" id="exampleInputEmail1">
+                                                <input type="number" name="txtQuantity" min="0" step="1" class="form-control" id="exampleInputEmail1" required>
                                             </div>
 
                                             <div class="mb-3">
                                                 <label for="exampleInputDes" class="form-label">Description</label>
-                                                <input type="text" name="txtDescription" class="form-control" id="exampleInputDes">
+                                                <input type="text" name="txtDescription" class="form-control" id="exampleInputDes" required>
                                             </div>
 
                                             <div class="mb-3">
                                                 <label for="exampleInputBird" class="form-label">Bird</label>
-                                                <input type="text" name="txtBird"class="form-control" id="exampleInputBird">
+                                                <input type="text" name="txtBird"class="form-control" id="exampleInputBird" required>
                                             </div>
 
                                             <input type="submit" name="btAction" value ="Update Product" class="btn btn-primary">
@@ -184,7 +192,7 @@
                                             <fieldset enable>
                                                 <div class="mb-3">
                                                     <label for="exampleInputID" class="form-label">Product ID</label>
-                                                    <input type="text" name="txtProductId" class="form-control" id="inputID">
+                                                    <input type="text" name="txtProductId" min="0" step="1" class="form-control" id="inputID" required>
                                                 </div>
                                                 <input type="submit" value="Delete Product" name="btAction" class="btn btn-primary">
                                             </fieldset>
@@ -203,7 +211,8 @@
         <script src="js/app.min.js"></script>
         <script src="js/libs/simplebar/dist/simplebar.js"></script>
     </body>
- <% }}else {
-                response.sendRedirect("login.jsp");
-                }%>
+    <% }
+        } else {
+            response.sendRedirect("login.jsp");
+     }%>
 </html>

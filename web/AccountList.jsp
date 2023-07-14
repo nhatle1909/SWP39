@@ -71,11 +71,11 @@
                                 <span class="hide-menu">UI COMPONENTS</span>
                             </li>
                             <li class="sidebar-item">
-                                <a class="sidebar-link" href="AccountController.jsp" aria-expanded="false">
+                                <a class="sidebar-link" href="AccountList.jsp" aria-expanded="false">
                                     <span>
                                         <i class="ti ti-user"></i>
                                     </span>
-                                    <span class="hide-menu">Account Controller</span>
+                                    <span class="hide-menu">Account List</span>
                                 </a>
                             </li>
                             <li class="sidebar-item">

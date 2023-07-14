@@ -893,7 +893,6 @@ public class DAO {
                         = "Update dbo.OrderList set status = 'CANCELED' WHERE order_id = ?;";
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, Order_id);
-                stm.setInt(2, Order_id);
                 int row = stm.executeUpdate();
                 if (row > 0) {
                     return true;
@@ -1046,12 +1045,12 @@ public class DAO {
             if (con != null) {
                 String sql = "Select * from dbo.ProfileUser where mail like ?";
                 stm = con.prepareStatement(sql);
-                stm.setString(1,"%"+mail+"%");
+                stm.setString(1, "%" + mail + "%");
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     int user_id = rs.getInt("user_id");
                     String username = rs.getString("username");
-                     mail = rs.getString("mail");
+                    mail = rs.getString("mail");
                     String address = rs.getString("address");
                     String phone_number = rs.getString("phone_number");
                     String role = rs.getString("role");
@@ -1083,7 +1082,7 @@ public class DAO {
             con = DBUtility.makeConnection();
             if (con != null) {
                 String sql = "Delete from dbo.ProfileUser where user_id = ? \n"
-                        + "                            Delete from dbo.Account_User where user_id = ?";
+                        +    "Delete from dbo.Account_User where user_id = ?";
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, user_id);
                 stm.setInt(2, user_id);
@@ -1517,6 +1516,7 @@ public class DAO {
             }
         }
     }
+
     public void DeleteRequest(int requestID) throws SQLException {
 
         Connection con = null;
@@ -1540,7 +1540,8 @@ public class DAO {
             }
         }
     }
-        public boolean confirmOrder(int orderID) throws SQLException {
+
+    public boolean confirmOrder(int orderID) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         try {
@@ -1563,5 +1564,32 @@ public class DAO {
             }
         }
         return false;
+    }
+
+    public String checkRole(int user_id) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        String Role = "";
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "select role from dbo.ProfileUser where user_id = ?";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, user_id);
+                ResultSet row = stm.executeQuery();
+                if (row.next()) {
+                    Role = row.getString("role");
+                    return Role;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return Role;
     }
 }

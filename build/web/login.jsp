@@ -88,9 +88,9 @@
                 <h5>Login</h5>
                 <p>Don't have an account? <a href="signup1.jsp">Create Your Account</a> it takes less than a minute</p>
                 <div class="inputs">
-                    <input type="text" name="txtMail" placeholder="Mail">
+                    <input type="text" name="txtMail" placeholder="Mail" required>
                     <br>
-                    <input type="password" name="txtPassword" placeholder="Password">
+                    <input type="password" name="txtPassword" placeholder="Password" required>
                 </div>
 
                 <br><br>
@@ -116,7 +116,7 @@
         <% String isValidLogin = (String) session.getAttribute("ValidLogin");
         if (isValidLogin != null && isValidLogin.equals("false")) {  %>
         alert("Invalid username or password");
-        <% } %>
+        <% } session.removeAttribute("ValidLogin"); %>
     </script>
     <!--end loginform-->
     <!-- Javascript files-->
