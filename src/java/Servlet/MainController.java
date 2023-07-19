@@ -37,7 +37,7 @@ public class MainController extends HttpServlet {
         PrintWriter out = response.getWriter();
         String action = request.getParameter("btAction");
         HttpSession session = request.getSession();
-        String url = "";
+        String url = "index.html";
         try {
             /* TODO output your page here. You may use following sample code. */
             if (action == null) {

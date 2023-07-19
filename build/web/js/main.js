@@ -99,12 +99,13 @@ function addCartClicked(event) {
     var title = shopProducts.getElementsByClassName("product-title")[0].innerText;
     var price = shopProducts.getElementsByClassName("price")[0].innerText;
     var productImg = shopProducts.getElementsByClassName("product-img")[0].src;
-    addProductToCart(title, price, productImg);
+    var quantity = String(shopProducts.getElementsByClassName("product-text")[0].innerText).match(/\d+/)[0];
+    addProductToCart(title, price, productImg,quantity);
     updateTotal();
     saveCartItems();
     updateCartIcon();
 }
-function addProductToCart(title, price, productImg) {
+function addProductToCart(title, price, productImg,quantity) {
     var cartShopBox = document.createElement("div");
     cartShopBox.classList.add("cart-box");
     var cartItems = document.getElementsByClassName("cart-content")[0];
@@ -122,7 +123,7 @@ function addProductToCart(title, price, productImg) {
                             <div class="cart-product-title">${title}</div>
                             
                             <div class="cart-price">${price}</div>
-                            <input type="number" value="1" class="cart-quantity">
+                            <input type="number" value="1" step="1" max="${quantity}" class="cart-quantity">
                         </div>
                         <!-- Remove Cart -->
                         <i class='bx bxs-trash cart-remove'></i>`;

@@ -97,7 +97,9 @@
                         </ul>
                         <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
                             <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
-                                <a href="https://adminmart.com/product/modernize-free-bootstrap-admin-dashboard/" target="_blank" class="btn btn-primary">Download Free</a>
+                                <form action="MainController" method="post">
+                                    <input type="submit" name="btAction" value="Logout" class="btn btn-primary">
+                                </form>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
                                        aria-expanded="false">
@@ -191,16 +193,17 @@
         <script src="js/app.min.js"></script>
         <script src="js/libs/simplebar/dist/simplebar.js"></script>
         <script>
-               <% String isWrongRole = (String) session.getAttribute("WrongRole");
-                       if (isWrongRole != null && isWrongRole.equals("TRUE")) {  %>
-        alert("You can not delete customer account");
-        <% } session.removeAttribute("WrongRole");%>
+            <% String isWrongRole = (String) session.getAttribute("WrongRole");
+                   if (isWrongRole != null && isWrongRole.equals("TRUE")) {  %>
+            alert("You can not delete customer account");
+            <% }
+            session.removeAttribute("WrongRole");%>
         </script>
         <% }
             } else {
                 response.sendRedirect("login.jsp");
-       }%>
-     
+            }%>
+
     </body>
 
 </html>

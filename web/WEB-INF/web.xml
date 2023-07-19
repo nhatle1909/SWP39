@@ -18,11 +18,11 @@
     </servlet>
     <servlet>
         <servlet-name>VerifyCode</servlet-name>
-        <servlet-class>Servlet.VerifyCode</servlet-class>
+        <servlet-class>Servlet.UserServlet.VerifyCode</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ForgetPassword</servlet-name>
-        <servlet-class>Servlet.ForgetPassword</servlet-class>
+        <servlet-class>Servlet.UserServlet.ForgetPassword</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
@@ -30,111 +30,111 @@
     </servlet>
     <servlet>
         <servlet-name>UpdatePassword</servlet-name>
-        <servlet-class>Servlet.UpdatePassword</servlet-class>
+        <servlet-class>Servlet.UserServlet.UpdatePassword</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UpdateInformation</servlet-name>
-        <servlet-class>Servlet.UpdateInformation</servlet-class>
+        <servlet-class>Servlet.UserServlet.UpdateInformation</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RemoveFavoriteProduct</servlet-name>
-        <servlet-class>Servlet.RemoveFavoriteProduct</servlet-class>
+        <servlet-class>Servlet.UserServlet.RemoveFavoriteProduct</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SortProductList</servlet-name>
-        <servlet-class>Servlet.SortProductList</servlet-class>
+        <servlet-class>Servlet.UserServlet.SortProductList</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddToFavorite</servlet-name>
-        <servlet-class>Servlet.AddToFavorite</servlet-class>
+        <servlet-class>Servlet.UserServlet.AddToFavorite</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Search</servlet-name>
-        <servlet-class>Servlet.Search</servlet-class>
+        <servlet-class>Servlet.UserServlet.Search</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ProductDetail</servlet-name>
-        <servlet-class>Servlet.ProductDetail</servlet-class>
+        <servlet-class>Servlet.UserServlet.ProductDetail</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ProductFeedback</servlet-name>
-        <servlet-class>Servlet.ProductFeedback</servlet-class>
+        <servlet-class>Servlet.UserServlet.ProductFeedback</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SearchBird</servlet-name>
-        <servlet-class>Servlet.SearchBird</servlet-class>
+        <servlet-class>Servlet.UserServlet.SearchBird</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>BirdDetail</servlet-name>
-        <servlet-class>Servlet.BirdDetail</servlet-class>
+        <servlet-class>Servlet.UserServlet.BirdDetail</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Checkout</servlet-name>
-        <servlet-class>Servlet.Checkout</servlet-class>
+        <servlet-class>Servlet.UserServlet.Checkout</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CancelOrder</servlet-name>
-        <servlet-class>Servlet.CancelOrder</servlet-class>
+        <servlet-class>Servlet.UserServlet.CancelOrder</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddProduct</servlet-name>
-        <servlet-class>Servlet.AddProduct</servlet-class>
+        <servlet-class>Servlet.StaffServlet.AddProduct</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeleteProduct</servlet-name>
-        <servlet-class>Servlet.DeleteProduct</servlet-class>
+        <servlet-class>Servlet.StaffServlet.DeleteProduct</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UpdateProduct</servlet-name>
-        <servlet-class>Servlet.UpdateProduct</servlet-class>
+        <servlet-class>Servlet.StaffServlet.UpdateProduct</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddStaffAccount</servlet-name>
-        <servlet-class>Servlet.AddStaffAccount</servlet-class>
+        <servlet-class>Servlet.AdminServlet.AddStaffAccount</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeleteStaff</servlet-name>
-        <servlet-class>Servlet.DeleteStaff</servlet-class>
+        <servlet-class>Servlet.AdminServlet.DeleteStaff</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UpdateStatus</servlet-name>
-        <servlet-class>Servlet.UpdateStatus</servlet-class>
+        <servlet-class>Servlet.StaffServlet.UpdateStatus</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Search1</servlet-name>
-        <servlet-class>Servlet.Search1</servlet-class>
+        <servlet-class>Servlet.StaffServlet.Search1</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SearchOrder</servlet-name>
-        <servlet-class>Servlet.SearchOrder</servlet-class>
+        <servlet-class>Servlet.StaffServlet.SearchOrder</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>GetRevenue</servlet-name>
-        <servlet-class>Servlet.GetRevenue</servlet-class>
+        <servlet-class>Servlet.AdminServlet.GetRevenue</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Feedback</servlet-name>
-        <servlet-class>Servlet.Feedback</servlet-class>
+        <servlet-class>Servlet.UserServlet.Feedback</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SendFeedback</servlet-name>
-        <servlet-class>Servlet.SendFeedback</servlet-class>
+        <servlet-class>Servlet.UserServlet.SendFeedback</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SendRequest</servlet-name>
-        <servlet-class>Servlet.SendRequest</servlet-class>
+        <servlet-class>Servlet.UserServlet.SendRequest</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>HandleRequest</servlet-name>
-        <servlet-class>Servlet.HandleRequest</servlet-class>
+        <servlet-class>Servlet.StaffServlet.HandleRequest</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SearchAccount</servlet-name>
-        <servlet-class>Servlet.SearchAccount</servlet-class>
+        <servlet-class>Servlet.AdminServlet.SearchAccount</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ConfirmOrder</servlet-name>
-        <servlet-class>Servlet.ConfirmOrder</servlet-class>
+        <servlet-class>Servlet.StaffServlet.ConfirmOrder</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>

@@ -189,8 +189,8 @@
                                         <hr />
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <button type="button" class="btn btn-info" onclick="editInfo()">Edit</button>
-                                                <button type="button" class="btn btn-secondary btn-sm" onclick="cancelEdit()"
+                                                <button type="button" id="Edit" class="btn btn-info" onclick="editInfo()">Edit</button>
+                                                <button type="button" id="Cancel" class="btn btn-secondary btn-sm" onclick="cancelEdit()"
                                                         style="display:none;">Cancel</button>
                                                 <br /><br />
                                                 <input id="save" class="btn btn-success btn-sm mr-2"
@@ -343,7 +343,7 @@
                                             <input type="hidden" name="txtMail" value="<%=userDTO.getMail()%>">
                                             <br/>
                                             <label>Order ID</label>
-                                            <input type="text" name="txtOrderID" placeholder="Please enter your Order ID" required>
+                                            <input type="text" name="txtOrderID" min="0" step="1" placeholder="Please enter your Order ID" required>
                                             <label>Refund Reason</label>
                                             <textarea name="Reason"placeholder="Please let us know your refund reason..." required></textarea>
                                             <input class="SendRequest"type="submit" value="Send Request" name="btAction">
@@ -367,8 +367,8 @@
                                                     function editInfo() {
                                                         document.getElementsByName("txtPhoneNumber")[0].style.display = "block";
                                                         document.getElementsByName("txtAddress")[0].style.display = "block";
-                                                        document.getElementsByTagName("button")[0].style.display = "none";
-                                                        document.getElementsByTagName("button")[1].style.display = "inline-block";
+                                                        document.getElementById("Edit").style.display = "none";
+                                                        document.getElementById("Cancel").style.display = "inline-block";
                                                         document.querySelector('input[type="submit"][name="btAction"][value="Save"]').style.display = "inline-block";
                                                     }
 
@@ -378,8 +378,8 @@
                                                         document.getElementsByName("txtAddress")[0].value = "<%= userDTO.getAddress()%>";
                                                         document.getElementsByName("txtPhoneNumber")[0].style.display = "none";
                                                         document.getElementsByName("txtAddress")[0].style.display = "none";
-                                                        document.getElementsByTagName("button")[0].style.display = "block";
-                                                        document.getElementsByTagName("button")[1].style.display = "none";
+                                                         document.getElementById("Edit").style.display = "block";
+                                                         document.getElementById("Cancel").style.display = "none";
                                                         document.querySelector('input[type="submit"][name="btAction"][value="Save"]').style.display = "none";
                                                     }
 

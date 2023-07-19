@@ -4,6 +4,8 @@
     Author     : ADMIN
 --%>
 
+<%@page import="java.nio.charset.StandardCharsets"%>
+<%@page import="java.net.URLEncoder"%>
 <%@page import="java.util.List"%>
 <%@page import="Utility.ProductListDTO"%>
 <%@page import="DAO.DAO"%>
@@ -80,18 +82,23 @@
             <h2 class="section-title">Shop Products</h2>
             <!-- Content -->
             <div>
-                <form action="MainController" method="post">
+                <form action="MainController" method="get">
                     <div class="search_wrap search_wrap_1">
                         <div class="search_box">
                             <input type="text" value="" name="txtProductName" class="input" placeholder="search...">
                             <input type="submit" name="btAction" value="Search" class="searchButton"/>
                         </div>
                     </div>
+                </form>
+                <form action="MainController" method="get">
                     <div class="filter-condition">
                         <select name="Sort" id="select">
-                            <option value="SortPrice">Price (Low to High)</option>                  
-                            <option value="SortQuantity">Quantity (Low to High)</option>                 
-                            <option value="SortName">Name (A to Z)</option>       
+                            <option value="SortPrice">Price (Low to High)</option>            
+                            <option value="SortPrice2">Price (High to Low)</option>
+                            <option value="SortQuantity">Quantity (Low to High)</option>         
+                            <option value="SortQuantity2">Quantity (High to Low)</option>     
+                            <option value="SortName">Name (A to Z)</option>   
+                            <option value="SortName2">Name (Z to A)</option>       
                         </select>
                         <input type="submit" name="btAction" Value="Sort" class="button"/>
                     </div>
@@ -115,12 +122,12 @@
                                 <% if (productList.getQuantity() <= 0) {%>    
                                 Out Of Stock</p>
                                 <%} else {%>
-                            Quantity : <%= productList.getQuantity()%></p>
-                            <%}%>
+                                             Quantity : <%= productList.getQuantity()%></p>
+                                <%}%>
                             <% if (sql.getRole(mail).equals("CUSTOMER")) {%> </p>
                             <a href="AddToFavorite?txtProductId=<%= productList.getProduct_id()%>" class="learn-more">Add To Favorite</a>
                             <%}%>
-                            <a href="ProductDetail?txtProductId=<%= productList.getProduct_id()%>">
+                            <a href="ProductDetail?keyword=<%=URLEncoder.encode(productList.getProduct_name(), StandardCharsets.UTF_8.toString()) %>">
                                 <h2 class="learn-more">Go To Product</h2>
                             </a>
                             <i class='bx bxs-cart-alt add-cart'></i>
@@ -214,5 +221,12 @@
         alert("You added this product to favorite list");
         <%} session.removeAttribute("Existed");%>
     </script>
+    <script>
+        <% String invalidQuantity = (String) session.getAttribute("InvalidQuantity");
+            if (invalidQuantity != null && invalidQuantity.equals("TRUE") ){  %>
+        alert("Quantity of product is invalid . You ordered the quantity exceed of product stock");
+        <%} session.removeAttribute("InvalidQuantity");%>
+    </script>
+    
 </body>
 </html>
