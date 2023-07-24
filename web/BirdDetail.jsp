@@ -4,6 +4,8 @@
     Author     : ADMIN
 --%>
 
+<%@page import="java.nio.charset.StandardCharsets"%>
+<%@page import="java.net.URLEncoder"%>
 <%@page import="Utility.BirdDTO"%>
 <%@page import="Utility.FeedbackDTO"%>
 <%@page import="Utility.ProductListDTO"%>
@@ -77,7 +79,7 @@
                         <h3>Species : <%=birdDetail.getSpecies()%></h3>
                         <h3>Food / Meal : <%=birdDetail.getDesc_order()%></h3>
                         <h3>Suggest Product : <%=birdDetail.getProduct_name()%></h3>
-                         <a href="ProductDetail?txtProductId=<%= birdDetail.getProduct_id()%>">
+                         <a href="ProductDetail?keyword=<%=URLEncoder.encode(birdDetail.getProduct_name(), StandardCharsets.UTF_8.toString()) %>">
                                 <h2 class="learn-more">Go To Product</h2>
                             </a>
                     </div>

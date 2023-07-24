@@ -1,39 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/popup.css">
-</head>
-
-<body>
-    <div class="box">
-        <a href="#divOne" class="button">Click here</a>
-    </div>
-
-    <div class="overlay" id="divOne">
-        <div class="wrapper">
-            <h2>Please give us your feedback</h2>
-            <a href="#" class="close">&times;</a>
-            <div class="content">
-                <div class="popup">
-                    <form>
-                        <label>First Name</label>
-                        <input type="text" placeholder="please enter your first name">
-                        <label>Last Name</label>
-                        <input type="text" placeholder="please enter your last name">
-                        <label>Email</label>
-                        <input type="text" placeholder="please enter your email address">
-                        <label>Feedback</label>
-                        <textarea placeholder="PLease let us know your opinion about our products..."></textarea>
-                        <input type="submit" value="Submit">
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
-
-</html>
+<h5 class="card-title fw-semibold mb-4">Delete Staff</h5>
+                                <div class="card mb-0">
+                                    <div class="card-body">
+                                        <form action="MainController" method="Post">
+                                            <fieldset enable>
+                                                <div class="mb-3">
+                                                    <label for="exampleInputID" class="form-label">User ID</label>
+                                                    <input type="number" name="txtUserID" min="0" step="1" class="form-control" id="inputID" required>
+                                                </div>
+                                                <input type="submit" value="Delete Staff" name="btAction" class="btn btn-primary">
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>

@@ -82,14 +82,16 @@
             <h2 class="section-title">Shop Products</h2>
             <!-- Content -->
             <div>
-                <form action="MainController" method="get">
+              
                     <div class="search_wrap search_wrap_1">
+                          <form action="MainController" method="get">
                         <div class="search_box">
                             <input type="text" value="" name="txtProductName" class="input" placeholder="search...">
                             <input type="submit" name="btAction" value="Search" class="searchButton"/>
                         </div>
+                              </form>
                     </div>
-                </form>
+                
                 <form action="MainController" method="get">
                     <div class="filter-condition">
                         <select name="Sort" id="select">
@@ -117,7 +119,7 @@
                             <img src="<%= productList.getImage_url()%>" alt="img" class="product-img">
                             <h2 class="product-title"><%= productList.getProduct_name()%></h2>
                             <br/>
-                            <p class ="price"><%= productList.getPrice()%>.000 VND</p>
+                            <p class ="price">$<%= productList.getPrice()%></p>
                             <p class = "product-text">
                                 <% if (productList.getQuantity() <= 0) {%>    
                                 Out Of Stock</p>
@@ -227,6 +229,12 @@
         alert("Quantity of product is invalid . You ordered the quantity exceed of product stock");
         <%} session.removeAttribute("InvalidQuantity");%>
     </script>
-    
+    <script>
+            <%String check = (String) session.getAttribute("LackOfInformation");
+                if (check != null && check.equals("true")) {%>
+            alert("The payment information is not filled up ");
+            <%}
+                session.removeAttribute("LackOfInformation");%>
+        </script>
 </body>
 </html>

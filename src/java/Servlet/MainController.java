@@ -68,8 +68,10 @@ public class MainController extends HttpServlet {
                 url = "Search";
             } else if (action.equals("Search Bird Name")) {
                 url = "SearchBird";
-            } else if (action.equals("proceed to checkout")) {
+            } else if (action.equals("Payment in Cash")) {
                 url = "Checkout";
+            } else if (action.equals("Pay by Paypal")) {
+                url = "AuthorizePaymentServlet";
             } else if (action.equals("Cancel")) {
                 url = "CancelOrder";
             } else if (action.equals("Add Product")) {

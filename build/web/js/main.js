@@ -155,7 +155,7 @@ function updateTotal() {
     // If price contain some cents value
     total = Math.round(total * 100) / 100;
 
-    document.getElementsByClassName("total-price")[0].innerText = total + ".000 VND";
+    document.getElementsByClassName("total-price")[0].innerText = "$"+total ;
     // Save Total To LocalStorage
     localStorage.setItem("cartTotal", total);
 }
@@ -201,7 +201,7 @@ function loadCartItems() {
     }
     var cartTotal = localStorage.getItem("cartTotal");
     if (cartTotal) {
-        document.getElementsByClassName("total-price")[0].innerText = cartTotal + ".000 VND";
+        document.getElementsByClassName("total-price")[0].innerText ="$"+ cartTotal;
     }
     updateCartIcon();
 }

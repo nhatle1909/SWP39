@@ -20,13 +20,13 @@
     </head>
     <body>
         <%  String role = (String) session.getAttribute("txtRole");
-        if (role != null) {
-             if (role.equals("ADMIN")) {
-              %>
+            if (role != null) {
+                if (role.equals("ADMIN")) {
+        %>
         <%
             DAO sql = new DAO();
-            String mail ="";
-           List<UserDTO> userDTO = (List) session.getAttribute("SortedAccountList");
+            String mail = "";
+            List<UserDTO> userDTO = (List) session.getAttribute("SortedAccountList");
             if (userDTO == null) {
                 sql.searchAllUser(mail);
                 userDTO = sql.getListAccount();
@@ -83,7 +83,7 @@
                                     <span>
                                         <i class="ti ti-file-description"></i>
                                     </span>
-                                    <span class="hide-menu">Add & Delete Staff</span>
+                                    <span class="hide-menu">Add Staff Account</span>
                                 </a>
                             </li>
                     </nav>
@@ -109,7 +109,7 @@
                             <!-- <button class="app-content-headerButton">Add Product</button> -->
                         </div>
                         <div class="app-content-actions">
-                             <form action ="MainController" method="Post">
+                            <form action ="MainController" method="Post">
                                 <input class="search-bar" placeholder="Search by mail" type="text" name="txtMail">
                                 <input type="submit" name="btAction" value="Search Account" class ="Button">
                             </form>
@@ -155,6 +155,7 @@
                                 <div class="product-cell sales">Address</div>
                                 <div class="product-cell stock">Phone Number</div>
                                 <div class="product-cell stock">Role</div>
+                                <div class="product-cell stock"></div>
                             </div>
                             <%if (userDTO != null && !userDTO.isEmpty()) {
                                     for (UserDTO users : userDTO) {%>
@@ -167,6 +168,11 @@
                                 <div class="product-cell sales"><span class="cell-label">Address:</span><%=users.getAddress()%></div>
                                 <div class="product-cell stock"><span class="cell-label">Phone Number:</span><%=users.getPhone_number()%></div>
                                 <div class="product-cell price"><span class="cell-label">Role:</span><%=users.getRole()%></div>
+                                <div class="product-cell price"><span class="cell-label">Delete:</span> <span class="cell-label"></span>
+                                    <% if (users.getRole().equals("STAFF")) {%>
+                                    <button id="order-status" class="Button"><a href = "DeleteStaff?txtUserID=<%=users.getUser_id()%>">Delete</a></button>
+                                    <%}%>
+                                </div>
                             </div>
                             <%}
                                     }
@@ -184,13 +190,14 @@
             <script src="js/libs/simplebar/dist/simplebar.js"></script>
             <script src="js/dashboard.js"></script>
             <script src="js/admin.js"></script>
-               <%if (userDTO != null) {
-                userDTO.clear();
-                session.removeAttribute("SortedAccountList");
-            }
-        %>
-        <% }}else {
-                response.sendRedirect("login.jsp");
-                }%>
+            <%if (userDTO != null) {
+                    userDTO.clear();
+                    session.removeAttribute("SortedAccountList");
+                }
+            %>
+            <% }
+                } else {
+                    response.sendRedirect("login.jsp");
+            }%>
     </body>
 </html>

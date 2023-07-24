@@ -135,7 +135,12 @@ header {
     .search_wrap .search_box button:hover {
     transform: translateX(5px);
     background-color: #434190;
-    }
+    }s
+    .search_wrap .search_box:hover .input,
+.search_wrap .search_box:focus-within .input {
+  border: none;
+  outline: none;
+}
     
     .filter-condition {
     display: flex;

@@ -12,7 +12,7 @@
 
             String status = (String) session.getAttribute("Status");
             if (status != null && status.equals("Verify")) {
-                session.removeAttribute("Status");
+                
         %>
         <div class="container">
             <header></header>

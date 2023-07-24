@@ -1,3 +1,5 @@
+<%@page import="java.nio.charset.StandardCharsets"%>
+<%@page import="java.net.URLEncoder"%>
 <%@page import="Utility.FavoriteDTO"%>
 <%@page import="Utility.OrderDTO"%>
 <%@page import="java.util.List"%>
@@ -164,10 +166,10 @@
                                             <div class="col-sm-9 text-secondary">
                                                 <%= userDTO.getPhone_number()%>
 
-                                                <input type="text" name="txtPhoneNumber"
+                                                <input type="number" name="txtPhoneNumber"
                                                        class="form-control form-control-sm mb-2"
                                                        value="<%= userDTO.getPhone_number()%>" required
-                                                       style="display:none;">
+                                                       style="display:none;"x>
 
                                             </div>
                                         </div>
@@ -302,7 +304,7 @@
                                                 <tr>
                                                     <td><%= ++count%></td>
                                                     <td><%= favorite.getProduct_id()%></td>
-                                                    <td><%= favorite.getProduct_name()%></td>
+                                                    <td> <a href="ProductDetail?keyword=<%=URLEncoder.encode(favorite.getProduct_name(), StandardCharsets.UTF_8.toString()) %>"><%= favorite.getProduct_name()%></a></td>
                                                     <td><%= favorite.getPrice()%>.000 VND</td>
 
                                                     <td>

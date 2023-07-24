@@ -54,7 +54,15 @@ public class HandleRequest extends HttpServlet {
         String mail = sql.getMailbyRequest(request_ID);
         if (button.equals("Reply")) {
             subject = "Reply Refund Request";
-            content = "Refund ID : " + request_ID + "\n" + "Your refund request is accepted \n" + reply;
+            content = "Refund ID : " + request_ID + "\n" + "Thank you for reaching out. \n"
+                    + "\n"
+                    + "Your refund request has been approved. You will receive it as soon as possible, between 3-5 days, depending on the bank transfer. \n"
+                    + "\n"
+                    + "And because we want to be able to develop what you need in the future, we would love it if you could answer a few questions. \n"
+                    + "\n"
+                    + "Let us know if we can further assist you. \n"
+                    + "\n"
+                    + "Have a lovely day\n";
             sql.HandleRequest(request_ID);
             sql.DeleteRequest(request_ID);
             EmailUtility.sendEmail(host, port, user, pass, mail, subject,
@@ -64,7 +72,16 @@ public class HandleRequest extends HttpServlet {
         }
         if (button.equals("Ignore")) {
             subject = "Reply Refund Request";
-            content = "Refund ID : " + request_ID + "\n" + "Your refund request is decline \n" + reply;
+            content = "Refund ID : " + request_ID + "\n" + "I am writing to inform you that we have not granted your request for a refund.\n"
+                    + "\n"
+                    + "This is reason : \n" + reply + "\n"
+                    + "We understand how frustrating this must be, but we are unable to provide the requested reimbursement.\n"
+                    + "\n"
+                    + "Once again, we apologize for any inconvenience this has caused you.\n"
+                    + "\n"
+                    + "We value your business and look forward to continuing to serve you in the future.\n"
+                    + "\n"
+                    + "Have a lovely day";
             sql.DeleteRequest(request_ID);
             EmailUtility.sendEmail(host, port, user, pass, mail, subject,
                     content);

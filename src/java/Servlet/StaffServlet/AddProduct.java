@@ -46,7 +46,7 @@ public class AddProduct extends HttpServlet {
            DAO sql = new DAO();
            boolean result = sql.addProduct(product_id, product_name, price, quantity, desc, bird, url);
            if (result){
-              response.sendRedirect("StaffDashboard.jsp"); 
+              response.sendRedirect("product.jsp"); 
            }
         
     }

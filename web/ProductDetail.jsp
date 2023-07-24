@@ -73,7 +73,7 @@
                         <div class="product-box">
                             <img src="<%=product.getImage_url()%>" alt="img" class="product-img single-img">
                             <h2 class="product-title"><%=product.getProduct_name()%></h2>
-                            <h2 class="price"><%=product.getPrice()%>.000 VND</h2>
+                            <h2 class="price">$<%=product.getPrice()%></h2>
                             <%if (product.getQuantity() > 0) {%>
                             <p class = "product-text" >Quantity : <%= product.getQuantity()%></p>
                             <%} else {%>

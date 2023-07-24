@@ -326,7 +326,7 @@ public class DAO {
         try {
             con = DBUtility.makeConnection();
             if (con != null) {
-                String sql = "Select top 10 * from dbo.OrderList where user_id = ?";
+                String sql = "Select top 10 * from dbo.OrderList where user_id = ? order by order_date desc";
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, user_id);
                 rs = stm.executeQuery();
@@ -815,7 +815,7 @@ public class DAO {
         }
     }
 
-    public boolean insertOrderToDB(int order_id, int user_id, String order_date, int total_price, String status) throws SQLException, NamingException {
+    public boolean insertOrderToDB(int order_id, int user_id, String order_date, float total_price, String status) throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -827,7 +827,7 @@ public class DAO {
                 stm.setInt(1, order_id);
                 stm.setInt(2, user_id);
                 stm.setString(3, order_date);
-                stm.setInt(4, total_price);
+                stm.setFloat(4, total_price);
                 stm.setString(5, status);
                 int row = stm.executeUpdate();
                 if (row > 0) {
@@ -848,7 +848,7 @@ public class DAO {
         return false;
     }
 
-    public boolean insertOrderDetail(int order_item_id, int order_id, String product_list, int total_price, String phone_number, String address, String username) throws SQLException, NamingException {
+    public boolean insertOrderDetail(int order_item_id, int order_id, String product_list, float total_price, String phone_number, String address, String username) throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -860,7 +860,7 @@ public class DAO {
                 stm.setInt(1, order_item_id);
                 stm.setInt(2, order_id);
                 stm.setString(3, product_list);
-                stm.setInt(4, total_price);
+                stm.setFloat(4, total_price);
                 stm.setString(5, phone_number);
                 stm.setString(6, address);
                 stm.setString(7, username);

@@ -11,6 +11,7 @@ import javax.servlet.http.*;
 
 public class VerifyCode extends HttpServlet {
 
+    
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         DAO sql = new DAO();

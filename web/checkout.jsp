@@ -72,68 +72,31 @@
 
                     </div>
 
-                    <div class="col">
-                        <h3 class="title">Payment</h3>
-                        <div class="inputBox">
-                            <label for="pay-on-receive">
-                                <input type="radio" id="pay-on-receive" name="payment-method" value="pay-on-receive">
-                                Pay when receive
-                            </label>
-                        </div>
-                        <div class="inputBox" style="display:none;">
-                            <label for="card-payment">
-                                <input type="radio" id="card-payment" name="payment-method" value="card-payment">
-                                Card payment
-                            </label>
-                        </div>
-                        <div id="card-details">
-                            <div class="inputBox">
-                                <span>Cards accepted :</span>
-                                <img src="images/card_img.png" alt="">
-                            </div>
-                            <div class="inputBox">
-                                <span>Name on card :</span>
-                                <input type="text" placeholder="Mr. John Deo">
-                            </div>
-                            <div class="inputBox">
-                                <span>Credit card number :</span>
-                                <input type="number" placeholder="1111-2222-3333-4444">
-                            </div>
-                            <div class="inputBox">
-                                <span>Exp month :</span>
-                                <input type="text" placeholder="January">
-                            </div>
-                            <div class="flex">
-                                <div class="inputBox">
-                                    <span>Exp year :</span>
-                                    <input type="text" placeholder="2025">
-                                </div>
-                                <div class="inputBox">
-                                    <span>CVV :</span>
-                                    <input type="text" placeholder="123">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
 
                     <div class="col cart-col">
 
                         <!-- cart details container -->
                         <div id="products" class="cart-details">
-                            <h3 class="title">cart details</h3>
+                            <h3 class="title">Cart details</h3>
                             <ul id="productList"></ul>
+                            <label for="total">Total:</label>
+                            <input type="text" id="total" name="total" readonly>
+                            <br/>
                             <label for="subtotal">Subtotal:</label>
-                            <input type="readonly" id="subtotal" name="subtotal">
-
+                            <input type="text" id="subtotal" name="subtotal" readonly>
+                             <label for="tax">Tax ( 2% of Subtotal ): </label>
+                            <input type="text" id="tax" name="tax" readonly>
                         </div>
 
                     </div>
-
+                       
                 </div>
 
-                        <input id="clearButton" type="submit" name="btAction" value="proceed to checkout" class="submit-btn"> 
-                        <br/>
-                        <br/>
+                <input id="clearButton" type="submit" name="btAction" value="Payment in Cash" class="submit-btn"> 
+                <input id="clearButton2" type="submit" name="btAction" value="Pay by Paypal" class="submit-btn"> 
+                <br/>
+                <br/>
                 <a href="ProductPage.jsp" class="submit-btn">Return</a>
                 <a id="clearHref" href="ProductPage.jsp" class="submit-btn">Cancel</a>
             </form>
@@ -152,19 +115,24 @@
                 var price = document.createElement("input");
                 var quantity = document.createElement("input");
 
-                title.type = "readonly";
+                title.type = "text";
                 title.name = "title";
                 title.value = product.title;
+                title.readOnly = true;
 
                 img.src = product.imgSrc;
+                img.readonly = true;
 
-                price.type = "readonly";
+                price.type = "text";
                 price.name = "price";
                 price.value = String(product.price);
+                price.readOnly = true;
                 
-                quantity.type = "readonly";
+                quantity.type = "text";
                 quantity.name = "quantity";
                 quantity.value = String(product.quantity);
+                quantity.readOnly = true;
+                
                 
                 productDiv.appendChild(title);
                 productDiv.appendChild(img);
@@ -173,54 +141,50 @@
                 productsDiv.appendChild(productDiv);
             }
             var subtotal = localStorage.getItem("cartTotal");
-            document.getElementById('subtotal').value = subtotal + ".000 VND";
-
+            document.getElementById('total').value = "$" + subtotal*1.02 ;
+            document.getElementById('subtotal').value = "$" + subtotal*1 ;
+            document.getElementById('tax').value = "$" + subtotal*0.02 ;
         </script>
-        <script>
-            <%String check = (String) session.getAttribute("LackOfInformation");
-                 if (check != null && check.equals("true")) {%>
-            alert("The Information is not filled up ");
-            <%}
-                session.removeAttribute("LackOfInformation");%>
-        </script>
+        
         <script>
             const payOnReceiveRadio = document.getElementById("pay-on-receive");
-const cardPaymentRadio = document.getElementById("card-payment");
-const cardDetailsDiv = document.getElementById("card-details");
+            const cardPaymentRadio = document.getElementById("card-payment");
+            const cardDetailsDiv = document.getElementById("card-details");
 
 // Hide card payment details initially
-cardDetailsDiv.style.display = "none";
+            cardDetailsDiv.style.display = "none";
 
 // Add event listener for payment radio buttons
-payOnReceiveRadio.addEventListener("change", () => {
-  if (payOnReceiveRadio.checked) {
-    cardDetailsDiv.style.display = "none";
-  }
-});
+            payOnReceiveRadio.addEventListener("change", () => {
+                if (payOnReceiveRadio.checked) {
+                    cardDetailsDiv.style.display = "none";
+                }
+            });
 
-cardPaymentRadio.addEventListener("change", () => {
-  if (cardPaymentRadio.checked) {
-    cardDetailsDiv.style.display = "block";
-  } else {
-    cardDetailsDiv.style.display = "none";
-  }
-});
+            cardPaymentRadio.addEventListener("change", () => {
+                if (cardPaymentRadio.checked) {
+                    cardDetailsDiv.style.display = "block";
+                } else {
+                    cardDetailsDiv.style.display = "none";
+                }
+            });
         </script>
         <script>
             function clearLocalStorage() {
-  // Clear the local storage
-  localStorage.clear();
-  subtotal="";
-}
+                // Clear the local storage
+                localStorage.clear();
+                subtotal = "";
+            }
 
 // Assuming you have a button in your HTML with the id "clearButton"
-var clearButton = document.getElementById("clearButton");
-clearButton.addEventListener("click", clearLocalStorage);
-
-document.querySelector('#clearHref').addEventListener('click', function() {
-    localStorage.clear();
-    subtotal="";
-});
+            var clearButton = document.getElementById("clearButton");
+            clearButton.addEventListener("click", clearLocalStorage);
+            var clearButton = document.getElementById("clearButton2");
+            clearButton.addEventListener("click", clearLocalStorage);
+            document.querySelector('#clearHref').addEventListener('click', function () {
+                localStorage.clear();
+                subtotal = "";
+            });
         </script>
     </body>
 </html>

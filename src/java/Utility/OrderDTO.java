@@ -16,14 +16,14 @@ public class OrderDTO {
     private int user_id;
  
     private Date order_date;
-    private int total_price;
+    private float total_price;
     private String status;
 
 
     public OrderDTO() {
     }
 
-    public OrderDTO(int order_id, int user_id, Date order_date, int total_price, String status) {
+    public OrderDTO(int order_id, int user_id, Date order_date, float total_price, String status) {
         this.order_id = order_id;
         this.user_id = user_id;
 
@@ -56,11 +56,11 @@ public class OrderDTO {
         this.user_id = user_id;
     }
 
-    public int getTotal_price() {
+    public float getTotal_price() {
         return total_price;
     }
 
-    public void setTotal_price(int total_price) {
+    public void setTotal_price(float total_price) {
         this.total_price = total_price;
     }
 

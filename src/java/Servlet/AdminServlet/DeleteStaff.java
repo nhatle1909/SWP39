@@ -44,11 +44,11 @@ public class DeleteStaff extends HttpServlet {
 
         if (sql.checkRole(user_id).equals("CUSTOMER")) {
             session.setAttribute("WrongRole", "TRUE");
-            response.sendRedirect("Add-DeleAccount.jsp");
+            response.sendRedirect("AccountList.jsp");
         } else {
             boolean result = sql.DeleteStaff(user_id);
             if (result) {
-                response.sendRedirect("Add-DeleAccount.jsp");
+                response.sendRedirect("AccountList.jsp");
             }
         }
 

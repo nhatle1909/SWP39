@@ -182,12 +182,11 @@
   margin-right: 20px;
 }
 
-.cart-details input[type="readonly"] {
+.cart-details input {
   border: none;
-  background-color: transparent;
+  background-color: #f7f7f7;
   font-size: 16px;
-  margin-right: 20px;
-  width: 50%;
+
 }
 
 /* subtotal label style */

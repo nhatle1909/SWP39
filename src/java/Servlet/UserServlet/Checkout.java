@@ -40,7 +40,7 @@ public class Checkout extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-
+            boolean valid = true;
             DAO sql = new DAO();
             HttpSession session = request.getSession();
             Random rng = new Random();
@@ -56,7 +56,7 @@ public class Checkout extends HttpServlet {
 
             int order_id = rng.nextInt(99999) + 100000;
             int order_item_id = rng.nextInt(99999) + 100000;
-            String total_price = request.getParameter("subtotal").substring(0, request.getParameter("subtotal").length() - 8);
+            String total_price = request.getParameter("total").substring(1, request.getParameter("total").length());
             String[] products = request.getParameterValues("title");
             String[] quantities = request.getParameterValues("quantity");
             String username = request.getParameter("txtUsername");
@@ -65,30 +65,30 @@ public class Checkout extends HttpServlet {
             String address = request.getParameter("txtAddress");
 
             String productList = quantities[0] + " " + products[0];
+            
             for (int i = 0; i < products.length; i++) {
                 if (sql.getProductQuantity(products[i]) < Integer.parseInt(quantities[i])) {
                     session.setAttribute("InvalidQuantity", "TRUE");
-                    url = "ProductPage.jsp";
-                    response.sendRedirect(url);
+                    valid = false;
                 }
             }
-
-            for (int i = 1; i < products.length; i++) {
-                productList = productList + " | " + quantities[i] + " " + products[i];
-                sql.updateQuantity(Integer.parseInt(quantities[i]), products[i]);
-            }
-            if (username == "" || mail == "" || phone_number == "" || address == "") {
-                session.setAttribute("LackOfInformation", "true");
-                url = "checkout.jsp";
-            } else {
-                if (sql.getID(mail) > 0) {
-                    sql.insertOrderToDB(order_id, sql.getID(mail), formattedDate, Integer.parseInt(total_price), "WAITING");
-                    sql.insertOrderDetail(order_item_id, order_id, productList, Integer.parseInt(total_price), phone_number, address, username);
-                    url = "ProductPage.jsp";
+            if (valid) {
+                sql.updateQuantity(Integer.parseInt(quantities[0]), products[0]);
+                for (int i = 1; i < products.length; i++) {
+                    productList = productList + " | " + quantities[i] + " " + products[i];
+                    sql.updateQuantity(Integer.parseInt(quantities[i]), products[i]);
+                }
+                if (username == "" || mail == "" || phone_number == "" || address == "") {
+                    session.setAttribute("LackOfInformation", "true");
                 } else {
-                    sql.insertOrderToDB(order_id, 0, formattedDate, Integer.parseInt(total_price), "WAITING");
-                    sql.insertOrderDetail(order_item_id, order_id, productList, Integer.parseInt(total_price), phone_number, address, username);
-                    url = "ProductPage.jsp";
+                    if (sql.getID(mail) > 0) {
+                        sql.insertOrderToDB(order_id, sql.getID(mail), formattedDate, Float.parseFloat(total_price), "WAITING");
+                        sql.insertOrderDetail(order_item_id, order_id, productList, Float.parseFloat(total_price), phone_number, address, username);
+                    } else {
+                        sql.insertOrderToDB(order_id, 0, formattedDate, Float.parseFloat(total_price), "WAITING");
+                        sql.insertOrderDetail(order_item_id, order_id, productList, Float.parseFloat(total_price), phone_number, address, username);
+
+                    }
                 }
             }
 
@@ -97,8 +97,10 @@ public class Checkout extends HttpServlet {
         } catch (NamingException ex) {
             Logger.getLogger(Checkout.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
+            url = "ProductPage.jsp";
             response.sendRedirect(url);
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
