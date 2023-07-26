@@ -43,7 +43,7 @@ public class VerifyCode extends HttpServlet {
                     boolean result = sql.insertAccount(user_id, username, password, email); // TODO: Add code to insert user details into database
                     sql.insertProfile(user_id, username, email, address, phoneNumber, "CUSTOMER");
                     if (result) {
-                        response.sendRedirect("birds.html");
+                        response.sendRedirect("login.jsp");
                         session.invalidate();
                     }
                 } catch (SQLException ex) {

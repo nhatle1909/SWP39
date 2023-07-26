@@ -498,7 +498,7 @@ public class DAO {
             if (con != null) {
                 String sql = "select * from dbo.Product_List order by price";
                 stm = con.prepareStatement(sql);
-     
+
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     int product_id = rs.getInt("product_id");
@@ -537,7 +537,7 @@ public class DAO {
             if (con != null) {
                 String sql = "select * from dbo.Product_List  order by quantity";
                 stm = con.prepareStatement(sql);
-  
+
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     int product_id = rs.getInt("product_id");
@@ -576,7 +576,7 @@ public class DAO {
             if (con != null) {
                 String sql = "select * from dbo.Product_List order by product_name";
                 stm = con.prepareStatement(sql);
-    
+
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     int product_id = rs.getInt("product_id");
@@ -1082,7 +1082,7 @@ public class DAO {
             con = DBUtility.makeConnection();
             if (con != null) {
                 String sql = "Delete from dbo.ProfileUser where user_id = ? \n"
-                        +    "Delete from dbo.Account_User where user_id = ?";
+                        + "Delete from dbo.Account_User where user_id = ?";
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, user_id);
                 stm.setInt(2, user_id);
@@ -1592,6 +1592,7 @@ public class DAO {
         }
         return Role;
     }
+
     public int getProductID(String product_name) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -1618,7 +1619,8 @@ public class DAO {
         }
         return id;
     }
-     public void sortProductByPrice2() throws SQLException, NamingException {
+
+    public void sortProductByPrice2() throws SQLException, NamingException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -1665,7 +1667,7 @@ public class DAO {
             if (con != null) {
                 String sql = "select * from dbo.Product_List order by quantity desc";
                 stm = con.prepareStatement(sql);
- 
+
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     int product_id = rs.getInt("product_id");
@@ -1732,7 +1734,8 @@ public class DAO {
             }
         }
     }
-     public int getProductQuantity(String product_name) throws SQLException {
+
+    public int getProductQuantity(String product_name) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         int id = 0;
@@ -1758,4 +1761,35 @@ public class DAO {
         }
         return id;
     }
+
+    public boolean removeRequest(int request_id) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "DELETE FROM dbo.Request\n"
+                        + "WHERE order_id = (\n"
+                        + "  SELECT order_id\n"
+                        + "  FROM request\n"
+                        + "  WHERE request_id = ?\n"
+                        + ");";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, request_id);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+
 }

@@ -35,9 +35,6 @@
         } else {%>
 <html lang="en">
     <!-- loader  -->
-    <div class="loader_bg">
-        <div class="loader"><img src="images/loading.gif" alt="" /></div>
-    </div>
     <!-- end loader -->
     <div id="mySidepanel" class="sidepanel">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
@@ -75,11 +72,6 @@
             <div class="left">
                 <div class="overlay">
                     <h1>Welcome</h1>
-                    <span>
-                        <p>Login with social media</p>
-                        <a href="#"><i class="fa fa-facebook" aria-hidden="true">Login with Facebook</i></a>
-                        <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i> Login with Twitter</a>
-                    </span>
                 </div>
             </div>
 
@@ -98,12 +90,9 @@
 
                 <div class="remember-me--forget-password">
 
-                    <label>
-                        <input type="checkbox" checked="checked" name="item"/>
-                        <span class="text-checkbox">Remember me</span>
-                    </label>
+                  
 
-                    <a href="ResetPassword.jsp">Forget password?</a>
+                    <a href="ResetPassword.jsp">Forget password ?</a>
                 </div>
                 <br>
 
@@ -114,9 +103,10 @@
     </form>
     <script>
         <% String isValidLogin = (String) session.getAttribute("ValidLogin");
-        if (isValidLogin != null && isValidLogin.equals("false")) {  %>
+            if (isValidLogin != null && isValidLogin.equals("false")) {  %>
         alert("Invalid username or password");
-        <% } session.removeAttribute("ValidLogin"); %>
+        <% }
+            session.removeAttribute("ValidLogin"); %>
     </script>
     <!--end loginform-->
     <!-- Javascript files-->

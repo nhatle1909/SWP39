@@ -237,7 +237,7 @@
 
                                                     <td><%= order.getOrder_id()%></td>
                                                     <td><%= order.getOrder_date()%></td>
-                                                    <td><%= order.getTotal_price()%>.000 VND</td>
+                                                    <td>$<%= order.getTotal_price()%></td>
                                                     <td><%= order.getStatus()%></td>
                                                     <td>
                                                         <% if (order.getStatus().equals("CONFIRMED")) {%>
@@ -305,7 +305,7 @@
                                                     <td><%= ++count%></td>
                                                     <td><%= favorite.getProduct_id()%></td>
                                                     <td> <a href="ProductDetail?keyword=<%=URLEncoder.encode(favorite.getProduct_name(), StandardCharsets.UTF_8.toString()) %>"><%= favorite.getProduct_name()%></a></td>
-                                                    <td><%= favorite.getPrice()%>.000 VND</td>
+                                                    <td>$<%= favorite.getPrice()%></td>
 
                                                     <td>
                                                         <form action="MainController" method="post">

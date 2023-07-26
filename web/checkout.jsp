@@ -72,7 +72,7 @@
 
                     </div>
 
-                    
+
 
                     <div class="col cart-col">
 
@@ -85,12 +85,12 @@
                             <br/>
                             <label for="subtotal">Subtotal:</label>
                             <input type="text" id="subtotal" name="subtotal" readonly>
-                             <label for="tax">Tax ( 2% of Subtotal ): </label>
+                            <label for="tax">Tax ( 2% of Subtotal ): </label>
                             <input type="text" id="tax" name="tax" readonly>
                         </div>
 
                     </div>
-                       
+
                 </div>
 
                 <input id="clearButton" type="submit" name="btAction" value="Payment in Cash" class="submit-btn"> 
@@ -105,6 +105,8 @@
         <script>
             var products = JSON.parse(localStorage.getItem("products"));
             var productsDiv = document.getElementById("products");
+
+            // Hide the button
 
             for (var i = 0; i < products.length; i++) {
                 var product = products[i];
@@ -127,13 +129,13 @@
                 price.name = "price";
                 price.value = String(product.price);
                 price.readOnly = true;
-                
+
                 quantity.type = "text";
                 quantity.name = "quantity";
                 quantity.value = String(product.quantity);
                 quantity.readOnly = true;
-                
-                
+
+
                 productDiv.appendChild(title);
                 productDiv.appendChild(img);
                 productDiv.appendChild(price);
@@ -141,33 +143,14 @@
                 productsDiv.appendChild(productDiv);
             }
             var subtotal = localStorage.getItem("cartTotal");
-            document.getElementById('total').value = "$" + subtotal*1.02 ;
-            document.getElementById('subtotal').value = "$" + subtotal*1 ;
-            document.getElementById('tax').value = "$" + subtotal*0.02 ;
-        </script>
-        
-        <script>
-            const payOnReceiveRadio = document.getElementById("pay-on-receive");
-            const cardPaymentRadio = document.getElementById("card-payment");
-            const cardDetailsDiv = document.getElementById("card-details");
+            if (subtotal == 0) {
+                clearButton.style.display = "none";
+                clearButton2.style.display = "none";
 
-// Hide card payment details initially
-            cardDetailsDiv.style.display = "none";
-
-// Add event listener for payment radio buttons
-            payOnReceiveRadio.addEventListener("change", () => {
-                if (payOnReceiveRadio.checked) {
-                    cardDetailsDiv.style.display = "none";
-                }
-            });
-
-            cardPaymentRadio.addEventListener("change", () => {
-                if (cardPaymentRadio.checked) {
-                    cardDetailsDiv.style.display = "block";
-                } else {
-                    cardDetailsDiv.style.display = "none";
-                }
-            });
+            }
+            document.getElementById('total').value = "$" + subtotal * 1.02;
+            document.getElementById('subtotal').value = "$" + subtotal * 1;
+            document.getElementById('tax').value = "$" + subtotal * 0.02;
         </script>
         <script>
             function clearLocalStorage() {

@@ -65,6 +65,7 @@ public class HandleRequest extends HttpServlet {
                     + "Have a lovely day\n";
             sql.HandleRequest(request_ID);
             sql.DeleteRequest(request_ID);
+            sql.removeRequest(request_ID);
             EmailUtility.sendEmail(host, port, user, pass, mail, subject,
                     content);
 

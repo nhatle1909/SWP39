@@ -68,7 +68,7 @@
                     <!-- Total -->
                     <div class="total">
                         <div class="total-title">Total</div>
-                        <div class="total-price">0 VND</div>
+                        <div class="total-price">$0</div>
                     </div>
                     <!-- Buy Button -->
                     <button type="button" class="btn-buy">Buy Now</button>
