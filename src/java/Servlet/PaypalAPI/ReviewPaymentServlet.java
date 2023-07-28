@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.paypal.api.payments.*;
 import com.paypal.base.rest.PayPalRESTException;
+import javax.servlet.http.HttpSession;
 /**
  *
  * @author ADMIN
@@ -28,7 +29,7 @@ public class ReviewPaymentServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String paymentId = request.getParameter("paymentId");
 		String payerId = request.getParameter("PayerID");
-		
+		HttpSession session = request.getSession();
 		try {
 			PaymentServices paymentServices = new PaymentServices();
 			Payment payment = paymentServices.getPaymentDetails(paymentId);
@@ -40,7 +41,7 @@ public class ReviewPaymentServlet extends HttpServlet {
 			request.setAttribute("payer", payerInfo);
 			request.setAttribute("transaction", transaction);
 			request.setAttribute("shippingAddress", shippingAddress);
-			
+                        session.setAttribute("Status1","TRUE");
 			String url = "review.jsp?paymentId=" + paymentId + "&PayerID=" + payerId;
 			
 			request.getRequestDispatcher(url).forward(request, response);

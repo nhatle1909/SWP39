@@ -946,9 +946,15 @@ public class DAO {
         try {
             con = DBUtility.makeConnection();
             if (con != null) {
-                String sql = "Delete from dbo.Product_List where product_id = ?";
+                String sql = "Delete from dbo.Favorite where product_id = ?\n"
+                        + "Delete from dbo.Feedback where product_id = ?\n"
+                        + "Delete from dbo.BIRD where product_id = ?\n"
+                        + "Delete from dbo.Product_List where product_id = ?";
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, product_id);
+                stm.setInt(2, product_id);
+                stm.setInt(3, product_id);
+                stm.setInt(4, product_id);
                 int row = stm.executeUpdate();
                 if (row > 0) {
                     return true;
@@ -1792,4 +1798,56 @@ public class DAO {
         return false;
     }
 
+    public String getProductList(int order_id) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        String product_list = "";
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "select product_list from dbo.OrderDetail where order_id = ?";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, order_id);
+                ResultSet row = stm.executeQuery();
+                if (row.next()) {
+                    product_list = row.getString("product_list");
+                    return product_list;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return product_list;
+    }
+      public void increaseQuantity(int quantity, String product_name) throws SQLException {
+
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "UPDATE Product_List\n"
+                        + "SET Quantity = Quantity + ? \n"
+                        + "WHERE product_name = ?;";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, quantity);
+                stm.setString(2, product_name);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
 }

@@ -6,6 +6,7 @@ package Servlet.PaypalAPI;
  * and open the template in the editor.
  */
 import DAO.DAO;
+import Utility.EmailUtility;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -20,6 +21,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.MessagingException;
 import javax.naming.NamingException;
 import javax.servlet.http.HttpSession;
 
@@ -33,6 +35,10 @@ public class ExecutePaymentServlet extends HttpServlet {
 
     public ExecutePaymentServlet() {
     }
+    private String host = "smtp.gmail.com";
+    private String port = "587";
+    private String user = "bmossystem@gmail.com";
+    private String pass = "yhtegccgzzmptrzq";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -65,6 +71,7 @@ public class ExecutePaymentServlet extends HttpServlet {
         session.removeAttribute("ADDRESS");
         session.removeAttribute("QUANTITY");
         session.removeAttribute("PRODUCT");
+        session.removeAttribute("Status1");
 
         try {
             PaymentServices paymentServices = new PaymentServices();
@@ -81,7 +88,31 @@ public class ExecutePaymentServlet extends HttpServlet {
             }
             sql.insertOrderToDB(order_id, user_id, formattedDate, Float.parseFloat(transaction.getAmount().getTotal()), "WAITING");
             sql.insertOrderDetail(order_item_id, order_id, transaction.getDescription(), Float.parseFloat(transaction.getAmount().getTotal()), phone_number, address, username);
-
+            String subject = "BIFO - Order Confirmation";
+            String content = "Dear " + username + "\n"
+                    + "\n"
+                    + "Thank you for your recent order with our shop. We are excited to confirm that your order has been received and is currently being processed. Below are the details of your order:\n"
+                    + "\n"
+                    + "Order Number:" + Integer.toString(order_id) + "\n"
+                    + "Order Date: " + formattedDate + "\n"
+                    + "Shipping Address: "+address+"\n"
+                    + "\n"
+                    + "Items Ordered:" + transaction.getDescription() + "\n"
+                    + "Subtotal: $" + Float.parseFloat(transaction.getAmount().getTotal()) / 1.02 + "\n"
+                    + "Tax: $" + Float.parseFloat(transaction.getAmount().getTotal()) * 0.02 + "\n"
+                    + "Total Amount: $" + Float.parseFloat(transaction.getAmount().getTotal()) + "\n"
+                    + "\n"
+                    + "Payment Method: Pay with Paypal\n"
+                    + "\n"
+                    + "If you have any questions or concerns regarding your order, please feel free to contact us at bmossystem@gmail.com\n"
+                    + "\n"
+                    + "Please note that this email serves as a confirmation of your order and does not indicate that your order has been shipped. You will receive a separate email with tracking information once your order has been dispatched.\n"
+                    + "\n"
+                    + "Thank you for choosing our Shop. We appreciate your business!\n"
+                    + "\n"
+                    + "Best regards,";
+            EmailUtility.sendEmail(host, port, user, pass, mail, subject,
+                    content);
             response.sendRedirect("ProductPage.jsp");
 
         } catch (PayPalRESTException ex) {
@@ -91,6 +122,8 @@ public class ExecutePaymentServlet extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(ExecutePaymentServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NamingException ex) {
+            Logger.getLogger(ExecutePaymentServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MessagingException ex) {
             Logger.getLogger(ExecutePaymentServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

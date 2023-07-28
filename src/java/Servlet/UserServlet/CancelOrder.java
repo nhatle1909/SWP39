@@ -24,7 +24,7 @@ public class CancelOrder extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * methods. s
      *
      * @param request servlet request
      * @param response servlet response
@@ -36,10 +36,18 @@ public class CancelOrder extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         DAO sql = new DAO();
         String order_id = request.getParameter("txtOrderID");
-         boolean result = sql.cancelOrder(Integer.parseInt(order_id));
-      if (result){
-          response.sendRedirect("user_info.jsp");
-      }
+        String[] products = sql.getProductList(Integer.parseInt(order_id)).split(" \\| ");
+        for (String product : products) {
+            // Split the product string into quantity and name
+            String[] parts = product.split(" ", 2);
+            int quantity = Integer.parseInt(parts[0]);
+            String name = parts[1];
+            sql.increaseQuantity(quantity, name);
+        }
+        boolean result = sql.cancelOrder(Integer.parseInt(order_id));
+        if (result) {
+            response.sendRedirect("user_info.jsp");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

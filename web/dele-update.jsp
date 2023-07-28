@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="css/styles.min.css" />
     </head>
     <%  String role = (String) session.getAttribute("txtRole");
+        String product_name = (String) session.getAttribute("ProductName");
         if (role != null) {
             if (role.equals("ADMIN") || role.equals("STAFF")) {
     %>
@@ -147,6 +148,45 @@
                             <div class="card-body">
                                 <h5 class="card-title fw-semibold mb-4">Update</h5>
                                 <div class="card">
+                                    <%if (product_name != null) {%>
+                                    <div class="card-body">
+                                        <form action="MainController" method="Post">
+
+                                            <div class="mb-3">
+                                                <label for="exampleInputID" class="form-label">Product ID</label>
+                                                <input type="id" name="txtProductId" class="form-control" id="inputID" readonly value="<%=(int) session.getAttribute("ProductID")%>">
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="exampleInputName" class="form-label">Product Name</label>
+                                                <input type="name" name="txtProductName" class="form-control" id="exampleInputName" required value="<%=(String) session.getAttribute("ProductName")%>">
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="exampleInputPassword1" class="form-label">Price</label>
+                                                <input type="number" name="txtPrice" min="0" step="1" class="form-control" id="exampleInputPassword1" required value="<%=(int) session.getAttribute("Price")%>">
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="exampleInputQuantity" class="form-label">Quantity</label>
+                                                <input type="number" name="txtQuantity" min="0" step="1" class="form-control" id="exampleInputEmail1"  required value="<%=(int) session.getAttribute("Quantity")%>">
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="exampleInputDes" class="form-label">Description</label>
+                                                <input type="text" name="txtDescription" class="form-control" id="exampleInputDes" required value="<%=(String) session.getAttribute("Desc")%>">
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="exampleInputBird" class="form-label">Bird</label>
+                                                <input type="text" name="txtBird"class="form-control" id="exampleInputBird" required value="<%=(String) session.getAttribute("Bird")%>">
+                                            </div>
+
+                                            <input type="submit" name="btAction" value ="Update Product" class="btn btn-primary">
+
+                                        </form>
+                                    </div>
+                                    <%} else {%>
                                     <div class="card-body">
                                         <form action="MainController" method="Post">
 
@@ -157,12 +197,12 @@
 
                                             <div class="mb-3">
                                                 <label for="exampleInputName" class="form-label">Product Name</label>
-                                                <input type="name" name="txtProductName" class="form-control" id="exampleInputName" required>
+                                                <input type="name" name="txtProductName" class="form-control" id="exampleInputName" required >
                                             </div>
 
                                             <div class="mb-3">
                                                 <label for="exampleInputPassword1" class="form-label">Price</label>
-                                                <input type="number" name="txtPrice" min="0" step="1" class="form-control" id="exampleInputPassword1" required>
+                                                <input type="number" name="txtPrice" min="0" step="1" class="form-control" id="exampleInputPassword1" required >
                                             </div>
 
                                             <div class="mb-3">
@@ -172,33 +212,21 @@
 
                                             <div class="mb-3">
                                                 <label for="exampleInputDes" class="form-label">Description</label>
-                                                <input type="text" name="txtDescription" class="form-control" id="exampleInputDes" required>
+                                                <input type="text" name="txtDescription" class="form-control" id="exampleInputDes" required >
                                             </div>
 
                                             <div class="mb-3">
                                                 <label for="exampleInputBird" class="form-label">Bird</label>
-                                                <input type="text" name="txtBird"class="form-control" id="exampleInputBird" required>
+                                                <input type="text" name="txtBird"class="form-control" id="exampleInputBird" required >
                                             </div>
 
                                             <input type="submit" name="btAction" value ="Update Product" class="btn btn-primary">
 
                                         </form>
                                     </div>
+                                    <%}%>
                                 </div>
-                                <h5 class="card-title fw-semibold mb-4">Delete</h5>
-                                <div class="card mb-0">
-                                    <div class="card-body">
-                                        <form action="MainController" method="Post">
-                                            <fieldset enable>
-                                                <div class="mb-3">
-                                                    <label for="exampleInputID" class="form-label">Product ID</label>
-                                                    <input type="text" name="txtProductId" min="0" step="1" class="form-control" id="inputID" required>
-                                                </div>
-                                                <input type="submit" value="Delete Product" name="btAction" class="btn btn-primary">
-                                            </fieldset>
-                                        </form>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -210,9 +238,24 @@
         <script src="js/sidebarmenu.js"></script>
         <script src="js/app.min.js"></script>
         <script src="js/libs/simplebar/dist/simplebar.js"></script>
+        <script>
+            <% String checkProductID = (String) session.getAttribute("WrongProductID");
+        if (checkProductID != null && checkProductID.equals("TRUE") ){  %>
+    alert("Product ID is invalid or wrong");
+     <%} session.removeAttribute("WrongProductID");%>
+            
+        </script>
     </body>
     <% }
         } else {
             response.sendRedirect("login.jsp");
-     }%>
+        }%>
+    <%
+        session.removeAttribute("ProductID");
+        session.removeAttribute("ProductName");
+        session.removeAttribute("Price");
+        session.removeAttribute("Quantity");
+        session.removeAttribute("Desc");
+        session.removeAttribute("Bird");
+    %>
 </html>

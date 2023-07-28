@@ -9,6 +9,7 @@ import DAO.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -36,7 +37,8 @@ public class AddProduct extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
             /* TODO output your page here. You may use following sample code. */
             String url = request.getParameter("txtUrl");
-           int product_id = Integer.parseInt(request.getParameter("txtProductId"));
+            Random rng = new Random();
+           int product_id = rng.nextInt(900000) + 100000;
            String product_name = request.getParameter("txtProductName");
            int price = Integer.parseInt(request.getParameter("txtPrice"));
            int quantity = Integer.parseInt(request.getParameter("txtQuantity"));

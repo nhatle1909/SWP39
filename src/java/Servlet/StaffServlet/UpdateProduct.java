@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -34,20 +35,27 @@ public class UpdateProduct extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
+        String url = "";
         int product_id = Integer.parseInt(request.getParameter("txtProductId"));
         String product_name = request.getParameter("txtProductName");
         int price = Integer.parseInt(request.getParameter("txtPrice"));
         int quantity = Integer.parseInt(request.getParameter("txtQuantity"));
         String desc = request.getParameter("txtDescription");
         String bird = request.getParameter("txtBird");
-        
+        HttpSession session = request.getSession();
         DAO sql = new DAO();
-        boolean result = sql.updateProduct(product_id, product_name, price, quantity, desc, bird);
-        if (result){
-            response.sendRedirect("dele-update.jsp");
+        if (sql.getProductID(product_name) == product_id) {
+            boolean result = sql.updateProduct(product_id, product_name, price, quantity, desc, bird);
+            if (result) {
+                url = "product.jsp";
+            }
+        } else {
+            session.setAttribute("WrongProductID","TRUE");
+            url = "dele-update.jsp";
         }
-        
-        
+
+        response.sendRedirect(url);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

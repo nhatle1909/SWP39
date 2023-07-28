@@ -150,26 +150,10 @@
                                     <div class="card-body">
                                         <form action="MainController" method="post">
 
-                                            <!-- <div class="mb-3">
-                                              <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                                            </div>
-                        
-                                            <div class="mb-3">
-                                              <label for="exampleInputPassword1" class="form-label">Password</label>
-                                              <input type="password" class="form-control" id="exampleInputPassword1">
-                                            </div> -->
                                             <div class="mb-3">
                                                 <label for="exampleInputImage" class="form-label">Image</label>
                                                 <input name="txtUrl" type="picture" class="form-control" id="exampleInputImage">
                                             </div>
-
-                                            <div class="mb-3">
-                                                <label for="exampleInputID" class="form-label">Product ID</label>
-                                                <input type="id" name="txtProductId" class="form-control" id="inputID">
-                                            </div>
-
                                             <div class="mb-3">
                                                 <label for="exampleInputName" class="form-label">Product Name</label>
                                                 <input type="name" name="txtProductName" class="form-control" id="exampleInputName">

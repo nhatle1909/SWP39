@@ -21,10 +21,10 @@
     </head>
 
     <body>
-            <%  String role = (String) session.getAttribute("txtRole");
-        if (role != null) {
-             if (role.equals("ADMIN") || role.equals("STAFF")) {
-              %>
+        <%  String role = (String) session.getAttribute("txtRole");
+            if (role != null) {
+                if (role.equals("ADMIN") || role.equals("STAFF")) {
+        %>
         <%DAO sql = new DAO();
             String product_name = "";
             List<ProductListDTO> productLists = (List) session.getAttribute("SortedProductList");
@@ -32,7 +32,7 @@
                 sql.searchProduct(product_name);
                 productLists = sql.getListProduct();
                 session.setAttribute("SortedProductList", productLists);
-        }%>
+            }%>
         <!--  Body Wrapper -->
         <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
              data-sidebar-position="fixed" data-header-position="fixed">
@@ -51,7 +51,7 @@
                     <!-- Sidebar navigation-->
                     <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
                         <ul id="sidebarnav">
-                           
+
                             <li class="nav-small-cap">
                                 <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                                 <span class="hide-menu">UI COMPONENTS</span>
@@ -88,7 +88,7 @@
                                     <span class="hide-menu">Order List</span>
                                 </a>
                             </li>
-                             <li class="sidebar-item">
+                            <li class="sidebar-item">
                                 <a class="sidebar-link" href="refundList.jsp" aria-expanded="false">
                                     <span>
                                         <i class="ti ti-box"></i>
@@ -117,7 +117,7 @@
                                 </svg>
                             </button>
                             <form action ="MainController" method="post">
-                            <input type='submit' name='btAction' value='Logout' class="app-content-headerButton">
+                                <input type='submit' name='btAction' value='Logout' class="app-content-headerButton">
                             </form>
                         </div>
                         <div class="app-content-actions">
@@ -166,11 +166,13 @@
                                 <div class="product-cell stock">Quantity</div>
                                 <div class="product-cell price">Price</div>
                                 <div class="product-cell status-cell">Use For Bird</div>
+                                <div class="product-cell status-cell">Delete</div>
+                                <div class="product-cell status-cell">Update</div>
                             </div>
 
 
                             <%if (productLists != null && !productLists.isEmpty()) {
-          for (ProductListDTO productList : productLists) {%>
+                                    for (ProductListDTO productList : productLists) {%>
 
                             <div class="products-row">
                                 <button class="cell-more-button">
@@ -180,10 +182,22 @@
                                     <img src="<%=productList.getImage_url()%>" alt="product">
                                     <span><%=productList.getProduct_name()%></span>
                                 </div>
-                                <div class="product-cell category"><span class="cell-label">Category:</span><%=productList.getProduct_id()%></div>
-                                <div class="product-cell sales"><span class="cell-label">Sales:</span><%=productList.getQuantity()%></div>
-                                <div class="product-cell stock"><span class="cell-label">Stock:</span><%=productList.getPrice()%>.000 VND</div>
-                                <div class="product-cell price"><span class="cell-label">Price:</span><%=productList.getBirds()%></div>
+                                <div class="product-cell category"><span class="cell-label">ProductID:</span><%=productList.getProduct_id()%></div>
+                                <div class="product-cell sales"><span class="cell-label">Quantity:</span><%=productList.getQuantity()%></div>
+                                <div class="product-cell stock"><span class="cell-label">Price:</span>$<%=productList.getPrice()%></div>
+                                <div class="product-cell price"><span class="cell-label">Bird:</span><%=productList.getBirds()%></div>
+                                <div class="product-cell price"><span class="cell-label">Delete:</span> <button id="order-status" class="Button"><a href = "DeleteProduct?txtProductId=<%=productList.getProduct_id()%>">Delete</a></button></div>
+                                <div class="product-cell price"><span class="cell-label">Update:</span>
+                                    <form action="MainController" method="post">
+                                        <input type="hidden" name="txtProductId" value="<%=productList.getProduct_id()%>">
+                                        <input type="hidden" name="txtProductName" value="<%=productList.getProduct_name()%>">
+                                        <input type="hidden" name="txtPrice" value="<%=productList.getPrice()%>">
+                                        <input type="hidden" name="txtQuantity" value="<%=productList.getQuantity()%>">
+                                        <input type="hidden" name="txtDesc" value="<%=productList.getDescription()%>">
+                                        <input type="hidden" name="txtBird" value="<%=productList.getBirds()%>">
+                                        <input type="submit" id="order-status" class="Button" name="btAction" value="Update">
+                                    </form>
+                                </div>
                             </div>      
                             <%}%>
                             <%}%>
@@ -205,9 +219,10 @@
                     session.removeAttribute("SortedProductList");
                 }
             %>
-                 <% }}else {
-                response.sendRedirect("login.jsp");
-                }%>
+            <% }
+                } else {
+                    response.sendRedirect("login.jsp");
+                     }%>
     </body>
 
 </html>

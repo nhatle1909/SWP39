@@ -30,8 +30,8 @@ public class SignUpServlet extends HttpServlet {
     private String user = "bmossystem@gmail.com";
     private String pass = "yhtegccgzzmptrzq";
 
-    
     private String url = "";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, MessagingException {
         response.setContentType("text/html;charset=UTF-8");
@@ -58,7 +58,11 @@ public class SignUpServlet extends HttpServlet {
             session.setAttribute("Status", "Verify");
             // Send verification code to user's email
             String subject = "Verification Mail";
-            String content = "The Verify Code for register is " + Integer.toString(code);
+            String content = "Hello" +username+"\n"
+                    + "\n"
+                    + "You registered an account on our website, before being able to use your account you need to verify that this is your email address by enter this verify code: " +Integer.toString(code) +"\n"
+                    + "\n"
+                    + "Kind Regards, BIFO";
             EmailUtility.sendEmail(host, port, user, pass, mail, subject,
                     content);
 

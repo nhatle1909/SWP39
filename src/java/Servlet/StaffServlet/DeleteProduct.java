@@ -39,7 +39,7 @@ public class DeleteProduct extends HttpServlet {
         DAO sql = new DAO();
         boolean result = sql.deleteProduct(product_id);
         if (result){
-            response.sendRedirect("dele-update.jsp");
+            response.sendRedirect("product.jsp");
         }
     }
 

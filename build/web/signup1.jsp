@@ -20,7 +20,7 @@
           <form action="MainController" method ="POST">
             
             <div class="form-control">
-                <input type="text" id="username" class="input" name="txtUsername" required/>
+                <input type="text" id="username" class="input" name="txtUsername" required minlength="6" maxlength="32">
               <label for="" class="label">Username</label>
               <span></span>
               <small></small>
@@ -34,14 +34,14 @@
             </div>
 
             <div class="form-control">
-              <input type="password" id="password" class="input" name="txtPassword" required=/>
+              <input type="password" id="password" class="input" name="txtPassword" required minlength="6" maxlength="32">
               <label for="" class="label">Password</label>
               <span></span>
               <small></small>
             </div>
 
             <div class="form-control">
-              <input type="password" id="password2" class="input" name="txtConfirmPassword"  required/>
+              <input type="password" id="password2" class="input" name="txtConfirmPassword"  required minlength="6" maxlength="32">
               <label for="" class="label">Confirm Password</label>
               <span></span>
               <small></small>

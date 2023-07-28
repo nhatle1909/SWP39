@@ -6,6 +6,7 @@
 package Servlet.UserServlet;
 
 import DAO.DAO;
+import Utility.EmailUtility;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.MessagingException;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -36,8 +38,12 @@ public class Checkout extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     String url = "ProductPage.jsp";
+    private String host = "smtp.gmail.com";
+    private String port = "587";
+    private String user = "bmossystem@gmail.com";
+    private String pass = "yhtegccgzzmptrzq";
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, MessagingException {
         response.setContentType("text/html;charset=UTF-8");
         try {
             boolean valid = true;
@@ -54,7 +60,7 @@ public class Checkout extends HttpServlet {
             // Format the current date using the formatter
             String formattedDate = currentDate.format(formatter);
 
-            int order_id = rng.nextInt(99999) + 100000;
+            int order_id = rng.nextInt(900000) + 100000;
             int order_item_id = rng.nextInt(99999) + 100000;
             String total_price = request.getParameter("total").substring(1, request.getParameter("total").length());
             String[] products = request.getParameterValues("title");
@@ -63,9 +69,10 @@ public class Checkout extends HttpServlet {
             String mail = request.getParameter("txtMail");
             String phone_number = request.getParameter("txtPhoneNumber");
             String address = request.getParameter("txtAddress");
-
+            String subtotal = request.getParameter("subtotal");
+            String tax = request.getParameter("tax");
             String productList = quantities[0] + " " + products[0];
-            
+
             for (int i = 0; i < products.length; i++) {
                 if (sql.getProductQuantity(products[i]) < Integer.parseInt(quantities[i])) {
                     session.setAttribute("InvalidQuantity", "TRUE");
@@ -89,6 +96,31 @@ public class Checkout extends HttpServlet {
                         sql.insertOrderDetail(order_item_id, order_id, productList, Float.parseFloat(total_price), phone_number, address, username);
 
                     }
+                    String subject = "BIFO - Order Confirmation";
+                    String content = "Dear " + username + "\n"
+                            + "\n"
+                            + "Thank you for your recent order with our shop. We are excited to confirm that your order has been received and is currently being processed. Below are the details of your order:\n"
+                            + "\n"
+                            + "Order Number:" + Integer.toString(order_id) + "\n"
+                            + "Order Date: " + formattedDate + "\n"
+                            + "Shipping Address: "+address + "\n"
+                            + "\n"
+                            + "Items Ordered:" + productList + "\n"
+                            + "Subtotal: " + subtotal + "\n"
+                            + "Tax: " + tax + "\n"
+                            + "Total Amount: $" + total_price + "\n"
+                            + "\n"
+                            + "Payment Method: Pay with Cash\n"
+                            + "\n"
+                            + "If you have any questions or concerns regarding your order, please feel free to contact us at bmossystem@gmail.com \n"
+                            + "\n"
+                            + "Please note that this email serves as a confirmation of your order and does not indicate that your order has been shipped. You will receive a separate email with tracking information once your order has been dispatched.\n"
+                            + "\n"
+                            + "Thank you for choosing our Shop. We appreciate your business!\n"
+                            + "\n"
+                            + "Best regards,";
+                    EmailUtility.sendEmail(host, port, user, pass, mail, subject,
+                            content);
                 }
             }
 
@@ -115,7 +147,11 @@ public class Checkout extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (MessagingException ex) {
+            Logger.getLogger(Checkout.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -129,7 +165,11 @@ public class Checkout extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (MessagingException ex) {
+            Logger.getLogger(Checkout.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

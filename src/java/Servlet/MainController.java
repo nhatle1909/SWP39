@@ -101,6 +101,8 @@ public class MainController extends HttpServlet {
                 session.setAttribute("Button",action);
             }else if (action.equals("Search Account")) {
                 url = "SearchAccount";
+            }else if (action.equals("Update")) {
+                url = "TransferData";
             }
             
 
