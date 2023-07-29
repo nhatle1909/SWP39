@@ -139,7 +139,7 @@
 
                                             <div class="mb-3">
                                                 <label for="exampleInputName" class="form-label">Username</label>
-                                                <input type="text" name = "txtUsername"class="form-control" id="exampleInputName" required>
+                                                <input type="text" name = "txtUsername"class="form-control" id="exampleInputName" required minlength="6" maxlength="32">
                                             </div>
 
                                             <div class="mb-3">
@@ -158,8 +158,8 @@
                                             </div>
 
                                             <div class="mb-3">
-                                                <label for="exampleInputBird" class="form-label">PhoneNumber</label>
-                                                <input type="text" name="txtPhoneNumber" class="form-control" id="exampleInputBird" required>
+                                                <label for="exampleInputBird" class="form-label">Phone Number</label>
+                                                <input type="text" name="txtPhoneNumber" class="form-control" id="exampleInputBird" required minlength="10" maxlength="12">
                                             </div>
 
                                             <input type="submit" name="btAction" value ="Add Staff Account" class="btn btn-primary" required>

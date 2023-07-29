@@ -34,20 +34,20 @@
             </div>
 
             <div class="form-control">
-              <input type="password" id="password" class="input" name="txtPassword" required minlength="6" maxlength="32">
+              <input type="password" id="password" class="input" name="txtPassword" required >
               <label for="" class="label">Password</label>
               <span></span>
               <small></small>
             </div>
 
             <div class="form-control">
-              <input type="password" id="password2" class="input" name="txtConfirmPassword"  required minlength="6" maxlength="32">
+              <input type="password" id="password2" class="input" name="txtConfirmPassword"  required >
               <label for="" class="label">Confirm Password</label>
               <span></span>
               <small></small>
             </div>
               <div class="form-control">
-              <input type="text" id="password2" class="input" name="txtPhone"  required/>
+              <input type="text" id="password2" class="input" name="txtPhone" minlength="10" maxlength="12" required/>
               <label for="" class="label">Phone Number</label>
               <span></span>
               <small></small>

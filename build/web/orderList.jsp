@@ -71,7 +71,7 @@ t<%--
                                     <span>
                                         <i class="ti ti-file-description"></i>
                                     </span>
-                                    <span class="hide-menu">Update & Delete</span>
+                                    <span class="hide-menu">Update Product</span>
                                 </a>
                             </li>
                             <li class="sidebar-item">
@@ -79,7 +79,7 @@ t<%--
                                     <span>
                                         <i class="ti ti-box"></i>
                                     </span>
-                                    <span class="hide-menu">Product</span>
+                                    <span class="hide-menu">Product List</span>
                                 </a>
 
                             </li>
@@ -186,7 +186,7 @@ t<%--
                                 <div class="product-cell price"><span class="cell-label">Username:</span><%=orderDetailLists.getUsername()%></div>
                                 <div class="product-cell price"><span class="cell-label">Phone Number:</span><%=orderDetailLists.getPhoneNumber()%></div>
                                 <div class="product-cell price"><span class="cell-label">Address:</span><%=orderDetailLists.getAddress()%></div>
-                                <div class="product-cell stock"><span class="cell-label">Price:</span><%=orderDetailLists.getTotalPrice()%>.000 VND</div>
+                                <div class="product-cell stock"><span class="cell-label">Price:</span>$<%=orderDetailLists.getTotalPrice()%></div>
                                 <div class="product-cell price"><span class="cell-label">Product List:</span><%=orderDetailLists.getProductList()%></div>
                                 <div class="product-cell price">
                                     <span class="cell-label"><%=orderDetailLists.getStatus()%></span>

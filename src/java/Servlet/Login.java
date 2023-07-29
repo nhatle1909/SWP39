@@ -55,7 +55,7 @@ public class Login extends HttpServlet {
                 }
                 session.setAttribute("txtMail", mail);
                 session.setAttribute("txtRole", sql.getRole(mail));
-                session.setMaxInactiveInterval(60 * 5);
+                session.setMaxInactiveInterval(60 * 60);
                 if (sql.getRole(mail).equals("CUSTOMER")) {
                     url = "ProductPage.jsp";
                 } else if (sql.getRole(mail).equals("ADMIN")) {

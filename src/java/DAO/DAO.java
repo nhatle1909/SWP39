@@ -1009,7 +1009,7 @@ public class DAO {
         try {
             con = DBUtility.makeConnection();
             if (con != null) {
-                String sql = "select d.*,l.status from dbo.OrderDetail d, dbo.OrderList l where d.order_id = l.order_id and username like ?";
+                String sql = "select d.*,l.status from dbo.OrderDetail d, dbo.OrderList l where d.order_id = l.order_id and username like ? order by status desc";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, "%" + username + "%");
                 rs = stm.executeQuery();
@@ -1849,5 +1849,33 @@ public class DAO {
                 con.close();
             }
         }
+    } public static boolean checkRequestID(int request_id) throws SQLException, NamingException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtility.makeConnection();
+            if (con != null) {
+                String sql = "select * From dbo.Request Where request_id = ? ";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1,request_id);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    return true;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
     }
+
 }

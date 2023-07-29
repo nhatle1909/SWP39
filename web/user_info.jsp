@@ -116,8 +116,7 @@
                                 <div class="card-body">
                                     <div class="d-flex flex-column align-items-center text-center">
                                         <div class="mt-3">
-                                            <p class="text-secondary mb-1"><%= userDTO.getRole()%></p>
-                                            <p class="text-muted font-size-sm">UserID : <%= userDTO.getUser_id()%>
+                                            <p class="text-secondary mb-1">Role : <%= userDTO.getRole()%></p>
                                             </p>
                                             <br/>
                                             <a class="btn btn-primary" href="UpdatePassword.jsp">Update Password</a>
@@ -345,7 +344,7 @@
                                             <input type="hidden" name="txtMail" value="<%=userDTO.getMail()%>">
                                             <br/>
                                             <label>Order ID</label>
-                                            <input type="text" name="txtOrderID" min="0" step="1" placeholder="Please enter your Order ID" required>
+                                            <input type="text" name="txtOrderID" min="0" step="1" minlength="6" maxlength="6" placeholder="Please enter your Order ID" required>
                                             <label>Refund Reason</label>
                                             <textarea name="Reason"placeholder="Please let us know your refund reason..." required></textarea>
                                             <input class="SendRequest"type="submit" value="Send Request" name="btAction">

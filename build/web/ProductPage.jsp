@@ -143,24 +143,7 @@
 
        
     <!-- Offer -->
-    <div class="offer">
-        <div class="small-container">
-            <div class="row">
-                <div class="col-6">
-                    <img src="images/body_bird_food1/bird_food5.png" class="offer-img">
-                </div>
-                <div class="col-6 offer-content">
-                    <p>Exclusively Available on BIFO Shop</p>
-                    <h1>ZUPREEM PURE FUN</h1>
-                    <small>
-                        Our ZuPreem Pure Fun is 39.9% more nutrious than other product which can only found on BIFO Shop
-                        <p>Want to see more information about the product?</p>
-                        <a href="" class="btn-offer">See More &#8594;</a>
-                    </small>
-                </div>
-            </div>
-        </div>
-    </div>
+ 
     <!-- Brands -->
     <div class="brands">
         <div class="small-container">

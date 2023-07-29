@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -40,18 +41,20 @@ public class HandleRequest extends HttpServlet {
     private String pass = "yhtegccgzzmptrzq";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, MessagingException, SQLException {
+            throws ServletException, IOException, MessagingException, SQLException, NamingException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         DAO sql = new DAO();
-
+      
         String subject = "";
         String content = "";
         String button = (String) session.getAttribute("Button");
         session.removeAttribute("Button");
         int request_ID = Integer.parseInt(request.getParameter("RequestID"));
+          boolean valid = sql.checkRequestID(request_ID);
         String reply = request.getParameter("Reply");
         String mail = sql.getMailbyRequest(request_ID);
+        if (valid){
         if (button.equals("Reply")) {
             subject = "Reply Refund Request";
             content = "Refund ID : " + request_ID + "\n" + "Thank you for reaching out. \n"
@@ -89,6 +92,10 @@ public class HandleRequest extends HttpServlet {
 
             response.sendRedirect("refundList.jsp");
         }
+        }else {
+            session.setAttribute("WrongRefundID","TRUE");
+            response.sendRedirect("refundList.jsp");
+        }
 
     }
 
@@ -110,6 +117,10 @@ public class HandleRequest extends HttpServlet {
             Logger.getLogger(HandleRequest.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(HandleRequest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(HandleRequest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(HandleRequest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -129,6 +140,10 @@ public class HandleRequest extends HttpServlet {
         } catch (MessagingException ex) {
             Logger.getLogger(HandleRequest.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
+            Logger.getLogger(HandleRequest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(HandleRequest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(HandleRequest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

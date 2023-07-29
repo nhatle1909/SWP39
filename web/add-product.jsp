@@ -56,7 +56,7 @@
                                     <span>
                                         <i class="ti ti-file-description"></i>
                                     </span>
-                                    <span class="hide-menu">Update & Delete</span>
+                                    <span class="hide-menu">Update Product</span>
                                 </a>
                             </li>
                             <li class="sidebar-item">
@@ -64,7 +64,7 @@
                                     <span>
                                         <i class="ti ti-box"></i>
                                     </span>
-                                    <span class="hide-menu">Product</span>
+                                    <span class="hide-menu">Product List</span>
                                 </a>
                             </li>  <li class="sidebar-item">
                                 <a class="sidebar-link" href="orderList.jsp" aria-expanded="false">

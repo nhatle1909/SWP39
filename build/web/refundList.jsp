@@ -22,10 +22,10 @@
     </head>
 
     <body>
-            <%  String role = (String) session.getAttribute("txtRole");
-        if (role != null) {
-             if (role.equals("ADMIN") || role.equals("STAFF")) {
-              %>
+        <%  String role = (String) session.getAttribute("txtRole");
+            if (role != null) {
+                if (role.equals("ADMIN") || role.equals("STAFF")) {
+        %>
         <%DAO sql = new DAO();
             String mail = "";
             List<RefundDTO> refunds = (List) session.getAttribute("SortedRefundList");
@@ -70,7 +70,7 @@
                                     <span>
                                         <i class="ti ti-file-description"></i>
                                     </span>
-                                    <span class="hide-menu">Update & Delete</span>
+                                    <span class="hide-menu">Update Product</span>
                                 </a>
                             </li>
                             <li class="sidebar-item">
@@ -78,7 +78,7 @@
                                     <span>
                                         <i class="ti ti-box"></i>
                                     </span>
-                                    <span class="hide-menu">Product</span>
+                                    <span class="hide-menu">Product List</span>
                                 </a>
                             </li>
                             <li class="sidebar-item">
@@ -172,7 +172,7 @@
 
 
                             <%if (refunds != null && !refunds.isEmpty()) {
-                                for (RefundDTO refund : refunds) {%>
+                                    for (RefundDTO refund : refunds) {%>
 
                             <div class="products-row">
                                 <button class="cell-more-button">
@@ -200,7 +200,7 @@
                         <div class="popup">
                             <form action="MainController" method="post">
                                 <label>Request ID</label>
-                                <input type="text" name="RequestID" placeholder="Enter Request ID" required>
+                                <input type="text" name="RequestID" placeholder="Enter Request ID" required minlength="6" maxlength="6">
                                 <label>Reply</label>
                                 <textarea name="Reply" placeholder="Enter Reply"></textarea>
                                 <input class="Button" type="submit" value="Reply" name="btAction"><br/><br/>
@@ -218,13 +218,21 @@
             <script src="js/libs/simplebar/dist/simplebar.js"></script>
             <script src="js/dashboard.js"></script>
             <script src="js/admin.js"></script>
+            <script>
+                <% String isWrongRefundID = (String) session.getAttribute("WrongRefundID");
+                      if (isWrongRefundID != null && isWrongRefundID.equals("TRUE")) {  %>
+                alert("Wrong Refund ID");
+                <% }
+                session.removeAttribute("WrongRole");%>
+            </script>
             <%if (refunds != null) {
                     refunds.clear();
                     session.removeAttribute("SortedRefundList");
                 }
             %>
-            <% }}else {
-                response.sendRedirect("login.jsp");
+            <% }
+                } else {
+                    response.sendRedirect("login.jsp");
                 }%>
     </body>
 
